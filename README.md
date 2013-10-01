@@ -34,7 +34,7 @@ Creating a snapshot test
    into your project. In the Add Files dialog, be sure to check the **tests**
    target, not the main target.
 
-     ![Add Files Dialog](http://facebook.github.io/ios-snapshot-test-case/AddFiles.png)
+     <img src="http://facebook.github.io/ios-snapshot-test-case/AddFiles.png" alt="Add Files Dialog" width="364">
 
 2. Define `FB_REFERENCE_IMAGE_DIR` in `GCC_PREPROCESSOR_DEFINITIONS`. This
    should point to the directory where you want reference images to be stored.
