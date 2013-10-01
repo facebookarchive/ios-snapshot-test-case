@@ -31,7 +31,11 @@ Creating a snapshot test
 ------------------------
 
 1. Drop the `FBSnapshotTestCase` and `FBTestSnapshotController` source files
-   into your project.
+   into your project. In the Add Files dialog, be sure to check the **tests**
+   target, not the main target.
+
+     ![Add Files Dialog](http://facebook.github.io/ios-snapshot-test-case/AddFiles.png)
+
 2. Define `FB_REFERENCE_IMAGE_DIR` in `GCC_PREPROCESSOR_DEFINITIONS`. This
    should point to the directory where you want reference images to be stored.
    At Facebook, we normally use this:
