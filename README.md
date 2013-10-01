@@ -56,6 +56,21 @@ Features
   in a single test method.
 - Support for `CALayer` via `FBSnapshotVerifyLayer`.
 
+Notes
+-----
+
+Your unit test must be an "application test", not a "logic test." (That is, it
+must be run within the Simulator so that it has access to UIKit.) In Xcode 5
+and later new projects only offer application tests, but older projects will
+have separate targets for the two types.
+
+Authors
+-------
+
+`FBSnapshotTestCase` was written at Facebook by
+[Jonathan Dann](facebook.com/j.p.dann) with significant contributions by
+[Todd Krabach](facebook.com/toddkrabach).
+
 License
 -------
 
