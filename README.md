@@ -72,8 +72,8 @@ Authors
 -------
 
 `FBSnapshotTestCase` was written at Facebook by
-[Jonathan Dann](facebook.com/j.p.dann) with significant contributions by
-[Todd Krabach](facebook.com/toddkrabach).
+[Jonathan Dann](https://facebook.com/j.p.dann) with significant contributions by
+[Todd Krabach](https://facebook.com/toddkrabach).
 
 License
 -------
