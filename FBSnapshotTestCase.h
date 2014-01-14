@@ -30,7 +30,7 @@
 { \
   NSError *error__ = nil; \
   NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s", FB_REFERENCE_IMAGE_DIR]; \
-  BOOL comparisonSuccess__ = [self compareSnapshotOfView:(view__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) error:&error__]; \
+  BOOL comparisonSuccess__ = [self compareSnapshotOfView:(view__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) error:&error__ testSelector:[self selector] recordMode:[self recordMode]]; \
   XCTAssertTrue(comparisonSuccess__, @"Snapshot comparison failed: %@", error__); \
 }
 
@@ -43,7 +43,7 @@
 { \
   NSError *error__ = nil; \
   NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s", FB_REFERENCE_IMAGE_DIR]; \
-  BOOL comparisonSuccess__ = [self compareSnapshotOfLayer:(layer__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) error:&error__]; \
+  BOOL comparisonSuccess__ = [self compareSnapshotOfLayer:(layer__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) error:&error__ testSelector:[self selector] recordMode:[self recordMode]]; \
   XCTAssertTrue(comparisonSuccess__, @"Snapshot comparison failed: %@", error__); \
 }
 
@@ -64,29 +64,36 @@
 @property (readwrite, nonatomic, assign) BOOL recordMode;
 
 /**
- Performs the comparisong or records a snapshot of the layer if recordMode is YES.
+ Performs the comparison or records a snapshot of the layer.
  @param layer The Layer to snapshot
  @param referenceImagesDirectory The directory in which reference images are stored.
  @param identifier An optional identifier, used is there are muliptle snapshot tests in a given -test method.
  @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
+ @param selector Test selector.
+ @param record Record a snapshot of the view if YES.
  @returns YES if the comparison (or saving of the reference image) succeeded.
  */
 - (BOOL)compareSnapshotOfLayer:(CALayer *)layer
       referenceImagesDirectory:(NSString *)referenceImagesDirectory
                     identifier:(NSString *)identifier
-                         error:(NSError **)errorPtr;
+                         error:(NSError **)errorPtr
+                  testSelector:(SEL)selector
+                    recordMode:(BOOL)record;
 
 /**
- Performs the comparisong or records a snapshot of the view if recordMode is YES.
+ Performs the comparison or records a snapshot of the view.
  @param view The view to snapshot
  @param referenceImagesDirectory The directory in which reference images are stored.
  @param identifier An optional identifier, used is there are muliptle snapshot tests in a given -test method.
  @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
+ @param selector Test selector.
+ @param record Record a snapshot of the view if YES.
  @returns YES if the comparison (or saving of the reference image) succeeded.
  */
 - (BOOL)compareSnapshotOfView:(UIView *)view
      referenceImagesDirectory:(NSString *)referenceImagesDirectory
                    identifier:(NSString *)identifier
-                        error:(NSError **)errorPtr;
-
+                        error:(NSError **)errorPtr
+                 testSelector:(SEL)selector
+                   recordMode:(BOOL)record;
 @end
