@@ -1,0 +1,8 @@
+language: objective-c
+
+before_script:
+  - open -a iPhone\ Simulator
+
+xcode_project: FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemo.xcodeproj
+xcode_scheme: FBSnapshotTestCaseDemo
+xcode_sdk: iphonesimulator
