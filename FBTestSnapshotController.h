@@ -36,6 +36,11 @@ extern NSString *const FBReferenceImageFilePathKey;
 @interface FBTestSnapshotController : NSObject
 
 /**
+ Record snapshots.
+ **/
+@property(readwrite, nonatomic, assign) BOOL recordMode;
+
+/**
  Designated initializer.
  Before this methods returns the controller enumerates over the test methods in `testClass` and loads the images
  for those tests.
@@ -44,6 +49,47 @@ extern NSString *const FBReferenceImageFilePathKey;
  @returns An instance of FBTestSnapshotController.
  */
 - (id)initWithTestClass:(Class)testClass;
+
+
+/**
+ Performs the comparison of the layer.
+ @param layer The Layer to snapshot.
+ @param referenceImagesDirectory The directory in which reference images are stored.
+ @param identifier An optional identifier, used is there are muliptle snapshot tests in a given -test method.
+ @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
+ @returns YES if the comparison (or saving of the reference image) succeeded.
+ */
+- (BOOL)compareSnapshotOfLayer:(CALayer *)layer
+                      selector:(SEL)selector
+                    identifier:(NSString *)identifier
+                         error:(NSError **)errorPtr;
+
+/**
+ Performs the comparison of the view.
+ @param view The view to snapshot.
+ @param referenceImagesDirectory The directory in which reference images are stored.
+ @param identifier An optional identifier, used is there are muliptle snapshot tests in a given -test method.
+ @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
+ @returns YES if the comparison (or saving of the reference image) succeeded.
+ */
+- (BOOL)compareSnapshotOfView:(UIView *)view
+                     selector:(SEL)selector
+                   identifier:(NSString *)identifier
+                        error:(NSError **)errorPtr;
+
+/**
+ Performs the comparison of a view or layer.
+ @param view The view or layer to snapshot.
+ @param referenceImagesDirectory The directory in which reference images are stored.
+ @param identifier An optional identifier, used is there are muliptle snapshot tests in a given -test method.
+ @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
+ @returns YES if the comparison (or saving of the reference image) succeeded.
+ */
+- (BOOL)compareSnapshotOfViewOrLayer:(id)viewOrLayer
+                            selector:(SEL)selector
+                          identifier:(NSString *)identifier
+                               error:(NSError **)errorPtr;
+
 
 /**
  The directory in which referfence images are stored.
