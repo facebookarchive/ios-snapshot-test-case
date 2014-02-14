@@ -7,10 +7,16 @@
  *  of patent rights can be found in the PATENTS file in the same directory.
  *
  */
- 
+
 #import "FBSnapshotTestCase.h"
 
 #import "FBTestSnapshotController.h"
+
+@interface FBSnapshotTestCase ()
+
+@property (readwrite, nonatomic, retain) FBTestSnapshotController *snapshotController;
+
+@end
 
 @implementation FBSnapshotTestCase
 
@@ -26,14 +32,51 @@
   [super tearDown];
 }
 
-- (BOOL) recordMode
+- (BOOL)recordMode
 {
     return self.snapshotController.recordMode;
 }
 
-- (void) setRecordMode:(BOOL)recordMode
+- (void)setRecordMode:(BOOL)recordMode
 {
     self.snapshotController.recordMode = recordMode;
+}
+
+- (BOOL)compareSnapshotOfLayer:(CALayer *)layer
+      referenceImagesDirectory:(NSString *)referenceImagesDirectory
+                    identifier:(NSString *)identifier
+                         error:(NSError **)errorPtr
+{
+  return [self _compareSnapshotOfViewOrLayer:layer
+                    referenceImagesDirectory:referenceImagesDirectory
+                                  identifier:identifier
+                                       error:errorPtr];
+}
+
+- (BOOL)compareSnapshotOfView:(UIView *)view
+     referenceImagesDirectory:(NSString *)referenceImagesDirectory
+                   identifier:(NSString *)identifier
+                        error:(NSError **)errorPtr
+{
+  return [self _compareSnapshotOfViewOrLayer:view
+                    referenceImagesDirectory:referenceImagesDirectory
+                                  identifier:identifier
+                                       error:errorPtr];
+}
+
+#pragma mark -
+#pragma mark Private API
+
+- (BOOL)_compareSnapshotOfViewOrLayer:(id)viewOrLayer
+             referenceImagesDirectory:(NSString *)referenceImagesDirectory
+                           identifier:(NSString *)identifier
+                                error:(NSError **)errorPtr
+{
+  _snapshotController.referenceImagesDirectory = referenceImagesDirectory;
+  return [_snapshotController compareSnapshotOfViewOrLayer:viewOrLayer
+                                                  selector:self.selector
+                                                identifier:identifier
+                                                     error:errorPtr];
 }
 
 @end
