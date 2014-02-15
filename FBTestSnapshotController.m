@@ -255,12 +255,8 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   void *imagePixels = calloc(1, referenceImageSizeBytes);
 
   if (!referenceImagePixels || !imagePixels) {
-    if (referenceImagePixels) {
-      free(referenceImagePixels);
-    }
-    if (imagePixels) {
-      free(imagePixels);
-    }
+    free(referenceImagePixels);
+    free(imagePixels);
     return NO;
   }
     
