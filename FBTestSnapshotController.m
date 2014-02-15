@@ -249,8 +249,8 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
 
 - (BOOL)_compareReferenceImage:(UIImage *)referenceImage toImage:(UIImage *)image
 {
-  size_t maxBytesPerRow = MIN(CGImageGetBytesPerRow(referenceImage.CGImage), CGImageGetBytesPerRow(image.CGImage));
-  size_t referenceImageSizeBytes = CGImageGetHeight(referenceImage.CGImage) * maxBytesPerRow;
+  size_t minBytesPerRow = MIN(CGImageGetBytesPerRow(referenceImage.CGImage), CGImageGetBytesPerRow(image.CGImage));
+  size_t referenceImageSizeBytes = CGImageGetHeight(referenceImage.CGImage) * minBytesPerRow;
   void *referenceImagePixels = calloc(1, referenceImageSizeBytes);
   void *imagePixels = calloc(1, referenceImageSizeBytes);
 
@@ -264,7 +264,7 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                                                              CGImageGetWidth(referenceImage.CGImage),
                                                              CGImageGetHeight(referenceImage.CGImage),
                                                              CGImageGetBitsPerComponent(referenceImage.CGImage),
-                                                             maxBytesPerRow,
+                                                             minBytesPerRow,
                                                              CGImageGetColorSpace(referenceImage.CGImage),
                                                              (CGBitmapInfo)kCGImageAlphaPremultipliedLast
                                                              );
@@ -272,7 +272,7 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                                                     CGImageGetWidth(image.CGImage),
                                                     CGImageGetHeight(image.CGImage),
                                                     CGImageGetBitsPerComponent(image.CGImage),
-                                                    maxBytesPerRow,
+                                                    minBytesPerRow,
                                                     CGImageGetColorSpace(image.CGImage),
                                                     (CGBitmapInfo)kCGImageAlphaPremultipliedLast
                                                     );
