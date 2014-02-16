@@ -177,20 +177,7 @@ typedef struct RGBAPixel {
 {
   if (CGSizeEqualToSize(referenceImage.size, image.size)) {
 
-    __block BOOL imagesEqual = YES;
-    [self _enumeratePixelsInReferenceImage:referenceImage
-                                 testImage:image
-                                usingBlock:^(RGBAPixel *referencePixelPtr, RGBAPixel *testPixelPtr, BOOL *stop){
-                                  BOOL equal =
-                                  (referencePixelPtr->r == testPixelPtr->r &&
-                                   referencePixelPtr->g == testPixelPtr->g &&
-                                   referencePixelPtr->b == testPixelPtr->b &&
-                                   referencePixelPtr->a == testPixelPtr->a);
-                                  if (!equal) {
-                                    imagesEqual = NO;
-                                    *stop = YES;
-                                  }
-                                }];
+    BOOL imagesEqual = [self _compareReferenceImage:referenceImage toImage:image];
     if (NULL != errorPtr) {
       *errorPtr = [NSError errorWithDomain:FBTestSnapshotControllerErrorDomain
                                       code:FBTestSnapshotControllerErrorCodeImagesDifferent
@@ -279,45 +266,56 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   return filePath;
 }
 
-- (void)_enumeratePixelsInReferenceImage:(UIImage *)referenceImage
-                               testImage:(UIImage *)testImage
-                              usingBlock:(void (^)(RGBAPixel *referencePixel, RGBAPixel *testPixel, BOOL *stop))block
+- (BOOL)_compareReferenceImage:(UIImage *)referenceImage toImage:(UIImage *)image
 {
-  NSAssert(CGSizeEqualToSize(referenceImage.size, testImage.size), @"Images must be same size.");
+  NSAssert(CGSizeEqualToSize(referenceImage.size, image.size), @"Images must be same size.");
+    
+  // The images have the equal size, so we could use the smallest amount of bytes because of byte padding
+  size_t minBytesPerRow = MIN(CGImageGetBytesPerRow(referenceImage.CGImage), CGImageGetBytesPerRow(image.CGImage));
+  size_t referenceImageSizeBytes = CGImageGetHeight(referenceImage.CGImage) * minBytesPerRow;
+  void *referenceImagePixels = calloc(1, referenceImageSizeBytes);
+  void *imagePixels = calloc(1, referenceImageSizeBytes);
 
-  RGBAPixel *referenceData = NULL;
-  CGContextRef referenceContext = NULL;
-  UIGraphicsBeginImageContextWithOptions(referenceImage.size, NO, 0);
-  {
-    [referenceImage drawAtPoint:CGPointZero];
-    referenceContext = CGContextRetain(UIGraphicsGetCurrentContext());
-    referenceData = (RGBAPixel *)CGBitmapContextGetData(referenceContext);
+  if (!referenceImagePixels || !imagePixels) {
+    free(referenceImagePixels);
+    free(imagePixels);
+    return NO;
   }
-  UIGraphicsEndImageContext();
-
-  RGBAPixel *testData = NULL;
-  CGContextRef testContext = NULL;
-  UIGraphicsBeginImageContextWithOptions(testImage.size, NO, 0);
-  {
-    [testImage drawAtPoint:CGPointZero];
-    testContext = CGContextRetain(UIGraphicsGetCurrentContext());
-    testData = (RGBAPixel *)CGBitmapContextGetData(testContext);
+    
+  CGContextRef referenceImageContext = CGBitmapContextCreate(referenceImagePixels,
+                                                             CGImageGetWidth(referenceImage.CGImage),
+                                                             CGImageGetHeight(referenceImage.CGImage),
+                                                             CGImageGetBitsPerComponent(referenceImage.CGImage),
+                                                             minBytesPerRow,
+                                                             CGImageGetColorSpace(referenceImage.CGImage),
+                                                             (CGBitmapInfo)kCGImageAlphaPremultipliedLast
+                                                             );
+  CGContextRef imageContext = CGBitmapContextCreate(imagePixels,
+                                                    CGImageGetWidth(image.CGImage),
+                                                    CGImageGetHeight(image.CGImage),
+                                                    CGImageGetBitsPerComponent(image.CGImage),
+                                                    minBytesPerRow,
+                                                    CGImageGetColorSpace(image.CGImage),
+                                                    (CGBitmapInfo)kCGImageAlphaPremultipliedLast
+                                                    );
+    
+  if (!referenceImageContext || !imageContext) {
+    CGContextRelease(referenceImageContext);
+    CGContextRelease(imageContext);
+    free(referenceImagePixels);
+    free(imagePixels);
+    return NO;
   }
-  UIGraphicsEndImageContext();
-
-  RGBAPixel *referencePixelPtr = referenceData;
-  RGBAPixel *testPixelPtr = testData;
-  NSUInteger max = referenceImage.size.width * referenceImage.size.height;
-  BOOL stop = NO;
-  for (NSUInteger i = 0 ; i < max ; ++i) {
-    block(referencePixelPtr++, testPixelPtr++, &stop);
-    if (stop) {
-      break;
-    }
-  }
-
-  CGContextRelease(referenceContext);
-  CGContextRelease(testContext);
+    
+  CGContextDrawImage(referenceImageContext, CGRectMake(0.0f, 0.0f, referenceImage.size.width, referenceImage.size.height), referenceImage.CGImage);
+  CGContextDrawImage(imageContext, CGRectMake(0.0f, 0.0f, image.size.width, image.size.height), image.CGImage);
+  CGContextRelease(referenceImageContext);
+  CGContextRelease(imageContext);
+    
+  BOOL imageEqual = (memcmp(referenceImagePixels, imagePixels, referenceImageSizeBytes) == 0);
+  free(referenceImagePixels);
+  free(imagePixels);
+  return imageEqual;
 }
 
 - (UIImage *)_diffWithImage:(UIImage *)image renderedImage:(UIImage *)renderedImage
