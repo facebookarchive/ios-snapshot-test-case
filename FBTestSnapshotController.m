@@ -249,6 +249,8 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
 
 - (BOOL)_compareReferenceImage:(UIImage *)referenceImage toImage:(UIImage *)image
 {
+  NSAssert(CGSizeEqualToSize(referenceImage.size, image.size), @"Images must be same size.");
+    
   // The images have the equal size, so we could use the smallest amount of bytes because of byte padding
   size_t minBytesPerRow = MIN(CGImageGetBytesPerRow(referenceImage.CGImage), CGImageGetBytesPerRow(image.CGImage));
   size_t referenceImageSizeBytes = CGImageGetHeight(referenceImage.CGImage) * minBytesPerRow;
