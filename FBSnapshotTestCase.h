@@ -15,10 +15,7 @@
 #import <XCTest/XCTest.h>
 
 #ifndef FB_REFERENCE_IMAGE_DIR
-#error FB_REFERENCE_IMAGE_DIR is not defined. Define it in GCC_PREPROCESSOR_DEFINITIONS to point to a directory.
-// Usually, you'll want FB_REFERENCE_IMAGE_DIR to be within $SOURCE_ROOT.
-// At Facebook, we use the following line within our xcconfig file:
-//   GCC_PREPROCESSOR_DEFINITIONS = $(inherited) FB_REFERENCE_IMAGE_DIR="\"$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages\""
+#define FB_REFERENCE_IMAGE_DIR "\"$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages\""
 #endif
 
 /**
