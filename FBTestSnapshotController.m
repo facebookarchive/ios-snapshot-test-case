@@ -322,7 +322,7 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
     return nil;
   }
   CGSize imageSize = CGSizeMake(MAX(image.size.width, renderedImage.size.width), MAX(image.size.height, renderedImage.size.height));
-  UIGraphicsBeginImageContextWithOptions(imageSize, YES, [[UIScreen mainScreen] scale]);
+  UIGraphicsBeginImageContextWithOptions(imageSize, YES, 0.0);
   CGContextRef context = UIGraphicsGetCurrentContext();
   [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
   CGContextSetAlpha(context, 0.5f);
