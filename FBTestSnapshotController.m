@@ -10,6 +10,8 @@
 
 #import "FBTestSnapshotController.h"
 
+#import "UIImage+Compare.h"
+
 #import <objc/runtime.h>
 
 #import <UIKit/UIKit.h>
@@ -166,20 +168,7 @@ typedef struct RGBAPixel {
 {
   if (CGSizeEqualToSize(referenceImage.size, image.size)) {
 
-    __block BOOL imagesEqual = YES;
-    [self _enumeratePixelsInReferenceImage:referenceImage
-                                 testImage:image
-                                usingBlock:^(RGBAPixel *referencePixelPtr, RGBAPixel *testPixelPtr, BOOL *stop){
-                                  BOOL equal =
-                                  (referencePixelPtr->r == testPixelPtr->r &&
-                                   referencePixelPtr->g == testPixelPtr->g &&
-                                   referencePixelPtr->b == testPixelPtr->b &&
-                                   referencePixelPtr->a == testPixelPtr->a);
-                                  if (!equal) {
-                                    imagesEqual = NO;
-                                    *stop = YES;
-                                  }
-                                }];
+    BOOL imagesEqual = [referenceImage compareWithImage:image];
     if (NULL != errorPtr) {
       *errorPtr = [NSError errorWithDomain:FBTestSnapshotControllerErrorDomain
                                       code:FBTestSnapshotControllerErrorCodeImagesDifferent
@@ -262,47 +251,6 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   NSString *filePath = [folderPath stringByAppendingPathComponent:NSStringFromClass(_testClass)];
   filePath = [filePath stringByAppendingPathComponent:fileName];
   return filePath;
-}
-
-- (void)_enumeratePixelsInReferenceImage:(UIImage *)referenceImage
-                               testImage:(UIImage *)testImage
-                              usingBlock:(void (^)(RGBAPixel *referencePixel, RGBAPixel *testPixel, BOOL *stop))block
-{
-  NSAssert(CGSizeEqualToSize(referenceImage.size, testImage.size), @"Images must be same size.");
-
-  RGBAPixel *referenceData = NULL;
-  CGContextRef referenceContext = NULL;
-  UIGraphicsBeginImageContextWithOptions(referenceImage.size, NO, 0);
-  {
-    [referenceImage drawAtPoint:CGPointZero];
-    referenceContext = CGContextRetain(UIGraphicsGetCurrentContext());
-    referenceData = (RGBAPixel *)CGBitmapContextGetData(referenceContext);
-  }
-  UIGraphicsEndImageContext();
-
-  RGBAPixel *testData = NULL;
-  CGContextRef testContext = NULL;
-  UIGraphicsBeginImageContextWithOptions(testImage.size, NO, 0);
-  {
-    [testImage drawAtPoint:CGPointZero];
-    testContext = CGContextRetain(UIGraphicsGetCurrentContext());
-    testData = (RGBAPixel *)CGBitmapContextGetData(testContext);
-  }
-  UIGraphicsEndImageContext();
-
-  RGBAPixel *referencePixelPtr = referenceData;
-  RGBAPixel *testPixelPtr = testData;
-  NSUInteger max = referenceImage.size.width * referenceImage.size.height;
-  BOOL stop = NO;
-  for (NSUInteger i = 0 ; i < max ; ++i) {
-    block(referencePixelPtr++, testPixelPtr++, &stop);
-    if (stop) {
-      break;
-    }
-  }
-
-  CGContextRelease(referenceContext);
-  CGContextRelease(testContext);
 }
 
 @end
