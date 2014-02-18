@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53455EA918B3355D00571FEA /* UIImage+Diff.m in Sources */ = {isa = PBXBuildFile; fileRef = 53455EA818B3355D00571FEA /* UIImage+Diff.m */; };
 		A24E010717F9A42A001252DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24E010617F9A42A001252DB /* Foundation.framework */; };
 		A24E010917F9A42A001252DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24E010817F9A42A001252DB /* CoreGraphics.framework */; };
 		A24E010B17F9A42A001252DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24E010A17F9A42A001252DB /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53455EA718B3355D00571FEA /* UIImage+Diff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Diff.h"; path = "../UIImage+Diff.h"; sourceTree = "<group>"; };
+		53455EA818B3355D00571FEA /* UIImage+Diff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Diff.m"; path = "../UIImage+Diff.m"; sourceTree = "<group>"; };
 		A23E9CB517FA9C300071B3CE /* FBSnapshotTestCaseDemo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = FBSnapshotTestCaseDemo.xcconfig; path = ../FBSnapshotTestCaseDemo.xcconfig; sourceTree = "<group>"; };
 		A24E010317F9A42A001252DB /* FBSnapshotTestCaseDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBSnapshotTestCaseDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24E010617F9A42A001252DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -165,6 +168,8 @@
 				A24E013717F9A445001252DB /* FBSnapshotTestCase.m */,
 				A24E013817F9A445001252DB /* FBTestSnapshotController.h */,
 				A24E013917F9A445001252DB /* FBTestSnapshotController.m */,
+				53455EA718B3355D00571FEA /* UIImage+Diff.h */,
+				53455EA818B3355D00571FEA /* UIImage+Diff.m */,
 			);
 			name = FBSnapshotTestCase;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 			files = (
 				A24E013B17F9A445001252DB /* FBTestSnapshotController.m in Sources */,
 				A24E012C17F9A42A001252DB /* FBSnapshotTestCaseDemoTests.m in Sources */,
+				53455EA918B3355D00571FEA /* UIImage+Diff.m in Sources */,
 				A24E013A17F9A445001252DB /* FBSnapshotTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
