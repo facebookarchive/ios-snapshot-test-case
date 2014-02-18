@@ -23,6 +23,7 @@
 		A24E013A17F9A445001252DB /* FBSnapshotTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = A24E013717F9A445001252DB /* FBSnapshotTestCase.m */; };
 		A24E013B17F9A445001252DB /* FBTestSnapshotController.m in Sources */ = {isa = PBXBuildFile; fileRef = A24E013917F9A445001252DB /* FBTestSnapshotController.m */; };
 		A257F0C917FA982900AB1B02 /* FBExampleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A257F0C817FA982800AB1B02 /* FBExampleView.m */; };
+		FD93077618B345AA003B7EF6 /* UIImage+Compare.m in Sources */ = {isa = PBXBuildFile; fileRef = FD93077518B345AA003B7EF6 /* UIImage+Compare.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		A24E013917F9A445001252DB /* FBTestSnapshotController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBTestSnapshotController.m; path = ../FBTestSnapshotController.m; sourceTree = "<group>"; };
 		A257F0C717FA982800AB1B02 /* FBExampleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBExampleView.h; sourceTree = "<group>"; };
 		A257F0C817FA982800AB1B02 /* FBExampleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBExampleView.m; sourceTree = "<group>"; };
+		FD93077418B345AA003B7EF6 /* UIImage+Compare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Compare.h"; path = "../UIImage+Compare.h"; sourceTree = "<group>"; };
+		FD93077518B345AA003B7EF6 /* UIImage+Compare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Compare.m"; path = "../UIImage+Compare.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +173,8 @@
 				A24E013917F9A445001252DB /* FBTestSnapshotController.m */,
 				53455EA718B3355D00571FEA /* UIImage+Diff.h */,
 				53455EA818B3355D00571FEA /* UIImage+Diff.m */,
+				FD93077418B345AA003B7EF6 /* UIImage+Compare.h */,
+				FD93077518B345AA003B7EF6 /* UIImage+Compare.m */,
 			);
 			name = FBSnapshotTestCase;
 			sourceTree = "<group>";
@@ -284,6 +289,7 @@
 				A24E012C17F9A42A001252DB /* FBSnapshotTestCaseDemoTests.m in Sources */,
 				53455EA918B3355D00571FEA /* UIImage+Diff.m in Sources */,
 				A24E013A17F9A445001252DB /* FBSnapshotTestCase.m in Sources */,
+				FD93077618B345AA003B7EF6 /* UIImage+Compare.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
