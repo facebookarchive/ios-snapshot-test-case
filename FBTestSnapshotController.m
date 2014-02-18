@@ -10,6 +10,8 @@
 
 #import "FBTestSnapshotController.h"
 
+#import "UIImage+Diff.h"
+
 #import <objc/runtime.h>
 
 #import <UIKit/UIKit.h>
@@ -155,6 +157,17 @@ typedef struct RGBAPixel {
   if (![testPNGData writeToFile:testPath options:NSDataWritingAtomic error:errorPtr]) {
     return NO;
   }
+    
+  NSString *diffPath = [self _failedFilePathForSelector:selector
+                                               identifier:identifier
+                                             fileNameType:FBTestSnapshotFileNameTypeFailedTestDiff];
+    
+  UIImage *diffImage = [referenceImage diffWithImage:testImage];
+  NSData *diffImageData = UIImagePNGRepresentation(diffImage);
+    
+  if (![diffImageData writeToFile:diffPath options:NSDataWritingAtomic error:errorPtr]) {
+    return NO;
+  }
 
   NSLog(@"If you have Kaleidoscope installed you can run this command to see an image diff:\n"
         @"ksdiff \"%@\" \"%@\"", referencePath, testPath);
@@ -209,6 +222,7 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   FBTestSnapshotFileNameTypeReference,
   FBTestSnapshotFileNameTypeFailedReference,
   FBTestSnapshotFileNameTypeFailedTest,
+  FBTestSnapshotFileNameTypeFailedTestDiff,
 };
 
 - (NSString *)_fileNameForSelector:(SEL)selector
@@ -222,6 +236,9 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
       break;
     case FBTestSnapshotFileNameTypeFailedTest:
       fileName = @"failed_";
+      break;
+    case FBTestSnapshotFileNameTypeFailedTestDiff:
+      fileName = @"diff_";
       break;
     default:
       fileName = @"";
