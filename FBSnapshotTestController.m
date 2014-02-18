@@ -8,7 +8,7 @@
  *
  */
 
-#import "FBTestSnapshotController.h"
+#import "FBSnapshotTestController.h"
 
 #import "UIImage+Compare.h"
 #import "UIImage+Diff.h"
@@ -17,7 +17,7 @@
 
 #import <UIKit/UIKit.h>
 
-NSString *const FBTestSnapshotControllerErrorDomain = @"FBTestSnapshotControllerErrorDomain";
+NSString *const FBSnapshotTestControllerErrorDomain = @"FBSnapshotTestControllerErrorDomain";
 
 NSString *const FBReferenceImageFilePathKey = @"FBReferenceImageFilePathKey";
 
@@ -28,13 +28,13 @@ typedef struct RGBAPixel {
   char a;
 } RGBAPixel;
 
-@interface FBTestSnapshotController ()
+@interface FBSnapshotTestController ()
 
 @property (readonly, nonatomic, retain) Class testClass;
 
 @end
 
-@implementation FBTestSnapshotController
+@implementation FBSnapshotTestController
 {
   NSFileManager *_fileManager;
 }
@@ -71,16 +71,16 @@ typedef struct RGBAPixel {
   if (nil == image && NULL != errorPtr) {
     BOOL exists = [_fileManager fileExistsAtPath:filePath];
     if (!exists) {
-      *errorPtr = [NSError errorWithDomain:FBTestSnapshotControllerErrorDomain
-                                      code:FBTestSnapshotControllerErrorCodeNeedsRecord
+      *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
+                                      code:FBSnapshotTestControllerErrorCodeNeedsRecord
                                   userInfo:@{
                FBReferenceImageFilePathKey: filePath,
                  NSLocalizedDescriptionKey: @"Unable to load reference image.",
           NSLocalizedFailureReasonErrorKey: @"Reference image not found. You need to run the test in record mode",
                    }];
     } else {
-      *errorPtr = [NSError errorWithDomain:FBTestSnapshotControllerErrorDomain
-                                      code:FBTestSnapshotControllerErrorCodeUnknown
+      *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
+                                      code:FBSnapshotTestControllerErrorCodeUnknown
                                   userInfo:nil];
     }
   }
@@ -111,8 +111,8 @@ typedef struct RGBAPixel {
       didWrite = [pngData writeToFile:filePath options:NSDataWritingAtomic error:errorPtr];
     } else {
       if (nil != errorPtr) {
-        *errorPtr = [NSError errorWithDomain:FBTestSnapshotControllerErrorDomain
-                                        code:FBTestSnapshotControllerErrorCodePNGCreationFailed
+        *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
+                                        code:FBSnapshotTestControllerErrorCodePNGCreationFailed
                                     userInfo:@{
                  FBReferenceImageFilePathKey: filePath,
                      }];
@@ -182,8 +182,8 @@ typedef struct RGBAPixel {
 
     BOOL imagesEqual = [referenceImage compareWithImage:image];
     if (NULL != errorPtr) {
-      *errorPtr = [NSError errorWithDomain:FBTestSnapshotControllerErrorDomain
-                                      code:FBTestSnapshotControllerErrorCodeImagesDifferent
+      *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
+                                      code:FBSnapshotTestControllerErrorCodeImagesDifferent
                                   userInfo:@{
                  NSLocalizedDescriptionKey: @"Images different",
                    }];
@@ -191,8 +191,8 @@ typedef struct RGBAPixel {
     return imagesEqual;
   }
   if (NULL != errorPtr) {
-    *errorPtr = [NSError errorWithDomain:FBTestSnapshotControllerErrorDomain
-                                    code:FBTestSnapshotControllerErrorCodeImagesDifferentSizes
+    *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
+                                    code:FBSnapshotTestControllerErrorCodeImagesDifferentSizes
                                 userInfo:@{
                NSLocalizedDescriptionKey: @"Images different sizes",
         NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"referenceImage:%@, image:%@",
