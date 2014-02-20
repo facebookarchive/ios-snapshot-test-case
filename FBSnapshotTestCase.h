@@ -39,6 +39,9 @@
  */
 #define FBSnapshotVerifyViewWithLanguageCode(view__, languageCode__, identifier__) \
 { \
+  if (languageCode__ && ![languageCode__ isEqualToString:[[[NSLocale currentLocale] localeIdentifier] lowercaseString]]) { \
+    return; \
+  } \
   NSError *error__ = nil; \
   NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s", FB_REFERENCE_IMAGE_DIR]; \
   BOOL comparisonSuccess__ = [self compareSnapshotOfView:(view__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) languageCode:(languageCode__) error:&error__]; \
@@ -66,6 +69,9 @@
  */
 #define FBSnapshotVerifyLayerWithLanguageCode(layer__, languageCode__, identifier__) \
 { \
+  if (languageCode__ && ![languageCode__ isEqualToString:[[[NSLocale currentLocale] localeIdentifier] lowercaseString]]) { \
+    return; \
+  } \
   NSError *error__ = nil; \
   NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s", FB_REFERENCE_IMAGE_DIR]; \
   BOOL comparisonSuccess__ = [self compareSnapshotOfLayer:(layer__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) languageCode:(languageCode__) error:&error__]; \

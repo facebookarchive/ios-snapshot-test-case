@@ -91,10 +91,6 @@
                          languageCode:(NSString *)languageCode
                                 error:(NSError **)errorPtr
 {
-    // Skip test if not the right locale
-  if (languageCode && ![languageCode isEqualToString:[[[NSLocale currentLocale] localeIdentifier] lowercaseString]]) {
-    return YES;
-  }
   _snapshotController.referenceImagesDirectory = referenceImagesDirectory;
   if (self.recordMode) {
     return [self _recordSnapshotOfViewOrLayer:viewOrLayer identifier:identifier languageCode:languageCode error:errorPtr];
