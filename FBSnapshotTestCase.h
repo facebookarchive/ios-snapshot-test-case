@@ -39,7 +39,7 @@
  */
 #define FBSnapshotVerifyViewWithLocaleIdentifier(view__, localeIdentifier__, identifier__) \
 { \
-  if (localeIdentifier__ && ![localeIdentifier__ isEqualToString:[[[NSLocale currentLocale] localeIdentifier] lowercaseString]]) { \
+  if ([localeIdentifier__ lowercaseString] && ![localeIdentifier__ isEqualToString:[[[NSLocale currentLocale] localeIdentifier] lowercaseString]]) { \
     return; \
   } \
   NSError *error__ = nil; \
@@ -69,7 +69,7 @@
  */
 #define FBSnapshotVerifyLayerWithLocaleIdentifier(layer__, localeIdentifier__, identifier__) \
 { \
-  if (localeIdentifier__ && ![localeIdentifier__ isEqualToString:[[[NSLocale currentLocale] localeIdentifier] lowercaseString]]) { \
+  if ([localeIdentifier__ lowercaseString] && ![localeIdentifier__ isEqualToString:[[[NSLocale currentLocale] localeIdentifier] lowercaseString]]) { \
     return; \
   } \
   NSError *error__ = nil; \
