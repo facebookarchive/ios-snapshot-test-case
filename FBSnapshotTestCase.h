@@ -33,6 +33,20 @@
 
 /**
  Similar to our much-loved XCTAssert() macros. Use this to perform your test. No need to write an explanation, though.
+ @param view The view to snapshot
+ @param languageCode Language code for locale depended tests.
+ @param identifier An optional identifier, used is there are multiple snapshot tests in a given -test method.
+ */
+#define FBSnapshotVerifyViewWithLanguageCode(view__, languageCode__, identifier__) \
+{ \
+  NSError *error__ = nil; \
+  NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s", FB_REFERENCE_IMAGE_DIR]; \
+  BOOL comparisonSuccess__ = [self compareSnapshotOfView:(view__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) languageCode:(languageCode__) error:&error__]; \
+  XCTAssertTrue(comparisonSuccess__, @"Snapshot comparison failed: %@", error__); \
+}
+
+/**
+ Similar to our much-loved XCTAssert() macros. Use this to perform your test. No need to write an explanation, though.
  @param layer The layer to snapshot
  @param identifier An optional identifier, used is there are multiple snapshot tests in a given -test method.
  */
@@ -44,6 +58,19 @@
   XCTAssertTrue(comparisonSuccess__, @"Snapshot comparison failed: %@", error__); \
 }
 
+/**
+ Similar to our much-loved XCTAssert() macros. Use this to perform your test. No need to write an explanation, though.
+ @param layer The layer to snapshot
+ @param languageCode Language code for locale depended tests.
+ @param identifier An optional identifier, used is there are multiple snapshot tests in a given -test method.
+ */
+#define FBSnapshotVerifyLayerWithLanguageCode(layer__, languageCode__, identifier__) \
+{ \
+  NSError *error__ = nil; \
+  NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s", FB_REFERENCE_IMAGE_DIR]; \
+  BOOL comparisonSuccess__ = [self compareSnapshotOfLayer:(layer__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) languageCode:(languageCode__) error:&error__]; \
+  XCTAssertTrue(comparisonSuccess__, @"Snapshot comparison failed: %@", error__); \
+}
 @class FBTestSnapshotController;
 
 /**
@@ -74,6 +101,21 @@
                          error:(NSError **)errorPtr;
 
 /**
+ Performs the comparisong or records a snapshot of the layer if recordMode is YES.
+ @param layer The Layer to snapshot
+ @param referenceImagesDirectory The directory in which reference images are stored.
+ @param identifier An optional identifier, used is there are muliptle snapshot tests in a given -test method.
+ @param languageCode Language code for locale depended tests.
+ @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
+ @returns YES if the comparison (or saving of the reference image) succeeded.
+ */
+- (BOOL)compareSnapshotOfLayer:(CALayer *)layer
+      referenceImagesDirectory:(NSString *)referenceImagesDirectory
+                    identifier:(NSString *)identifier
+                  languageCode:(NSString *)languageCode
+                         error:(NSError **)errorPtr;
+
+/**
  Performs the comparisong or records a snapshot of the view if recordMode is YES.
  @param view The view to snapshot
  @param referenceImagesDirectory The directory in which reference images are stored.
@@ -84,6 +126,21 @@
 - (BOOL)compareSnapshotOfView:(UIView *)view
      referenceImagesDirectory:(NSString *)referenceImagesDirectory
                    identifier:(NSString *)identifier
+                        error:(NSError **)errorPtr;
+
+/**
+ Performs the comparisong or records a snapshot of the view if recordMode is YES.
+ @param view The view to snapshot
+ @param referenceImagesDirectory The directory in which reference images are stored.
+ @param languageCode Language code for locale depended tests.
+ @param identifier An optional identifier, used is there are muliptle snapshot tests in a given -test method.
+ @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
+ @returns YES if the comparison (or saving of the reference image) succeeded.
+ */
+- (BOOL)compareSnapshotOfView:(UIView *)view
+     referenceImagesDirectory:(NSString *)referenceImagesDirectory
+                   identifier:(NSString *)identifier
+                 languageCode:(NSString *)languageCode
                         error:(NSError **)errorPtr;
 
 @end
