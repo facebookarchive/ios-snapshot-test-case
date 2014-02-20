@@ -93,9 +93,9 @@
 {
   _snapshotController.referenceImagesDirectory = referenceImagesDirectory;
   if (self.recordMode) {
-    return [self _recordSnapshotOfViewOrLayer:viewOrLayer identifier:identifier localeIdentifier:localeIdentifier error:errorPtr];
+    return [self _recordSnapshotOfViewOrLayer:viewOrLayer identifier:identifier localeIdentifier:[localeIdentifier lowercaseString] error:errorPtr];
   } else {
-    return [self _performPixelComparisonWithViewOrLayer:viewOrLayer identifier:identifier localeIdentifier:localeIdentifier error:errorPtr];
+    return [self _performPixelComparisonWithViewOrLayer:viewOrLayer identifier:identifier localeIdentifier:[localeIdentifier lowercaseString] error:errorPtr];
   }
 }
 
