@@ -34,12 +34,12 @@
 
 - (BOOL)recordMode
 {
-    return self.snapshotController.recordMode;
+  return self.snapshotController.recordMode;
 }
 
 - (void)setRecordMode:(BOOL)recordMode
 {
-    self.snapshotController.recordMode = recordMode;
+  self.snapshotController.recordMode = recordMode;
 }
 
 - (BOOL)compareSnapshotOfLayer:(CALayer *)layer
