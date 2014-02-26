@@ -158,14 +158,14 @@ typedef struct RGBAPixel {
   if (![testPNGData writeToFile:testPath options:NSDataWritingAtomic error:errorPtr]) {
     return NO;
   }
-    
+
   NSString *diffPath = [self _failedFilePathForSelector:selector
                                                identifier:identifier
                                              fileNameType:FBTestSnapshotFileNameTypeFailedTestDiff];
-    
+
   UIImage *diffImage = [referenceImage diffWithImage:testImage];
   NSData *diffImageData = UIImagePNGRepresentation(diffImage);
-    
+
   if (![diffImageData writeToFile:diffPath options:NSDataWritingAtomic error:errorPtr]) {
     return NO;
   }
@@ -267,6 +267,110 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   NSString *filePath = [folderPath stringByAppendingPathComponent:NSStringFromClass(_testClass)];
   filePath = [filePath stringByAppendingPathComponent:fileName];
   return filePath;
+}
+
+- (BOOL)compareSnapshotOfLayer:(CALayer *)layer
+                      selector:(SEL)selector
+                    identifier:(NSString *)identifier
+                         error:(NSError **)errorPtr
+{
+  return [self compareSnapshotOfViewOrLayer:layer
+                                   selector:selector
+                                 identifier:identifier
+                                      error:errorPtr];
+}
+
+- (BOOL)compareSnapshotOfView:(UIView *)view
+                     selector:(SEL)selector
+                   identifier:(NSString *)identifier
+                        error:(NSError **)errorPtr
+{
+  return [self compareSnapshotOfViewOrLayer:view
+                                   selector:selector
+                                 identifier:identifier
+                                      error:errorPtr];
+}
+
+- (BOOL)compareSnapshotOfViewOrLayer:(id)viewOrLayer
+                            selector:(SEL)selector
+                          identifier:(NSString *)identifier
+                               error:(NSError **)errorPtr
+{
+  if (self.recordMode) {
+    return [self _recordSnapshotOfViewOrLayer:viewOrLayer selector:selector identifier:identifier error:errorPtr];
+  } else {
+    return [self _performPixelComparisonWithViewOrLayer:viewOrLayer selector:selector identifier:identifier error:errorPtr];
+  }
+}
+
+#pragma mark -
+#pragma mark Private API
+
+- (BOOL)_performPixelComparisonWithViewOrLayer:(UIView *)viewOrLayer
+                                      selector:(SEL)selector
+                                    identifier:(NSString *)identifier
+                                         error:(NSError **)errorPtr
+{
+  UIImage *referenceImage = [self referenceImageForSelector:selector identifier:identifier error:errorPtr];
+  if (nil != referenceImage) {
+    UIImage *snapshot = [self _snapshotViewOrLayer:viewOrLayer];
+    BOOL imagesSame = [self compareReferenceImage:referenceImage toImage:snapshot error:errorPtr];
+    if (!imagesSame) {
+      [self saveFailedReferenceImage:referenceImage
+                           testImage:snapshot
+                            selector:selector
+                          identifier:identifier
+                               error:errorPtr];
+    }
+    return imagesSame;
+  }
+  return NO;
+}
+
+- (BOOL)_recordSnapshotOfViewOrLayer:(id)viewOrLayer
+                            selector:(SEL)selector
+                          identifier:(NSString *)identifier
+                               error:(NSError **)errorPtr
+{
+  UIImage *snapshot = [self _snapshotViewOrLayer:viewOrLayer];
+  return [self saveReferenceImage:snapshot selector:selector identifier:identifier error:errorPtr];
+}
+
+- (UIImage *)_snapshotViewOrLayer:(id)viewOrLayer
+{
+  CALayer *layer = nil;
+  
+  if ([viewOrLayer isKindOfClass:[UIView class]]) {
+    UIView *view = (UIView *)viewOrLayer;
+    [view layoutIfNeeded];
+    layer = view.layer;
+  } else if ([viewOrLayer isKindOfClass:[CALayer class]]) {
+    layer = (CALayer *)viewOrLayer;
+    [layer layoutIfNeeded];
+  } else {
+    [NSException raise:@"Only UIView and CALayer classes can be snapshotted" format:@"%@", viewOrLayer];
+  }
+  
+  return [self _renderLayer:layer];
+}
+
+- (UIImage *)_renderLayer:(CALayer *)layer
+{
+  CGRect bounds = layer.bounds;
+  
+  UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
+  CGContextRef context = UIGraphicsGetCurrentContext();
+  
+  CGContextSaveGState(context);
+  {
+    [layer renderInContext:context];
+  }
+  CGContextRestoreGState(context);
+  
+  UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  
+  return snapshot;
 }
 
 @end

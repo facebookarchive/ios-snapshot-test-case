@@ -7,7 +7,7 @@
  *  of patent rights can be found in the PATENTS file in the same directory.
  *
  */
- 
+
 #import "FBSnapshotTestCase.h"
 
 #import "FBTestSnapshotController.h"
@@ -30,6 +30,16 @@
 {
   self.snapshotController = nil;
   [super tearDown];
+}
+
+- (BOOL)recordMode
+{
+  return self.snapshotController.recordMode;
+}
+
+- (void)setRecordMode:(BOOL)recordMode
+{
+  self.snapshotController.recordMode = recordMode;
 }
 
 - (BOOL)compareSnapshotOfLayer:(CALayer *)layer
@@ -63,76 +73,10 @@
                                 error:(NSError **)errorPtr
 {
   _snapshotController.referenceImagesDirectory = referenceImagesDirectory;
-  if (self.recordMode) {
-    return [self _recordSnapshotOfViewOrLayer:viewOrLayer identifier:identifier error:errorPtr];
-  } else {
-    return [self _performPixelComparisonWithViewOrLayer:viewOrLayer identifier:identifier error:errorPtr];
-  }
-}
-
-- (BOOL)_performPixelComparisonWithViewOrLayer:(UIView *)viewOrLayer
-                                    identifier:(NSString *)identifier
-                                         error:(NSError **)errorPtr
-{
-  UIImage *referenceImage = [_snapshotController referenceImageForSelector:self.selector identifier:identifier error:errorPtr];
-  if (nil != referenceImage) {
-    UIImage *snapshot = [self _snapshotViewOrLayer:viewOrLayer];
-    BOOL imagesSame = [_snapshotController compareReferenceImage:referenceImage toImage:snapshot error:errorPtr];
-    if (!imagesSame) {
-      [_snapshotController saveFailedReferenceImage:referenceImage
-                                          testImage:snapshot
-                                           selector:self.selector
-                                         identifier:identifier
-                                              error:errorPtr];
-    }
-    return imagesSame;
-  }
-  return NO;
-}
-
-- (BOOL)_recordSnapshotOfViewOrLayer:(id)viewOrLayer
-                          identifier:(NSString *)identifier
-                               error:(NSError **)errorPtr
-{
-  UIImage *snapshot = [self _snapshotViewOrLayer:viewOrLayer];
-  return [_snapshotController saveReferenceImage:snapshot selector:self.selector identifier:identifier error:errorPtr];
-}
-
-- (UIImage *)_snapshotViewOrLayer:(id)viewOrLayer
-{
-  CALayer *layer = nil;
-
-  if ([viewOrLayer isKindOfClass:[UIView class]]) {
-    UIView *view = (UIView *)viewOrLayer;
-    [view layoutIfNeeded];
-    layer = view.layer;
-  } else if ([viewOrLayer isKindOfClass:[CALayer class]]) {
-    layer = (CALayer *)viewOrLayer;
-    [layer layoutIfNeeded];
-  } else {
-    XCTAssertTrue(NO, @"Only UIView and CALayer classes can be snapshotted!  %@", viewOrLayer);
-  }
-
-  return [self _renderLayer:layer];
-}
-
-- (UIImage *)_renderLayer:(CALayer *)layer
-{
-  CGRect bounds = layer.bounds;
-
-  UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
-  CGContextRef context = UIGraphicsGetCurrentContext();
-
-  CGContextSaveGState(context);
-  {
-    [layer renderInContext:context];
-  }
-  CGContextRestoreGState(context);
-
-  UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
-  UIGraphicsEndImageContext();
-
-  return snapshot;
+  return [_snapshotController compareSnapshotOfViewOrLayer:viewOrLayer
+                                                  selector:self.selector
+                                                identifier:identifier
+                                                     error:errorPtr];
 }
 
 @end
