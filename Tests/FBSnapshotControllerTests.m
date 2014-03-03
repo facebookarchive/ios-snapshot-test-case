@@ -9,7 +9,7 @@
  */
 
 #import <XCTest/XCTest.h>
-#import "FBTestSnapshotController.h"
+#import "FBSnapshotTestController.h"
 
 @interface FBSnapshotControllerTests : XCTestCase
 
@@ -31,7 +31,7 @@
     XCTAssertNotNil(referenceImage, @"");
     UIImage *testImage = [self bundledImageNamed:@"square-copy" type:@"png"];
     XCTAssertNotNil(testImage, @"");
-    FBTestSnapshotController *controller = [[FBTestSnapshotController alloc] initWithTestClass:nil];
+    FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
     XCTAssertTrue([controller compareReferenceImage:referenceImage toImage:testImage error:nil], @"");
 }
 
@@ -41,7 +41,7 @@
     XCTAssertNotNil(referenceImage, @"");
     UIImage *testImage = [self bundledImageNamed:@"square_with_text" type:@"png"];
     XCTAssertNotNil(testImage, @"");
-    FBTestSnapshotController *controller = [[FBTestSnapshotController alloc] initWithTestClass:nil];
+    FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
     XCTAssertFalse([controller compareReferenceImage:referenceImage toImage:testImage error:nil], @"");
 }
 

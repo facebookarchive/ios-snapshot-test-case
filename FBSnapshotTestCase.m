@@ -10,11 +10,11 @@
 
 #import "FBSnapshotTestCase.h"
 
-#import "FBTestSnapshotController.h"
+#import "FBSnapshotTestController.h"
 
 @interface FBSnapshotTestCase ()
 
-@property (readwrite, nonatomic, retain) FBTestSnapshotController *snapshotController;
+@property (readwrite, nonatomic, retain) FBSnapshotTestController *snapshotController;
 
 @end
 
@@ -23,7 +23,7 @@
 - (void)setUp
 {
   [super setUp];
-  self.snapshotController = [[FBTestSnapshotController alloc] initWithTestClass:[self class]];
+  self.snapshotController = [[FBSnapshotTestController alloc] initWithTestClass:[self class]];
 }
 
 - (void)tearDown

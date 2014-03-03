@@ -32,7 +32,7 @@ We developed `FBSnapshotTestCase` to make snapshot tests easy.
 Creating a snapshot test
 ------------------------
 
-1. Drop the `FBSnapshotTestCase` and `FBTestSnapshotController` source files
+1. Drop the `FBSnapshotTestCase` and `FBSnapshotTestController` source files
    into your project. In the Add Files dialog, be sure to check the **tests**
    target, not the main target.
 

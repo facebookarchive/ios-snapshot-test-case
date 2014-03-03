@@ -11,20 +11,20 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, FBTestSnapshotControllerErrorCode) {
-  FBTestSnapshotControllerErrorCodeUnknown,
-  FBTestSnapshotControllerErrorCodeNeedsRecord,
-  FBTestSnapshotControllerErrorCodePNGCreationFailed,
-  FBTestSnapshotControllerErrorCodeImagesDifferentSizes,
-  FBTestSnapshotControllerErrorCodeImagesDifferent,
+typedef NS_ENUM(NSInteger, FBSnapshotTestControllerErrorCode) {
+  FBSnapshotTestControllerErrorCodeUnknown,
+  FBSnapshotTestControllerErrorCodeNeedsRecord,
+  FBSnapshotTestControllerErrorCodePNGCreationFailed,
+  FBSnapshotTestControllerErrorCodeImagesDifferentSizes,
+  FBSnapshotTestControllerErrorCodeImagesDifferent,
 };
 /**
- Errors returned by the methods of FBTestSnapshotController use this domain.
+ Errors returned by the methods of FBSnapshotTestController use this domain.
  */
-extern NSString *const FBTestSnapshotControllerErrorDomain;
+extern NSString *const FBSnapshotTestControllerErrorDomain;
 
 /**
- Errors returned by the methods of FBTestSnapshotController sometimes contain this key in the `userInfo` dictionary.
+ Errors returned by the methods of FBSnapshotTestController sometimes contain this key in the `userInfo` dictionary.
  */
 extern NSString *const FBReferenceImageFilePathKey;
 
@@ -33,7 +33,7 @@ extern NSString *const FBReferenceImageFilePathKey;
  by-pixel comparison of images.
  Instances are initialized with the test class, and directories to read and write to.
  */
-@interface FBTestSnapshotController : NSObject
+@interface FBSnapshotTestController : NSObject
 
 /**
  Record snapshots.
@@ -46,7 +46,7 @@ extern NSString *const FBReferenceImageFilePathKey;
  for those tests.
  @param testClass The subclass of FBSnapshotTestCase that is using this controller.
  @param referenceImagesDirectory The directory where the reference images are stored.
- @returns An instance of FBTestSnapshotController.
+ @returns An instance of FBSnapshotTestController.
  */
 - (id)initWithTestClass:(Class)testClass;
 

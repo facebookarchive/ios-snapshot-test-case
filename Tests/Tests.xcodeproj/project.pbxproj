@@ -11,7 +11,7 @@
 		B3090DC518AED83A00516CAD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3090DC418AED83A00516CAD /* Foundation.framework */; };
 		B3090DC718AED83A00516CAD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3090DC618AED83A00516CAD /* UIKit.framework */; };
 		B3090DD518AED8D200516CAD /* FBSnapshotControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3090DD418AED8D200516CAD /* FBSnapshotControllerTests.m */; };
-		B3090DD918AED95300516CAD /* FBTestSnapshotController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3090DD818AED95300516CAD /* FBTestSnapshotController.m */; };
+		B3090DD918AED95300516CAD /* FBSnapshotTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3090DD818AED95300516CAD /* FBSnapshotTestController.m */; };
 		B3090DDD18AEDAD000516CAD /* square_with_text.png in Resources */ = {isa = PBXBuildFile; fileRef = B3090DDA18AEDAD000516CAD /* square_with_text.png */; };
 		B3090DDE18AEDAD000516CAD /* square-copy.png in Resources */ = {isa = PBXBuildFile; fileRef = B3090DDB18AEDAD000516CAD /* square-copy.png */; };
 		B3090DDF18AEDAD000516CAD /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = B3090DDC18AEDAD000516CAD /* square.png */; };
@@ -25,8 +25,8 @@
 		B3090DC418AED83A00516CAD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		B3090DC618AED83A00516CAD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		B3090DD418AED8D200516CAD /* FBSnapshotControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotControllerTests.m; sourceTree = SOURCE_ROOT; };
-		B3090DD718AED95300516CAD /* FBTestSnapshotController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBTestSnapshotController.h; path = ../FBTestSnapshotController.h; sourceTree = "<group>"; };
-		B3090DD818AED95300516CAD /* FBTestSnapshotController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBTestSnapshotController.m; path = ../FBTestSnapshotController.m; sourceTree = "<group>"; };
+		B3090DD718AED95300516CAD /* FBSnapshotTestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestController.h; path = ../FBSnapshotTestController.h; sourceTree = "<group>"; };
+		B3090DD818AED95300516CAD /* FBSnapshotTestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestController.m; path = ../FBSnapshotTestController.m; sourceTree = "<group>"; };
 		B3090DDA18AEDAD000516CAD /* square_with_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square_with_text.png; sourceTree = SOURCE_ROOT; };
 		B3090DDB18AEDAD000516CAD /* square-copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square-copy.png"; sourceTree = SOURCE_ROOT; };
 		B3090DDC18AEDAD000516CAD /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square.png; sourceTree = SOURCE_ROOT; };
@@ -92,8 +92,8 @@
 		B3090DD618AED8E600516CAD /* FBSnapshotTestCase */ = {
 			isa = PBXGroup;
 			children = (
-				B3090DD718AED95300516CAD /* FBTestSnapshotController.h */,
-				B3090DD818AED95300516CAD /* FBTestSnapshotController.m */,
+				B3090DD718AED95300516CAD /* FBSnapshotTestController.h */,
+				B3090DD818AED95300516CAD /* FBSnapshotTestController.m */,
 				B3107CDF18B3985000FAFCBE /* UIImage+Compare.h */,
 				B3107CE018B3985000FAFCBE /* UIImage+Compare.m */,
 			);
@@ -165,7 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3090DD518AED8D200516CAD /* FBSnapshotControllerTests.m in Sources */,
-				B3090DD918AED95300516CAD /* FBTestSnapshotController.m in Sources */,
+				B3090DD918AED95300516CAD /* FBSnapshotTestController.m in Sources */,
 				B3107CE118B3985000FAFCBE /* UIImage+Compare.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
