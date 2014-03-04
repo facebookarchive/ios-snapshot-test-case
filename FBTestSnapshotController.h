@@ -54,27 +54,23 @@ extern NSString *const FBReferenceImageFilePathKey;
  Loads a reference image.
  @param selector The test method being run.
  @param identifier The optional identifier, used when multiple images are tested in a single -test method.
- @param localeIdentifier Language code for locale depended tests.
  @param error An error, if this methods returns nil, the error will be something useful.
  @returns An image.
  */
 - (UIImage *)referenceImageForSelector:(SEL)selector
                             identifier:(NSString *)identifier
-                      localeIdentifier:(NSString *)localeIdentifier
                                  error:(NSError **)error;
 
 /**
  Saves a reference image.
  @param selector The test method being run.
  @param identifier The optional identifier, used when multiple images are tested in a single -test method.
- @param localeIdentifier Language code for locale depended tests.
  @param error An error, if this methods returns NO, the error will be something useful.
  @returns An image.
  */
 - (BOOL)saveReferenceImage:(UIImage *)image
                   selector:(SEL)selector
                 identifier:(NSString *)identifier
-          localeIdentifier:(NSString *)localeIdentifier
                      error:(NSError **)errorPtr;
 
 /**
@@ -94,7 +90,6 @@ extern NSString *const FBReferenceImageFilePathKey;
  @param testImage The image to test against the reference.
  @param selector The test method being run.
  @param identifier The optional identifier, used when multiple images are tested in a single -test method.
- @param localeIdentifier Language code for locale depended tests.
  @param error An error that indicates why the comparison failed if it does.
  @param YES if the save succeeded.
  */
@@ -102,6 +97,5 @@ extern NSString *const FBReferenceImageFilePathKey;
                        testImage:(UIImage *)testImage
                         selector:(SEL)selector
                       identifier:(NSString *)identifier
-                localeIdentifier:(NSString *)localeIdentifier
                            error:(NSError **)errorPtr;
 @end

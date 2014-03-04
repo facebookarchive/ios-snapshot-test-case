@@ -37,23 +37,9 @@
                     identifier:(NSString *)identifier
                          error:(NSError **)errorPtr
 {
-    return [self compareSnapshotOfLayer:layer
-                      referenceImagesDirectory:referenceImagesDirectory
-                                    identifier:identifier
-                              localeIdentifier:nil
-                                         error:errorPtr];
-}
-
-- (BOOL)compareSnapshotOfLayer:(CALayer *)layer
-      referenceImagesDirectory:(NSString *)referenceImagesDirectory
-                    identifier:(NSString *)identifier
-              localeIdentifier:(NSString *)localeIdentifier
-                         error:(NSError **)errorPtr
-{
   return [self _compareSnapshotOfViewOrLayer:layer
                     referenceImagesDirectory:referenceImagesDirectory
                                   identifier:identifier
-                            localeIdentifier:localeIdentifier
                                        error:errorPtr];
 }
 
@@ -62,23 +48,9 @@
                    identifier:(NSString *)identifier
                         error:(NSError **)errorPtr
 {
-    return [self compareSnapshotOfView:view
-                      referenceImagesDirectory:referenceImagesDirectory
-                                    identifier:identifier
-                              localeIdentifier:nil
-                                         error:errorPtr];
-}
-
-- (BOOL)compareSnapshotOfView:(UIView *)view
-     referenceImagesDirectory:(NSString *)referenceImagesDirectory
-                   identifier:(NSString *)identifier
-             localeIdentifier:(NSString *)localeIdentifier
-                        error:(NSError **)errorPtr
-{
   return [self _compareSnapshotOfViewOrLayer:view
                     referenceImagesDirectory:referenceImagesDirectory
                                   identifier:identifier
-                            localeIdentifier:localeIdentifier
                                        error:errorPtr];
 }
 
@@ -88,23 +60,21 @@
 - (BOOL)_compareSnapshotOfViewOrLayer:(id)viewOrLayer
              referenceImagesDirectory:(NSString *)referenceImagesDirectory
                            identifier:(NSString *)identifier
-                     localeIdentifier:(NSString *)localeIdentifier
                                 error:(NSError **)errorPtr
 {
   _snapshotController.referenceImagesDirectory = referenceImagesDirectory;
   if (self.recordMode) {
-    return [self _recordSnapshotOfViewOrLayer:viewOrLayer identifier:identifier localeIdentifier:[localeIdentifier lowercaseString] error:errorPtr];
+    return [self _recordSnapshotOfViewOrLayer:viewOrLayer identifier:identifier error:errorPtr];
   } else {
-    return [self _performPixelComparisonWithViewOrLayer:viewOrLayer identifier:identifier localeIdentifier:[localeIdentifier lowercaseString] error:errorPtr];
+    return [self _performPixelComparisonWithViewOrLayer:viewOrLayer identifier:identifier error:errorPtr];
   }
 }
 
 - (BOOL)_performPixelComparisonWithViewOrLayer:(UIView *)viewOrLayer
                                     identifier:(NSString *)identifier
-                              localeIdentifier:(NSString *)localeIdentifier
                                          error:(NSError **)errorPtr
 {
-  UIImage *referenceImage = [_snapshotController referenceImageForSelector:self.selector identifier:identifier localeIdentifier:localeIdentifier error:errorPtr];
+  UIImage *referenceImage = [_snapshotController referenceImageForSelector:self.selector identifier:identifier error:errorPtr];
   if (nil != referenceImage) {
     UIImage *snapshot = [self _snapshotViewOrLayer:viewOrLayer];
     BOOL imagesSame = [_snapshotController compareReferenceImage:referenceImage toImage:snapshot error:errorPtr];
@@ -113,7 +83,6 @@
                                           testImage:snapshot
                                            selector:self.selector
                                          identifier:identifier
-                                   localeIdentifier:localeIdentifier
                                               error:errorPtr];
     }
     return imagesSame;
@@ -123,11 +92,10 @@
 
 - (BOOL)_recordSnapshotOfViewOrLayer:(id)viewOrLayer
                           identifier:(NSString *)identifier
-                    localeIdentifier:(NSString *)localeIdentifier
                                error:(NSError **)errorPtr
 {
   UIImage *snapshot = [self _snapshotViewOrLayer:viewOrLayer];
-  return [_snapshotController saveReferenceImage:snapshot selector:self.selector identifier:identifier localeIdentifier:localeIdentifier error:errorPtr];
+  return [_snapshotController saveReferenceImage:snapshot selector:self.selector identifier:identifier error:errorPtr];
 }
 
 - (UIImage *)_snapshotViewOrLayer:(id)viewOrLayer

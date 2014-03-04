@@ -64,10 +64,9 @@ typedef struct RGBAPixel {
 
 - (UIImage *)referenceImageForSelector:(SEL)selector
                             identifier:(NSString *)identifier
-                      localeIdentifier:(NSString *)localeIdentifier
                                  error:(NSError **)errorPtr
 {
-  NSString *filePath = [self _referenceFilePathForSelector:selector identifier:identifier localeIdentifier:localeIdentifier];
+  NSString *filePath = [self _referenceFilePathForSelector:selector identifier:identifier];
   UIImage *image = [UIImage imageWithContentsOfFile:filePath];
   if (nil == image && NULL != errorPtr) {
     BOOL exists = [_fileManager fileExistsAtPath:filePath];
@@ -91,12 +90,11 @@ typedef struct RGBAPixel {
 - (BOOL)saveReferenceImage:(UIImage *)image
                   selector:(SEL)selector
                 identifier:(NSString *)identifier
-          localeIdentifier:(NSString *)localeIdentifier
                      error:(NSError **)errorPtr
 {
   BOOL didWrite = NO;
   if (nil != image) {
-    NSString *filePath = [self _referenceFilePathForSelector:selector identifier:identifier localeIdentifier:localeIdentifier];
+    NSString *filePath = [self _referenceFilePathForSelector:selector identifier:identifier];
     NSData *pngData = UIImagePNGRepresentation(image);
     if (nil != pngData) {
       NSError *creationError = nil;
@@ -128,7 +126,6 @@ typedef struct RGBAPixel {
                        testImage:(UIImage *)testImage
                         selector:(SEL)selector
                       identifier:(NSString *)identifier
-                localeIdentifier:(NSString *)localeIdentifier
                            error:(NSError **)errorPtr
 {
   NSData *referencePNGData = UIImagePNGRepresentation(referenceImage);
@@ -136,7 +133,6 @@ typedef struct RGBAPixel {
 
   NSString *referencePath = [self _failedFilePathForSelector:selector
                                                   identifier:identifier
-                                            localeIdentifier:localeIdentifier
                                                 fileNameType:FBTestSnapshotFileNameTypeFailedReference];
 
   NSError *creationError = nil;
@@ -157,7 +153,6 @@ typedef struct RGBAPixel {
 
   NSString *testPath = [self _failedFilePathForSelector:selector
                                              identifier:identifier
-                                       localeIdentifier:localeIdentifier
                                            fileNameType:FBTestSnapshotFileNameTypeFailedTest];
 
   if (![testPNGData writeToFile:testPath options:NSDataWritingAtomic error:errorPtr]) {
@@ -165,9 +160,8 @@ typedef struct RGBAPixel {
   }
     
   NSString *diffPath = [self _failedFilePathForSelector:selector
-                                             identifier:identifier
-                                       localeIdentifier:localeIdentifier
-                                           fileNameType:FBTestSnapshotFileNameTypeFailedTestDiff];
+                                               identifier:identifier
+                                             fileNameType:FBTestSnapshotFileNameTypeFailedTestDiff];
     
   UIImage *diffImage = [referenceImage diffWithImage:testImage];
   NSData *diffImageData = UIImagePNGRepresentation(diffImage);
@@ -221,7 +215,6 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
 
 - (NSString *)_fileNameForSelector:(SEL)selector
                         identifier:(NSString *)identifier
-                  localeIdentifier:(NSString *)localeIdentifier
                       fileNameType:(FBTestSnapshotFileNameType)fileNameType
 {
   NSString *fileName = nil;
@@ -243,9 +236,6 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   if (0 < identifier.length) {
     fileName = [fileName stringByAppendingFormat:@"_%@", identifier];
   }
-  if (localeIdentifier) {
-      fileName = [fileName stringByAppendingFormat:@"_%@", localeIdentifier];
-  }
   if ([[UIScreen mainScreen] scale] >= 2.0) {
     fileName = [fileName stringByAppendingString:@"@2x"];
   }
@@ -253,13 +243,10 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   return fileName;
 }
 
-- (NSString *)_referenceFilePathForSelector:(SEL)selector
-                                 identifier:(NSString *)identifier
-                           localeIdentifier:(NSString *)localeIdentifier
+- (NSString *)_referenceFilePathForSelector:(SEL)selector identifier:(NSString *)identifier
 {
   NSString *fileName = [self _fileNameForSelector:selector
                                        identifier:identifier
-                                 localeIdentifier:localeIdentifier
                                      fileNameType:FBTestSnapshotFileNameTypeReference];
   NSString *filePath = [_referenceImagesDirectory stringByAppendingPathComponent:NSStringFromClass(_testClass)];
   filePath = [filePath stringByAppendingPathComponent:fileName];
@@ -268,12 +255,10 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
 
 - (NSString *)_failedFilePathForSelector:(SEL)selector
                               identifier:(NSString *)identifier
-                        localeIdentifier:(NSString *)localeIdentifier
                             fileNameType:(FBTestSnapshotFileNameType)fileNameType
 {
   NSString *fileName = [self _fileNameForSelector:selector
                                        identifier:identifier
-                                 localeIdentifier:localeIdentifier
                                      fileNameType:fileNameType];
   NSString *folderPath = NSTemporaryDirectory();
   if (getenv("IMAGE_DIFF_DIR")) {
