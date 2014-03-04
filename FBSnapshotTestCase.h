@@ -33,6 +33,30 @@
 
 /**
  Similar to our much-loved XCTAssert() macros. Use this to perform your test. No need to write an explanation, though.
+ @param view The view to snapshot
+ @param localeIdentifier Language code for locale depended tests.
+ @param identifier An optional identifier, used is there are multiple snapshot tests in a given -test method.
+ */
+#define FBSnapshotVerifyViewWithLocaleIdentifier(view__, localeIdentifier__, identifier__) \
+{ \
+  if ([localeIdentifier__ lowercaseString] && ![[localeIdentifier__ lowercaseString] isEqualToString:[[[NSLocale currentLocale] localeIdentifier] lowercaseString]]) { \
+    return; \
+  } \
+  NSString *identifier; \
+  if (identifier__) { \
+    identifier = [NSString stringWithFormat:@"%@_%@",identifier__,localeIdentifier__]; \
+  } \
+  else { \
+    identifier = localeIdentifier__; \
+  } \
+  NSError *error__ = nil; \
+  NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s", FB_REFERENCE_IMAGE_DIR]; \
+  BOOL comparisonSuccess__ = [self compareSnapshotOfView:(view__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier) error:&error__]; \
+  XCTAssertTrue(comparisonSuccess__, @"Snapshot comparison failed: %@", error__); \
+}
+
+/**
+ Similar to our much-loved XCTAssert() macros. Use this to perform your test. No need to write an explanation, though.
  @param layer The layer to snapshot
  @param identifier An optional identifier, used is there are multiple snapshot tests in a given -test method.
  */
