@@ -11,10 +11,10 @@
          location = "group:FBSnapshotTestCase.m">
       </FileRef>
       <FileRef
-         location = "group:/Users/dblock/source/ios-snapshot-test-case/dblock/FBSnapshotTestController.h">
+         location = "group:FBSnapshotTestController.h">
       </FileRef>
       <FileRef
-         location = "group:/Users/dblock/source/ios-snapshot-test-case/dblock/FBSnapshotTestController.m">
+         location = "group:FBSnapshotTestController.m">
       </FileRef>
    </Group>
    <FileRef
