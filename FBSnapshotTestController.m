@@ -341,17 +341,15 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   CALayer *layer = nil;
   
   if ([viewOrLayer isKindOfClass:[UIView class]]) {
-    UIView *view = (UIView *)viewOrLayer;
-    [view layoutIfNeeded];
-    layer = view.layer;
+    return [self _renderView:viewOrLayer];
   } else if ([viewOrLayer isKindOfClass:[CALayer class]]) {
     layer = (CALayer *)viewOrLayer;
     [layer layoutIfNeeded];
+    return [self _renderLayer:layer];
   } else {
     [NSException raise:@"Only UIView and CALayer classes can be snapshotted" format:@"%@", viewOrLayer];
   }
-  
-  return [self _renderLayer:layer];
+  return nil;
 }
 
 - (UIImage *)_renderLayer:(CALayer *)layer
@@ -371,6 +369,21 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   UIGraphicsEndImageContext();
   
   return snapshot;
+}
+        
+- (UIImage *)_renderView:(UIView *)view
+{
+#ifdef __IPHONE_7_0
+  if ([view respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+    UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+  }
+#endif
+  [view layoutIfNeeded];
+  return [self _renderLayer:view.layer];
 }
 
 @end
