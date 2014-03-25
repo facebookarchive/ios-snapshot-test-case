@@ -22,7 +22,7 @@
   [super setUp];
   // Flip this to YES to record images in the reference image directory.
   // You need to do this the first time you create a test and whenever you change the snapshotted views.
-  // Be careful not to commit with recordMode on though, or your tests will never fail.
+  // Tests running in record mode will allways fail so that you know that you have to do something here before you commit.
   self.recordMode = NO;
 }
 
