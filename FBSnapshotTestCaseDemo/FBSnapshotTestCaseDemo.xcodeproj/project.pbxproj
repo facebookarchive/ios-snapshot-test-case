@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C0FC76118E113E500A705F8 /* FBSnapshotTestCaseDemoTestsWithRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FC76018E113E500A705F8 /* FBSnapshotTestCaseDemoTestsWithRotation.m */; };
+		3C0FC76418E1173500A705F8 /* FBExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FC76318E1173500A705F8 /* FBExampleViewController.m */; };
 		53455EA918B3355D00571FEA /* UIImage+Diff.m in Sources */ = {isa = PBXBuildFile; fileRef = 53455EA818B3355D00571FEA /* UIImage+Diff.m */; };
 		A24E010717F9A42A001252DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24E010617F9A42A001252DB /* Foundation.framework */; };
 		A24E010917F9A42A001252DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24E010817F9A42A001252DB /* CoreGraphics.framework */; };
@@ -37,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C0FC76018E113E500A705F8 /* FBSnapshotTestCaseDemoTestsWithRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCaseDemoTestsWithRotation.m; sourceTree = "<group>"; };
+		3C0FC76218E1173500A705F8 /* FBExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBExampleViewController.h; sourceTree = "<group>"; };
+		3C0FC76318E1173500A705F8 /* FBExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBExampleViewController.m; sourceTree = "<group>"; };
 		53455EA718B3355D00571FEA /* UIImage+Diff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Diff.h"; path = "../UIImage+Diff.h"; sourceTree = "<group>"; };
 		53455EA818B3355D00571FEA /* UIImage+Diff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Diff.m"; path = "../UIImage+Diff.m"; sourceTree = "<group>"; };
 		A23E9CB517FA9C300071B3CE /* FBSnapshotTestCaseDemo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = FBSnapshotTestCaseDemo.xcconfig; path = ../FBSnapshotTestCaseDemo.xcconfig; sourceTree = "<group>"; };
@@ -130,6 +135,8 @@
 				A24E010D17F9A42A001252DB /* Supporting Files */,
 				A257F0C717FA982800AB1B02 /* FBExampleView.h */,
 				A257F0C817FA982800AB1B02 /* FBExampleView.m */,
+				3C0FC76218E1173500A705F8 /* FBExampleViewController.h */,
+				3C0FC76318E1173500A705F8 /* FBExampleViewController.m */,
 			);
 			path = FBSnapshotTestCaseDemo;
 			sourceTree = "<group>";
@@ -150,6 +157,7 @@
 			children = (
 				A24E012B17F9A42A001252DB /* FBSnapshotTestCaseDemoTests.m */,
 				A24E012617F9A42A001252DB /* Supporting Files */,
+				3C0FC76018E113E500A705F8 /* FBSnapshotTestCaseDemoTestsWithRotation.m */,
 			);
 			path = FBSnapshotTestCaseDemoTests;
 			sourceTree = "<group>";
@@ -278,6 +286,7 @@
 				A257F0C917FA982900AB1B02 /* FBExampleView.m in Sources */,
 				A24E011717F9A42A001252DB /* FBAppDelegate.m in Sources */,
 				A24E011317F9A42A001252DB /* main.m in Sources */,
+				3C0FC76418E1173500A705F8 /* FBExampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +298,7 @@
 				A24E012C17F9A42A001252DB /* FBSnapshotTestCaseDemoTests.m in Sources */,
 				53455EA918B3355D00571FEA /* UIImage+Diff.m in Sources */,
 				A24E013A17F9A445001252DB /* FBSnapshotTestCase.m in Sources */,
+				3C0FC76118E113E500A705F8 /* FBSnapshotTestCaseDemoTestsWithRotation.m in Sources */,
 				FD93077618B345AA003B7EF6 /* UIImage+Compare.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
