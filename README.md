@@ -1,7 +1,7 @@
 FBSnapshotTestCase
 ======================
 
-[![Build Status](https://travis-ci.org/facebook/ios-snapshot-test-case.png)](https://travis-ci.org/facebook/ios-snapshot-test-case)
+[![Build Status](https://travis-ci.org/facebook/ios-snapshot-test-case.svg)](https://travis-ci.org/facebook/ios-snapshot-test-case)
 
 What it does
 ------------
