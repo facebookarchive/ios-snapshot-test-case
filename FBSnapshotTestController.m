@@ -241,6 +241,9 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   }
   fileName = [fileName stringByAppendingPathExtension:@"png"];
   return fileName;
+    if ([[UIScreen mainScreen] bounds].size.height == 568) {
+        fileName = [fileName stringByAppendingString:@"-568h"];
+    }
 }
 
 - (NSString *)_referenceFilePathForSelector:(SEL)selector identifier:(NSString *)identifier
