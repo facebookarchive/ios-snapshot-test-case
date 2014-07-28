@@ -358,7 +358,8 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   
   UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
   CGContextRef context = UIGraphicsGetCurrentContext();
-  
+  NSAssert1(context, @"Could not generate context for layer %@", layer);
+
   CGContextSaveGState(context);
   {
     [layer renderInContext:context];
