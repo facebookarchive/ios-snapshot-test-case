@@ -109,6 +109,9 @@ typedef struct RGBAPixel {
         return NO;
       }
       didWrite = [pngData writeToFile:filePath options:NSDataWritingAtomic error:errorPtr];
+      if (didWrite) {
+        NSLog(@"Reference image save at: %@", filePath);
+      }
     } else {
       if (nil != errorPtr) {
         *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
