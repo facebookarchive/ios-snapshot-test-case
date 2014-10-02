@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
 
   s.license      = 'BSD'
   s.author       = 'Facebook'
-  s.source       = { :git => "https://github.com/facebook/ios-snapshot-test-case.git",
-                     :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/AshFurrow/ios-snapshot-test-case.git",
+                     :commit => "5efed9a7ef7a9005b744a187e3a069920005d89e" }
   s.platform     = :ios, '6.0'
   s.requires_arc = true
   s.framework    = 'XCTest'
