@@ -239,8 +239,8 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   if (0 < identifier.length) {
     fileName = [fileName stringByAppendingFormat:@"_%@", identifier];
   }
-  if ([[UIScreen mainScreen] scale] >= 2.0) {
-    fileName = [fileName stringByAppendingString:@"@2x"];
+  if ([[UIScreen mainScreen] scale] > 1.0) {
+    fileName = [fileName stringByAppendingFormat:@"@%.fx", [[UIScreen mainScreen] scale]];
   }
   fileName = [fileName stringByAppendingPathExtension:@"png"];
   return fileName;
@@ -380,15 +380,19 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
         
 - (UIImage *)_renderView:(UIView *)view
 {
+  if (!self.renderAsLayer) {
 #ifdef __IPHONE_7_0
-  if ([view respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
-    UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0);
-    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-  }
+    if ([view respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+      UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0);
+      [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+      UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+      UIGraphicsEndImageContext();
+      return image;
+    }
+#else
+    NSLog(@"drawViewHierarchy is only available on iOS 7+");
 #endif
+  }
   [view layoutIfNeeded];
   return [self _renderLayer:view.layer];
 }
