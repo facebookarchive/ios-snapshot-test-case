@@ -46,14 +46,19 @@ extern NSString *const FBReferenceImageFilePathKey;
 @property(readwrite, nonatomic, assign) BOOL renderAsLayer;
 
 /**
- Designated initializer.
- Before this methods returns the controller enumerates over the test methods in `testClass` and loads the images
- for those tests.
  @param testClass The subclass of FBSnapshotTestCase that is using this controller.
  @param referenceImagesDirectory The directory where the reference images are stored.
  @returns An instance of FBSnapshotTestController.
  */
 - (id)initWithTestClass:(Class)testClass;
+
+/**
+ Designated initializer.
+ @param testName The name of the tests.
+ @param referenceImagesDirectory The directory where the reference images are stored.
+ @returns An instance of FBSnapshotTestController.
+ */
+- (id)initWithTestName:(NSString *)testName;
 
 
 /**
