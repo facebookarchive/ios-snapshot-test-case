@@ -69,7 +69,7 @@
  Performs the comparisong or records a snapshot of the layer if recordMode is YES.
  @param layer The Layer to snapshot
  @param referenceImagesDirectory The directory in which reference images are stored.
- @param identifier An optional identifier, used if there are muliptle snapshot tests in a given -test method.
+ @param identifier An optional identifier, used if there are multiple snapshot tests in a given -test method.
  @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
  @returns YES if the comparison (or saving of the reference image) succeeded.
  */
@@ -82,7 +82,7 @@
  Performs the comparisong or records a snapshot of the view if recordMode is YES.
  @param view The view to snapshot
  @param referenceImagesDirectory The directory in which reference images are stored.
- @param identifier An optional identifier, used if there are muliptle snapshot tests in a given -test method.
+ @param identifier An optional identifier, used if there are multiple snapshot tests in a given -test method.
  @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
  @returns YES if the comparison (or saving of the reference image) succeeded.
  */
