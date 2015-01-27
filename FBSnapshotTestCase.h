@@ -70,7 +70,7 @@
  @param layer The Layer to snapshot
  @param referenceImagesDirectory The directory in which reference images are stored.
  @param identifier An optional identifier, used if there are multiple snapshot tests in a given -test method.
- @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
+ @param errorPtr An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
  @returns YES if the comparison (or saving of the reference image) succeeded.
  */
 - (BOOL)compareSnapshotOfLayer:(CALayer *)layer
@@ -83,7 +83,7 @@
  @param view The view to snapshot
  @param referenceImagesDirectory The directory in which reference images are stored.
  @param identifier An optional identifier, used if there are multiple snapshot tests in a given -test method.
- @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
+ @param errorPtr An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
  @returns YES if the comparison (or saving of the reference image) succeeded.
  */
 - (BOOL)compareSnapshotOfView:(UIView *)view
