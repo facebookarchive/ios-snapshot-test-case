@@ -12,12 +12,13 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, FBSnapshotTestControllerErrorCode) {
-  FBSnapshotTestControllerErrorCodeUnknown,
-  FBSnapshotTestControllerErrorCodeNeedsRecord,
-  FBSnapshotTestControllerErrorCodePNGCreationFailed,
-  FBSnapshotTestControllerErrorCodeImagesDifferentSizes,
-  FBSnapshotTestControllerErrorCodeImagesDifferent,
+    FBSnapshotTestControllerErrorCodeUnknown,
+    FBSnapshotTestControllerErrorCodeNeedsRecord,
+    FBSnapshotTestControllerErrorCodePNGCreationFailed,
+    FBSnapshotTestControllerErrorCodeImagesDifferentSizes,
+    FBSnapshotTestControllerErrorCodeImagesDifferent,
 };
+
 /**
  Errors returned by the methods of FBSnapshotTestController use this domain.
  */
@@ -35,15 +36,18 @@ extern NSString *const FBReferenceImageFilePathKey;
  */
 @interface FBSnapshotTestController : NSObject
 
++ (void)setDefaultReferenceImagesDirectoryPath:(NSString *)path;
++ (NSString *)defaultReferenceImagesDirectoryPath;
+
 /**
  Record snapshots.
  **/
-@property(readwrite, nonatomic, assign) BOOL recordMode;
+@property (readwrite, nonatomic, assign) BOOL recordMode;
 
 /**
  Render as layer (NO) or with drawViewHierarchyInRect on iOS 7+ (YES)
  **/
-@property(readwrite, nonatomic, assign) BOOL renderAsLayer;
+@property (readwrite, nonatomic, assign) BOOL renderAsLayer;
 
 /**
  @param testClass The subclass of FBSnapshotTestCase that is using this controller.

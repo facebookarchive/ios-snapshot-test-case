@@ -30,6 +30,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface UIImage (Diff)
 
 - (UIImage *)diffWithImage:(UIImage *)image;
