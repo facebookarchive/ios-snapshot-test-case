@@ -22,11 +22,12 @@ NSString *const FBSnapshotTestControllerErrorDomain = @"FBSnapshotTestController
 NSString *const FBReferenceImageFilePathKey = @"FBReferenceImageFilePathKey";
 
 typedef struct RGBAPixel {
-  char r;
-  char g;
-  char b;
-  char a;
+    char r;
+    char g;
+    char b;
+    char a;
 } RGBAPixel;
+
 
 @interface FBSnapshotTestController ()
 
@@ -34,9 +35,22 @@ typedef struct RGBAPixel {
 
 @end
 
-@implementation FBSnapshotTestController
+
+@implementation FBSnapshotTestController {
+    NSFileManager *_fileManager;
+}
+
+#pragma mark - Class Methods
+
+static NSString *FBSnapshotTestControllerDefaultReferenceImagesDirectoryPath;
++ (void)setDefaultReferenceImagesDirectoryPath:(NSString *)path;
 {
-  NSFileManager *_fileManager;
+    FBSnapshotTestControllerDefaultReferenceImagesDirectoryPath = path;
+}
+
++ (NSString *)defaultReferenceImagesDirectoryPath;
+{
+    return FBSnapshotTestControllerDefaultReferenceImagesDirectoryPath;
 }
 
 #pragma mark -
@@ -52,6 +66,7 @@ typedef struct RGBAPixel {
     if ((self = [super init])) {
         _testName = [testName copy];
         _fileManager = [[NSFileManager alloc] init];
+        _referenceImagesDirectory = [[self class] defaultReferenceImagesDirectoryPath];
     }
     return self;
 }
@@ -61,7 +76,7 @@ typedef struct RGBAPixel {
 
 - (NSString *)description
 {
-  return [NSString stringWithFormat:@"%@ %@", [super description], _referenceImagesDirectory];
+    return [NSString stringWithFormat:@"%@ %@", [super description], _referenceImagesDirectory];
 }
 
 #pragma mark -
@@ -71,25 +86,25 @@ typedef struct RGBAPixel {
                             identifier:(NSString *)identifier
                                  error:(NSError **)errorPtr
 {
-  NSString *filePath = [self _referenceFilePathForSelector:selector identifier:identifier];
-  UIImage *image = [UIImage imageWithContentsOfFile:filePath];
-  if (nil == image && NULL != errorPtr) {
-    BOOL exists = [_fileManager fileExistsAtPath:filePath];
-    if (!exists) {
-      *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
-                                      code:FBSnapshotTestControllerErrorCodeNeedsRecord
-                                  userInfo:@{
-               FBReferenceImageFilePathKey: filePath,
-                 NSLocalizedDescriptionKey: @"Unable to load reference image.",
-          NSLocalizedFailureReasonErrorKey: @"Reference image not found. You need to run the test in record mode",
-                   }];
-    } else {
-      *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
-                                      code:FBSnapshotTestControllerErrorCodeUnknown
-                                  userInfo:nil];
+    NSString *filePath = [self _referenceFilePathForSelector:selector identifier:identifier];
+    UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+    if (nil == image && NULL != errorPtr) {
+        BOOL exists = [_fileManager fileExistsAtPath:filePath];
+        if (!exists) {
+            *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
+                                            code:FBSnapshotTestControllerErrorCodeNeedsRecord
+                                        userInfo:@{
+                                            FBReferenceImageFilePathKey : filePath,
+                                            NSLocalizedDescriptionKey : @"Unable to load reference image.",
+                                            NSLocalizedFailureReasonErrorKey : @"Reference image not found. You need to run the test in record mode",
+                                        }];
+        } else {
+            *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
+                                            code:FBSnapshotTestControllerErrorCodeUnknown
+                                        userInfo:nil];
+        }
     }
-  }
-  return image;
+    return image;
 }
 
 - (BOOL)saveReferenceImage:(UIImage *)image
@@ -97,37 +112,37 @@ typedef struct RGBAPixel {
                 identifier:(NSString *)identifier
                      error:(NSError **)errorPtr
 {
-  BOOL didWrite = NO;
-  if (nil != image) {
-    NSString *filePath = [self _referenceFilePathForSelector:selector identifier:identifier];
-    NSData *pngData = UIImagePNGRepresentation(image);
-    if (nil != pngData) {
-      NSError *creationError = nil;
-      BOOL didCreateDir = [_fileManager createDirectoryAtPath:[filePath stringByDeletingLastPathComponent]
-                                  withIntermediateDirectories:YES
-                                                   attributes:nil
-                                                        error:&creationError];
-      if (!didCreateDir) {
-        if (NULL != errorPtr) {
-          *errorPtr = creationError;
+    BOOL didWrite = NO;
+    if (nil != image) {
+        NSString *filePath = [self _referenceFilePathForSelector:selector identifier:identifier];
+        NSData *pngData = UIImagePNGRepresentation(image);
+        if (nil != pngData) {
+            NSError *creationError = nil;
+            BOOL didCreateDir = [_fileManager createDirectoryAtPath:[filePath stringByDeletingLastPathComponent]
+                                        withIntermediateDirectories:YES
+                                                         attributes:nil
+                                                              error:&creationError];
+            if (!didCreateDir) {
+                if (NULL != errorPtr) {
+                    *errorPtr = creationError;
+                }
+                return NO;
+            }
+            didWrite = [pngData writeToFile:filePath options:NSDataWritingAtomic error:errorPtr];
+            if (didWrite) {
+                NSLog(@"Reference image save at: %@", filePath);
+            }
+        } else {
+            if (nil != errorPtr) {
+                *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
+                                                code:FBSnapshotTestControllerErrorCodePNGCreationFailed
+                                            userInfo:@{
+                                                FBReferenceImageFilePathKey : filePath,
+                                            }];
+            }
         }
-        return NO;
-      }
-      didWrite = [pngData writeToFile:filePath options:NSDataWritingAtomic error:errorPtr];
-      if (didWrite) {
-        NSLog(@"Reference image save at: %@", filePath);
-      }
-    } else {
-      if (nil != errorPtr) {
-        *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
-                                        code:FBSnapshotTestControllerErrorCodePNGCreationFailed
-                                    userInfo:@{
-                 FBReferenceImageFilePathKey: filePath,
-                     }];
-      }
     }
-  }
-  return didWrite;
+    return didWrite;
 }
 
 - (BOOL)saveFailedReferenceImage:(UIImage *)referenceImage
@@ -136,145 +151,151 @@ typedef struct RGBAPixel {
                       identifier:(NSString *)identifier
                            error:(NSError **)errorPtr
 {
-  NSData *referencePNGData = UIImagePNGRepresentation(referenceImage);
-  NSData *testPNGData = UIImagePNGRepresentation(testImage);
+    NSData *referencePNGData = UIImagePNGRepresentation(referenceImage);
+    NSData *testPNGData = UIImagePNGRepresentation(testImage);
 
-  NSString *referencePath = [self _failedFilePathForSelector:selector
-                                                  identifier:identifier
-                                                fileNameType:FBTestSnapshotFileNameTypeFailedReference];
+    NSString *referencePath = [self _failedFilePathForSelector:selector
+                                                    identifier:identifier
+                                                  fileNameType:FBTestSnapshotFileNameTypeFailedReference];
 
-  NSError *creationError = nil;
-  BOOL didCreateDir = [_fileManager createDirectoryAtPath:[referencePath stringByDeletingLastPathComponent]
-                              withIntermediateDirectories:YES
-                                               attributes:nil
-                                                    error:&creationError];
-  if (!didCreateDir) {
-    if (NULL != errorPtr) {
-      *errorPtr = creationError;
+    NSError *creationError = nil;
+    BOOL didCreateDir = [_fileManager createDirectoryAtPath:[referencePath stringByDeletingLastPathComponent]
+                                withIntermediateDirectories:YES
+                                                 attributes:nil
+                                                      error:&creationError];
+    if (!didCreateDir) {
+        if (NULL != errorPtr) {
+            *errorPtr = creationError;
+        }
+        return NO;
     }
-    return NO;
-  }
 
-  if (![referencePNGData writeToFile:referencePath options:NSDataWritingAtomic error:errorPtr]) {
-    return NO;
-  }
+    if (![referencePNGData writeToFile:referencePath options:NSDataWritingAtomic error:errorPtr]) {
+        return NO;
+    }
 
-  NSString *testPath = [self _failedFilePathForSelector:selector
-                                             identifier:identifier
-                                           fileNameType:FBTestSnapshotFileNameTypeFailedTest];
+    NSString *testPath = [self _failedFilePathForSelector:selector
+                                               identifier:identifier
+                                             fileNameType:FBTestSnapshotFileNameTypeFailedTest];
 
-  if (![testPNGData writeToFile:testPath options:NSDataWritingAtomic error:errorPtr]) {
-    return NO;
-  }
+    if (![testPNGData writeToFile:testPath options:NSDataWritingAtomic error:errorPtr]) {
+        return NO;
+    }
 
-  NSString *diffPath = [self _failedFilePathForSelector:selector
+    NSString *diffPath = [self _failedFilePathForSelector:selector
                                                identifier:identifier
                                              fileNameType:FBTestSnapshotFileNameTypeFailedTestDiff];
 
-  UIImage *diffImage = [referenceImage diffWithImage:testImage];
-  NSData *diffImageData = UIImagePNGRepresentation(diffImage);
+    UIImage *diffImage = [referenceImage diffWithImage:testImage];
+    NSData *diffImageData = UIImagePNGRepresentation(diffImage);
 
-  if (![diffImageData writeToFile:diffPath options:NSDataWritingAtomic error:errorPtr]) {
-    return NO;
-  }
+    if (![diffImageData writeToFile:diffPath options:NSDataWritingAtomic error:errorPtr]) {
+        return NO;
+    }
 
-  NSLog(@"If you have Kaleidoscope installed you can run this command to see an image diff:\n"
-        @"ksdiff \"%@\" \"%@\"", referencePath, testPath);
+    NSLog(@"If you have Kaleidoscope installed you can run this command to see an image diff:\n"
+          @"ksdiff \"%@\" \"%@\"",
+          referencePath, testPath);
 
-  return YES;
+    return YES;
 }
 
 - (BOOL)compareReferenceImage:(UIImage *)referenceImage toImage:(UIImage *)image error:(NSError **)errorPtr
 {
-  if (CGSizeEqualToSize(referenceImage.size, image.size)) {
-
-    BOOL imagesEqual = [referenceImage compareWithImage:image];
-    if (NULL != errorPtr) {
-      *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
-                                      code:FBSnapshotTestControllerErrorCodeImagesDifferent
-                                  userInfo:@{
-                 NSLocalizedDescriptionKey: @"Images different",
-                   }];
+    if (CGSizeEqualToSize(referenceImage.size, image.size)) {
+        BOOL imagesEqual = [referenceImage compareWithImage:image];
+        if (NULL != errorPtr) {
+            *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
+                                            code:FBSnapshotTestControllerErrorCodeImagesDifferent
+                                        userInfo:@{
+                                            NSLocalizedDescriptionKey : @"Images different",
+                                        }];
+        }
+        return imagesEqual;
     }
-    return imagesEqual;
-  }
-  if (NULL != errorPtr) {
-    *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
-                                    code:FBSnapshotTestControllerErrorCodeImagesDifferentSizes
-                                userInfo:@{
-               NSLocalizedDescriptionKey: @"Images different sizes",
-        NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"referenceImage:%@, image:%@",
-                                           NSStringFromCGSize(referenceImage.size),
-                                           NSStringFromCGSize(image.size)],
-                 }];
-  }
-  return NO;
+    if (NULL != errorPtr) {
+        *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
+                                        code:FBSnapshotTestControllerErrorCodeImagesDifferentSizes
+                                    userInfo:@{
+                                        NSLocalizedDescriptionKey : @"Images different sizes",
+                                        NSLocalizedFailureReasonErrorKey : [NSString stringWithFormat:@"referenceImage:%@, image:%@",
+                                                                                                      NSStringFromCGSize(referenceImage.size),
+                                                                                                      NSStringFromCGSize(image.size)],
+                                    }];
+    }
+    return NO;
 }
 
 #pragma mark -
 #pragma mark Private API
 
 typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
-  FBTestSnapshotFileNameTypeReference,
-  FBTestSnapshotFileNameTypeFailedReference,
-  FBTestSnapshotFileNameTypeFailedTest,
-  FBTestSnapshotFileNameTypeFailedTestDiff,
+    FBTestSnapshotFileNameTypeReference,
+    FBTestSnapshotFileNameTypeFailedReference,
+    FBTestSnapshotFileNameTypeFailedTest,
+    FBTestSnapshotFileNameTypeFailedTestDiff,
 };
 
 - (NSString *)_fileNameForSelector:(SEL)selector
                         identifier:(NSString *)identifier
                       fileNameType:(FBTestSnapshotFileNameType)fileNameType
 {
-  NSString *fileName = nil;
-  switch (fileNameType) {
-    case FBTestSnapshotFileNameTypeFailedReference:
-      fileName = @"reference_";
-      break;
-    case FBTestSnapshotFileNameTypeFailedTest:
-      fileName = @"failed_";
-      break;
-    case FBTestSnapshotFileNameTypeFailedTestDiff:
-      fileName = @"diff_";
-      break;
-    default:
-      fileName = @"";
-      break;
-  }
-  fileName = [fileName stringByAppendingString:NSStringFromSelector(selector)];
-  if (0 < identifier.length) {
-    fileName = [fileName stringByAppendingFormat:@"_%@", identifier];
-  }
-  if ([[UIScreen mainScreen] scale] > 1.0) {
-    fileName = [fileName stringByAppendingFormat:@"@%.fx", [[UIScreen mainScreen] scale]];
-  }
-  fileName = [fileName stringByAppendingPathExtension:@"png"];
-  return fileName;
+    NSString *fileName = nil;
+    switch (fileNameType) {
+        case FBTestSnapshotFileNameTypeFailedReference:
+            fileName = @"reference_";
+            break;
+        case FBTestSnapshotFileNameTypeFailedTest:
+            fileName = @"failed_";
+            break;
+        case FBTestSnapshotFileNameTypeFailedTestDiff:
+            fileName = @"diff_";
+            break;
+        default:
+            fileName = @"";
+            break;
+    }
+    fileName = [fileName stringByAppendingString:NSStringFromSelector(selector)];
+    if (0 < identifier.length) {
+        fileName = [fileName stringByAppendingFormat:@"_%@", identifier];
+    }
+
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    NSString *screenSizeDescription = [NSString stringWithFormat:@"(%@ x %@)", @(screenSize.width), @(screenSize.height)];
+    fileName = [fileName stringByAppendingFormat:@"_%@", screenSizeDescription];
+
+    if ([[UIScreen mainScreen] scale] > 1.0) {
+        fileName = [fileName stringByAppendingFormat:@"@%.fx", [[UIScreen mainScreen] scale]];
+    }
+    fileName = [fileName stringByAppendingPathExtension:@"png"];
+    return fileName;
 }
 
-- (NSString *)_referenceFilePathForSelector:(SEL)selector identifier:(NSString *)identifier
+- (NSString *)_referenceFilePathForSelector:(SEL)selector
+                                 identifier:(NSString *)identifier
 {
-  NSString *fileName = [self _fileNameForSelector:selector
-                                       identifier:identifier
-                                     fileNameType:FBTestSnapshotFileNameTypeReference];
-  NSString *filePath = [_referenceImagesDirectory stringByAppendingPathComponent:_testName];
-  filePath = [filePath stringByAppendingPathComponent:fileName];
-  return filePath;
+    NSString *fileName = [self _fileNameForSelector:selector
+                                         identifier:identifier
+                                       fileNameType:FBTestSnapshotFileNameTypeReference];
+    NSString *filePath = [_referenceImagesDirectory stringByAppendingPathComponent:_testName];
+    filePath = [filePath stringByAppendingPathComponent:fileName];
+    return filePath;
 }
 
 - (NSString *)_failedFilePathForSelector:(SEL)selector
                               identifier:(NSString *)identifier
                             fileNameType:(FBTestSnapshotFileNameType)fileNameType
 {
-  NSString *fileName = [self _fileNameForSelector:selector
-                                       identifier:identifier
-                                     fileNameType:fileNameType];
-  NSString *folderPath = NSTemporaryDirectory();
-  if (getenv("IMAGE_DIFF_DIR")) {
-    folderPath = @(getenv("IMAGE_DIFF_DIR"));
-  }
-  NSString *filePath = [folderPath stringByAppendingPathComponent:_testName];
-  filePath = [filePath stringByAppendingPathComponent:fileName];
-  return filePath;
+    NSString *fileName = [self _fileNameForSelector:selector
+                                         identifier:identifier
+                                       fileNameType:fileNameType];
+    NSString *folderPath = NSTemporaryDirectory();
+    if (getenv("IMAGE_DIFF_DIR")) {
+        folderPath = @(getenv("IMAGE_DIFF_DIR"));
+    }
+    NSString *filePath = [folderPath stringByAppendingPathComponent:_testName];
+    filePath = [filePath stringByAppendingPathComponent:fileName];
+    return filePath;
 }
 
 - (BOOL)compareSnapshotOfLayer:(CALayer *)layer
@@ -282,10 +303,10 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                     identifier:(NSString *)identifier
                          error:(NSError **)errorPtr
 {
-  return [self compareSnapshotOfViewOrLayer:layer
-                                   selector:selector
-                                 identifier:identifier
-                                      error:errorPtr];
+    return [self compareSnapshotOfViewOrLayer:layer
+                                     selector:selector
+                                   identifier:identifier
+                                        error:errorPtr];
 }
 
 - (BOOL)compareSnapshotOfView:(UIView *)view
@@ -293,10 +314,10 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                    identifier:(NSString *)identifier
                         error:(NSError **)errorPtr
 {
-  return [self compareSnapshotOfViewOrLayer:view
-                                   selector:selector
-                                 identifier:identifier
-                                      error:errorPtr];
+    return [self compareSnapshotOfViewOrLayer:view
+                                     selector:selector
+                                   identifier:identifier
+                                        error:errorPtr];
 }
 
 - (BOOL)compareSnapshotOfViewOrLayer:(id)viewOrLayer
@@ -304,11 +325,11 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                           identifier:(NSString *)identifier
                                error:(NSError **)errorPtr
 {
-  if (self.recordMode) {
-    return [self _recordSnapshotOfViewOrLayer:viewOrLayer selector:selector identifier:identifier error:errorPtr];
-  } else {
-    return [self _performPixelComparisonWithViewOrLayer:viewOrLayer selector:selector identifier:identifier error:errorPtr];
-  }
+    if (self.recordMode) {
+        return [self _recordSnapshotOfViewOrLayer:viewOrLayer selector:selector identifier:identifier error:errorPtr];
+    } else {
+        return [self _performPixelComparisonWithViewOrLayer:viewOrLayer selector:selector identifier:identifier error:errorPtr];
+    }
 }
 
 #pragma mark -
@@ -319,20 +340,20 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                                     identifier:(NSString *)identifier
                                          error:(NSError **)errorPtr
 {
-  UIImage *referenceImage = [self referenceImageForSelector:selector identifier:identifier error:errorPtr];
-  if (nil != referenceImage) {
-    UIImage *snapshot = [self _snapshotViewOrLayer:viewOrLayer];
-    BOOL imagesSame = [self compareReferenceImage:referenceImage toImage:snapshot error:errorPtr];
-    if (!imagesSame) {
-      [self saveFailedReferenceImage:referenceImage
-                           testImage:snapshot
-                            selector:selector
-                          identifier:identifier
-                               error:errorPtr];
+    UIImage *referenceImage = [self referenceImageForSelector:selector identifier:identifier error:errorPtr];
+    if (nil != referenceImage) {
+        UIImage *snapshot = [self _snapshotViewOrLayer:viewOrLayer];
+        BOOL imagesSame = [self compareReferenceImage:referenceImage toImage:snapshot error:errorPtr];
+        if (!imagesSame) {
+            [self saveFailedReferenceImage:referenceImage
+                                 testImage:snapshot
+                                  selector:selector
+                                identifier:identifier
+                                     error:errorPtr];
+        }
+        return imagesSame;
     }
-    return imagesSame;
-  }
-  return NO;
+    return NO;
 }
 
 - (BOOL)_recordSnapshotOfViewOrLayer:(id)viewOrLayer
@@ -340,66 +361,68 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                           identifier:(NSString *)identifier
                                error:(NSError **)errorPtr
 {
-  UIImage *snapshot = [self _snapshotViewOrLayer:viewOrLayer];
-  return [self saveReferenceImage:snapshot selector:selector identifier:identifier error:errorPtr];
+    UIImage *snapshot = [self _snapshotViewOrLayer:viewOrLayer];
+    return [self saveReferenceImage:snapshot selector:selector identifier:identifier error:errorPtr];
 }
 
 - (UIImage *)_snapshotViewOrLayer:(id)viewOrLayer
 {
-  CALayer *layer = nil;
-  
-  if ([viewOrLayer isKindOfClass:[UIView class]]) {
-    return [self _renderView:viewOrLayer];
-  } else if ([viewOrLayer isKindOfClass:[CALayer class]]) {
-    layer = (CALayer *)viewOrLayer;
-    [layer layoutIfNeeded];
-    return [self _renderLayer:layer];
-  } else {
-    [NSException raise:@"Only UIView and CALayer classes can be snapshotted" format:@"%@", viewOrLayer];
-  }
-  return nil;
+    CALayer *layer = nil;
+
+    if ([viewOrLayer isKindOfClass:[UIView class]]) {
+        return [self _renderView:viewOrLayer];
+    } else if ([viewOrLayer isKindOfClass:[CALayer class]]) {
+        layer = (CALayer *)viewOrLayer;
+        [layer layoutIfNeeded];
+        return [self _renderLayer:layer];
+    } else {
+        [NSException raise:@"Only UIView and CALayer classes can be snapshotted" format:@"%@", viewOrLayer];
+    }
+    return nil;
 }
 
 - (UIImage *)_renderLayer:(CALayer *)layer
 {
-  CGRect bounds = layer.bounds;
+    CGRect bounds = layer.bounds;
 
-  NSAssert1(CGRectGetWidth(bounds), @"Zero width for layer %@", layer);
-  NSAssert1(CGRectGetHeight(bounds), @"Zero height for layer %@", layer);
+    NSAssert1(CGRectGetWidth(bounds), @"Zero width for layer %@", layer);
+    NSAssert1(CGRectGetHeight(bounds), @"Zero height for layer %@", layer);
 
-  UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
-  CGContextRef context = UIGraphicsGetCurrentContext();
-  NSAssert1(context, @"Could not generate context for layer %@", layer);
-  
-  CGContextSaveGState(context);
-  {
-    [layer renderInContext:context];
-  }
-  CGContextRestoreGState(context);
-  
-  UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
-  UIGraphicsEndImageContext();
-  
-  return snapshot;
+    UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    NSAssert1(context, @"Could not generate context for layer %@", layer);
+
+    CGContextSaveGState(context);
+    {
+        [layer renderInContext:context];
+    }
+    CGContextRestoreGState(context);
+
+    UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return snapshot;
 }
-        
+
 - (UIImage *)_renderView:(UIView *)view
 {
-  if (!self.renderAsLayer) {
+    [view layoutIfNeeded];
+
+    if (!self.renderAsLayer) {
 #ifdef __IPHONE_7_0
-    if ([view respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
-      UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0);
-      [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
-      UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-      UIGraphicsEndImageContext();
-      return image;
-    }
+        if ([view respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+            UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0);
+            [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            return image;
+        }
 #else
-    NSLog(@"drawViewHierarchy is only available on iOS 7+");
+        NSLog(@"drawViewHierarchy is only available on iOS 7+");
 #endif
-  }
-  [view layoutIfNeeded];
-  return [self _renderLayer:view.layer];
+    }
+
+    return [self _renderLayer:view.layer];
 }
 
 @end

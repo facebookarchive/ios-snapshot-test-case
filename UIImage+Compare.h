@@ -30,6 +30,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface UIImage (Compare)
 
 - (BOOL)compareWithImage:(UIImage *)image;
