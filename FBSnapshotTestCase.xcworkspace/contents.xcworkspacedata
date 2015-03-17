@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
-   <Group
-      location = "container:"
-      name = "FBSnapshotTestCase">
-      <FileRef
-         location = "group:FBSnapshotTestCase.h">
-      </FileRef>
-      <FileRef
-         location = "group:FBSnapshotTestCase.m">
-      </FileRef>
-      <FileRef
-         location = "group:FBSnapshotTestController.h">
-      </FileRef>
-      <FileRef
-         location = "group:FBSnapshotTestController.m">
-      </FileRef>
-   </Group>
    <FileRef
-      location = "group:FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemo.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Tests/Tests.xcodeproj">
+      location = "group:FBSnapshotTestCase.xcodeproj">
    </FileRef>
 </Workspace>

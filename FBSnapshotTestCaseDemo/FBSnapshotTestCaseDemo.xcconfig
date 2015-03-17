@@ -1,2 +1,0 @@
-// Quoted in case the developer has whitespace in the path.
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) FB_REFERENCE_IMAGE_DIR="\"$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages\""

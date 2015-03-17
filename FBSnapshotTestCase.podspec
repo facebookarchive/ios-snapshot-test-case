@@ -10,7 +10,6 @@ Pod::Spec.new do |s|
                     two images don't match.
                    DESC
   s.homepage     = "https://github.com/facebook/ios-snapshot-test-case"
-
   s.license      = 'BSD'
   s.author       = 'Facebook'
   s.source       = { :git => "https://github.com/facebook/ios-snapshot-test-case.git",
@@ -18,10 +17,5 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '6.0'
   s.requires_arc = true
   s.framework    = 'XCTest'
-
-  s.source_files = 'FBSnapshotTestCase.{h,m}', 'FBSnapshotTestController.{h,m}', 'UIImage+*{h,m}'
-
-  fb_def = 'FB_REFERENCE_IMAGE_DIR'
-  fb_val = '"$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages"'
-  s.prefix_header_contents = "#define #{fb_def} = #{fb_val}"
+  s.source_files = 'FBSnapshotTestCase/**/*.{h,m}'
 end
