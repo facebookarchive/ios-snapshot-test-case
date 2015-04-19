@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "FBSnapshotTestCase"
-  s.version      = "1.6"
+  s.version      = "1.7"
   s.summary      = "Snapshot view unit tests for iOS"
   s.description  = <<-DESC
                     A "snapshot test case" takes a configured UIView or CALayer
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.author       = 'Facebook'
   s.source       = { :git => "https://github.com/facebook/ios-snapshot-test-case.git",
                      :tag => s.version.to_s }
-  s.platform     = :ios, '6.0'
+  s.platform     = :ios, '7.0'
   s.requires_arc = true
   s.framework    = 'XCTest'
   s.source_files = 'FBSnapshotTestCase/**/*.{h,m}'
