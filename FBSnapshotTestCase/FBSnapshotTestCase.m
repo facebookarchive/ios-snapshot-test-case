@@ -36,6 +36,7 @@
 
 - (void)setRecordMode:(BOOL)recordMode
 {
+  NSAssert1(_snapshotController, @"%s cannot be called before [super setUp]", __FUNCTION__);
   _snapshotController.recordMode = recordMode;
 }
 
