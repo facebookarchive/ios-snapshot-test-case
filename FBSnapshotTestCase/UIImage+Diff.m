@@ -38,10 +38,10 @@
     return nil;
   }
   CGSize imageSize = CGSizeMake(MAX(self.size.width, image.size.width), MAX(self.size.height, image.size.height));
-  UIGraphicsBeginImageContextWithOptions(imageSize, YES, 0.0);
+  UIGraphicsBeginImageContextWithOptions(imageSize, YES, 0);
   CGContextRef context = UIGraphicsGetCurrentContext();
   [self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height)];
-  CGContextSetAlpha(context, 0.5f);
+  CGContextSetAlpha(context, 0.5);
   CGContextBeginTransparencyLayer(context, NULL);
   [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
   CGContextSetBlendMode(context, kCGBlendModeDifference);
