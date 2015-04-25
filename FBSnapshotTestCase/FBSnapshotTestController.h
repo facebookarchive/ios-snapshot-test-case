@@ -42,24 +42,22 @@ extern NSString *const FBReferenceImageFilePathKey;
 
 /**
  @param testClass The subclass of FBSnapshotTestCase that is using this controller.
- @param referenceImagesDirectory The directory where the reference images are stored.
  @returns An instance of FBSnapshotTestController.
  */
-- (id)initWithTestClass:(Class)testClass;
+- (instancetype)initWithTestClass:(Class)testClass;
 
 /**
  Designated initializer.
  @param testName The name of the tests.
- @param referenceImagesDirectory The directory where the reference images are stored.
  @returns An instance of FBSnapshotTestController.
  */
-- (id)initWithTestName:(NSString *)testName;
+- (instancetype)initWithTestName:(NSString *)testName;
 
 
 /**
  Performs the comparison of the layer.
  @param layer The Layer to snapshot.
- @param referenceImagesDirectory The directory in which reference images are stored.
+ @param selector The test method being run.
  @param identifier An optional identifier, used is there are muliptle snapshot tests in a given -test method.
  @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
  @returns YES if the comparison (or saving of the reference image) succeeded.
@@ -72,7 +70,7 @@ extern NSString *const FBReferenceImageFilePathKey;
 /**
  Performs the comparison of the view.
  @param view The view to snapshot.
- @param referenceImagesDirectory The directory in which reference images are stored.
+ @param selector The test method being run.
  @param identifier An optional identifier, used is there are muliptle snapshot tests in a given -test method.
  @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
  @returns YES if the comparison (or saving of the reference image) succeeded.
@@ -85,7 +83,7 @@ extern NSString *const FBReferenceImageFilePathKey;
 /**
  Performs the comparison of a view or layer.
  @param view The view or layer to snapshot.
- @param referenceImagesDirectory The directory in which reference images are stored.
+ @param selector The test method being run.
  @param identifier An optional identifier, used is there are muliptle snapshot tests in a given -test method.
  @param error An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
  @returns YES if the comparison (or saving of the reference image) succeeded.
