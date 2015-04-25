@@ -42,12 +42,12 @@ typedef struct RGBAPixel {
 #pragma mark -
 #pragma mark Lifecycle
 
-- (id)initWithTestClass:(Class)testClass;
+- (instancetype)initWithTestClass:(Class)testClass;
 {
     return [self initWithTestName:NSStringFromClass(testClass)];
 }
 
-- (id)initWithTestName:(NSString *)testName
+- (instancetype)initWithTestName:(NSString *)testName
 {
     if ((self = [super init])) {
         _testName = [testName copy];
