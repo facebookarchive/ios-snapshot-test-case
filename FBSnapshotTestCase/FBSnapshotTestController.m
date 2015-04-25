@@ -13,29 +13,15 @@
 #import "UIImage+Compare.h"
 #import "UIImage+Diff.h"
 
-#import <objc/runtime.h>
-
 #import <UIKit/UIKit.h>
 
 NSString *const FBSnapshotTestControllerErrorDomain = @"FBSnapshotTestControllerErrorDomain";
 
 NSString *const FBReferenceImageFilePathKey = @"FBReferenceImageFilePathKey";
 
-typedef struct RGBAPixel {
-  char r;
-  char g;
-  char b;
-  char a;
-} RGBAPixel;
-
-@interface FBSnapshotTestController ()
-
-@property (readonly, nonatomic, copy) NSString *testName;
-
-@end
-
 @implementation FBSnapshotTestController
 {
+  NSString *_testName;
   NSFileManager *_fileManager;
 }
 
@@ -44,16 +30,16 @@ typedef struct RGBAPixel {
 
 - (instancetype)initWithTestClass:(Class)testClass;
 {
-    return [self initWithTestName:NSStringFromClass(testClass)];
+  return [self initWithTestName:NSStringFromClass(testClass)];
 }
 
 - (instancetype)initWithTestName:(NSString *)testName
 {
-    if ((self = [super init])) {
-        _testName = [testName copy];
-        _fileManager = [[NSFileManager alloc] init];
-    }
-    return self;
+  if ((self = [super init])) {
+    _testName = [testName copy];
+    _fileManager = [[NSFileManager alloc] init];
+  }
+  return self;
 }
 
 #pragma mark -
@@ -244,7 +230,7 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   if (0 < identifier.length) {
     fileName = [fileName stringByAppendingFormat:@"_%@", identifier];
   }
-  if ([[UIScreen mainScreen] scale] > 1.0) {
+  if ([[UIScreen mainScreen] scale] > 1) {
     fileName = [fileName stringByAppendingFormat:@"@%.fx", [[UIScreen mainScreen] scale]];
   }
   fileName = [fileName stringByAppendingPathExtension:@"png"];

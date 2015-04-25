@@ -12,34 +12,31 @@
 
 #import "FBSnapshotTestController.h"
 
-@interface FBSnapshotTestCase ()
-
-@property (readwrite, nonatomic, retain) FBSnapshotTestController *snapshotController;
-
-@end
-
 @implementation FBSnapshotTestCase
+{
+  FBSnapshotTestController *_snapshotController;
+}
 
 - (void)setUp
 {
   [super setUp];
-  self.snapshotController = [[FBSnapshotTestController alloc] initWithTestName:NSStringFromClass([self class])];
+  _snapshotController = [[FBSnapshotTestController alloc] initWithTestName:NSStringFromClass([self class])];
 }
 
 - (void)tearDown
 {
-  self.snapshotController = nil;
+  _snapshotController = nil;
   [super tearDown];
 }
 
 - (BOOL)recordMode
 {
-  return self.snapshotController.recordMode;
+  return _snapshotController.recordMode;
 }
 
 - (void)setRecordMode:(BOOL)recordMode
 {
-  self.snapshotController.recordMode = recordMode;
+  _snapshotController.recordMode = recordMode;
 }
 
 - (BOOL)compareSnapshotOfLayer:(CALayer *)layer

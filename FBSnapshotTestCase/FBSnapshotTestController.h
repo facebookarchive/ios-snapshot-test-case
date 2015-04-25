@@ -38,7 +38,7 @@ extern NSString *const FBReferenceImageFilePathKey;
 /**
  Record snapshots.
  **/
-@property(readwrite, nonatomic, assign) BOOL recordMode;
+@property (readwrite, nonatomic, assign) BOOL recordMode;
 
 /**
  @param testClass The subclass of FBSnapshotTestCase that is using this controller.
