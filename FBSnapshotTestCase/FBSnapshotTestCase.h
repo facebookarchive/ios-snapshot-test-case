@@ -8,6 +8,8 @@
  *
  */
 
+#import <FBSnapshotTestCase/FBSnapshotTestCaseArchitecture.h>
+
 #import <QuartzCore/QuartzCore.h>
 
 #import <UIKit/UIKit.h>
@@ -22,46 +24,66 @@
  Similar to our much-loved XCTAssert() macros. Use this to perform your test. No need to write an explanation, though.
  @param view The view to snapshot
  @param identifier An optional identifier, used if there are multiple snapshot tests in a given -test method.
- @param referenceImageDirectorySuffix An optional suffix, appended to the reference image directory path, such as "_iOS8"
+ @param version An optional suffix, appended to the reference image directory path, such as "_iOS8"
+ @param architectureSuffixes An optional dictionary with a type and suffix e.g. @{ FBSnapshotTestArchitectureType64BitKey : @"_64"}
  */
-#define FBSnapshotVerifyViewWithReferenceDirectorySuffix(view__, identifier__, referenceImagesDirectorySuffix__) \
+#define FBSnapshotVerifyViewWithOptions(view__, identifier__, version__, architectureSuffixes__) \
 { \
+NSOrderedSet *suffixes__ = FBSuffixesForArchitectureTypes(architectureSuffixes__); \
 NSError *error__ = nil; \
-NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s%@", FB_REFERENCE_IMAGE_DIR, referenceImagesDirectorySuffix__]; \
-BOOL comparisonSuccess__ = [self compareSnapshotOfView:(view__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) error:&error__]; \
+BOOL comparisonSuccess__; \
+for (NSString *suffix__ in suffixes__) { \
+NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s%@%@", FB_REFERENCE_IMAGE_DIR, version__, suffix__]; \
+comparisonSuccess__ = [self compareSnapshotOfView:(view__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) error:&error__]; \
+if (comparisonSuccess__) break; \
+} \
 XCTAssertTrue(comparisonSuccess__, @"Snapshot comparison failed: %@", error__); \
-XCTAssertFalse(self.recordMode, @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparsion!"); \
+XCTAssertFalse(self.recordMode, @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!"); \
 }
 
 #define FBSnapshotVerifyView(view__, identifier__) \
 { \
-FBSnapshotVerifyViewWithReferenceDirectorySuffix(view__, identifier__, @""); \
+NSDictionary *architectureSuffixes__ = @{ \
+FBSnapshotTestArchitectureType32BitKey : @"_32", \
+FBSnapshotTestArchitectureType64BitKey : @"_64", \
+}; \
+FBSnapshotVerifyViewWithOptions(view__, identifier__, @"", architectureSuffixes__); \
 }
 
 /**
  Similar to our much-loved XCTAssert() macros. Use this to perform your test. No need to write an explanation, though.
  @param layer The layer to snapshot
  @param identifier An optional identifier, used is there are multiple snapshot tests in a given -test method.
- @param referenceImageDirectorySuffix An optional suffix, appended to the reference image directory path, such as "_iOS8"
+ @param version An optional suffix, appended to the reference image directory path, such as "_iOS8"
+ @param architectureTypes An optional dictionary with a type and suffix e.g. @{ FBSnapshotTestArchitectureType64BitKey : @"_64"}
  */
-#define FBSnapshotVerifyLayerWithReferenceDirectorySuffix(layer__, identifier__, referenceImagesDirectorySuffix__) \
+#define FBSnapshotVerifyLayerWithOptions(layer__, identifier__, version__, architectureTypes__) \
 { \
+NSOrderedSet *suffixes__ = FBSuffixesForArchitectureTypes(architectureTypes__); \
 NSError *error__ = nil; \
-NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s%@", FB_REFERENCE_IMAGE_DIR, referenceImagesDirectorySuffix__]; \
-BOOL comparisonSuccess__ = [self compareSnapshotOfLayer:(layer__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) error:&error__]; \
+BOOL comparisonSuccess__; \
+for (NSString *suffix__ in suffixes__) { \
+NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s%@%@", FB_REFERENCE_IMAGE_DIR, version__, suffix__]; \
+comparisonSuccess__ = [self compareSnapshotOfLayer:(layer__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) error:&error__]; \
+if (comparisonSuccess__) break; \
+} \
 XCTAssertTrue(comparisonSuccess__, @"Snapshot comparison failed: %@", error__); \
-XCTAssertFalse(self.recordMode, @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparsion!"); \
+XCTAssertFalse(self.recordMode, @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!"); \
 }
 
 #define FBSnapshotVerifyLayer(layer__, identifier__) \
 { \
-FBSnapshotVerifyLayerWithReferenceDirectorySuffix(layer__, identifier__, @""); \
+NSDictionary *architectureSuffixes__ = @{ \
+FBSnapshotTestArchitectureType32BitKey : @"_32", \
+FBSnapshotTestArchitectureType64BitKey : @"_64", \
+}; \
+FBSnapshotVerifyLayerWithOptions(layer__, identifier__, @"", architectureSuffixes__); \
 }
 
 /**
  The base class of view snapshotting tests. If you have small UI component, it's often easier to configure it in a test
  and compare an image of the view to a reference image that write lots of complex layout-code tests.
-
+ 
  In order to flip the tests in your subclass to record the reference images set `recordMode` to YES before calling
  -[super setUp].
  */
@@ -73,7 +95,7 @@ FBSnapshotVerifyLayerWithReferenceDirectorySuffix(layer__, identifier__, @""); \
 @property (readwrite, nonatomic, assign) BOOL recordMode;
 
 /**
- Performs the comparisong or records a snapshot of the layer if recordMode is YES.
+ Performs the comparison or records a snapshot of the layer if recordMode is YES.
  @param layer The Layer to snapshot
  @param referenceImagesDirectory The directory in which reference images are stored.
  @param identifier An optional identifier, used if there are multiple snapshot tests in a given -test method.
@@ -86,7 +108,7 @@ FBSnapshotVerifyLayerWithReferenceDirectorySuffix(layer__, identifier__, @""); \
                          error:(NSError **)errorPtr;
 
 /**
- Performs the comparisong or records a snapshot of the view if recordMode is YES.
+ Performs the comparison or records a snapshot of the view if recordMode is YES.
  @param view The view to snapshot
  @param referenceImagesDirectory The directory in which reference images are stored.
  @param identifier An optional identifier, used if there are multiple snapshot tests in a given -test method.
