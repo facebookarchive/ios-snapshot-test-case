@@ -10,6 +10,10 @@
 
 #import <Foundation/Foundation.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  Returns a Boolean value that indicates whether the snapshot test is running in 64Bit.
  This method is a convenience for creating the suffixes set based on the architecture
@@ -17,7 +21,7 @@
  
  @returns @c YES if the test is running in 64bit, otherwise @c NO.
  */
-extern BOOL FBSnapshotTestCaseIs64Bit(void);
+BOOL FBSnapshotTestCaseIs64Bit(void);
 
 /**
  Returns a default set of strings that is used to append a suffix based on the architectures.
@@ -25,4 +29,8 @@ extern BOOL FBSnapshotTestCaseIs64Bit(void);
  
  @returns An @c NSOrderedSet object containing strings that are appended to the reference images directory.
  */
-extern NSOrderedSet *FBSnapshotTestCaseDefaultSuffixes(void);
+NSOrderedSet *FBSnapshotTestCaseDefaultSuffixes(void);
+
+#ifdef __cplusplus
+}
+#endif
