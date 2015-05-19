@@ -1,0 +1,14 @@
+PODS:
+  - FBSnapshotTestCase (1.8.1)
+
+DEPENDENCIES:
+  - FBSnapshotTestCase (from `..`)
+
+EXTERNAL SOURCES:
+  FBSnapshotTestCase:
+    :path: ..
+
+SPEC CHECKSUMS:
+  FBSnapshotTestCase: 2dbb0709f5d84eab073883c7b4ee61631fe1134b
+
+COCOAPODS: 0.37.1

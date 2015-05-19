@@ -18,4 +18,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.framework    = 'XCTest'
   s.source_files = 'FBSnapshotTestCase/**/*.{h,m}'
+  s.xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'FB_REFERENCE_IMAGE_DIR="\"$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages\""' }
 end

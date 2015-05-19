@@ -1,4 +1,4 @@
 language: objective-c
 
 script:
-  xcodebuild -project FBSnapshotTestCase.xcodeproj -scheme FBSnapshotTestCase -sdk iphonesimulator build test
+  ./build.sh
