@@ -32,7 +32,10 @@
     UIImage *testImage = [self bundledImageNamed:@"square-copy" type:@"png"];
     XCTAssertNotNil(testImage, @"");
     FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
-    XCTAssertTrue([controller compareReferenceImage:referenceImage toImage:testImage error:nil], @"");
+    XCTAssertTrue([controller compareReferenceImage:referenceImage
+                                            toImage:testImage
+                                          tolerance:0
+                                              error:nil], @"");
 }
 
 - (void)testCompareReferenceImageToImageShouldNotBeEqual
@@ -42,7 +45,36 @@
     UIImage *testImage = [self bundledImageNamed:@"square_with_text" type:@"png"];
     XCTAssertNotNil(testImage, @"");
     FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
-    XCTAssertFalse([controller compareReferenceImage:referenceImage toImage:testImage error:nil], @"");
+    XCTAssertFalse([controller compareReferenceImage:referenceImage
+                                             toImage:testImage
+                                           tolerance:0
+                                               error:nil], @"");
+}
+
+- (void)testCompareReferenceImageWithVeryLowToleranceShouldNotMatch
+{
+    UIImage *referenceImage = [self bundledImageNamed:@"square" type:@"png"];
+    XCTAssertNotNil(referenceImage);
+    UIImage *testImage = [self bundledImageNamed:@"square_with_pixel" type:@"png"];
+    XCTAssertNotNil(testImage);
+
+    FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
+
+    // With virtually no margin for error, this should fail to be equal
+    XCTAssertFalse([controller compareReferenceImage:referenceImage toImage:testImage tolerance:0.0001 error:nil], @"");
+}
+
+- (void)testCompareReferenceImageWithVeryLowToleranceShouldMatch
+{
+    UIImage *referenceImage = [self bundledImageNamed:@"square" type:@"png"];
+    XCTAssertNotNil(referenceImage);
+    UIImage *testImage = [self bundledImageNamed:@"square_with_pixel" type:@"png"];
+    XCTAssertNotNil(testImage);
+
+    FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
+
+    // With some tolerance these should be considered the same
+    XCTAssertTrue([controller compareReferenceImage:referenceImage toImage:testImage tolerance:.001 error:nil], @"");
 }
 
 @end

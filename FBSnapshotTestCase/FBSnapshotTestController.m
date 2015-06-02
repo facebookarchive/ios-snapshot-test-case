@@ -170,11 +170,13 @@ NSString *const FBReferenceImageFilePathKey = @"FBReferenceImageFilePathKey";
   return YES;
 }
 
-- (BOOL)compareReferenceImage:(UIImage *)referenceImage toImage:(UIImage *)image error:(NSError **)errorPtr
-{
+- (BOOL)compareReferenceImage:(UIImage *)referenceImage
+                      toImage:(UIImage *)image
+                    tolerance:(CGFloat)tolerance
+                        error:(NSError **)errorPtr {
   if (CGSizeEqualToSize(referenceImage.size, image.size)) {
 
-    BOOL imagesEqual = [referenceImage compareWithImage:image];
+    BOOL imagesEqual = [referenceImage compareWithImage:image tolerance:tolerance];
     if (NULL != errorPtr) {
       *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
                                       code:FBSnapshotTestControllerErrorCodeImagesDifferent
@@ -271,6 +273,7 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   return [self compareSnapshotOfViewOrLayer:layer
                                    selector:selector
                                  identifier:identifier
+                                  tolerance:0
                                       error:errorPtr];
 }
 
@@ -282,33 +285,36 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   return [self compareSnapshotOfViewOrLayer:view
                                    selector:selector
                                  identifier:identifier
+                                  tolerance:0
                                       error:errorPtr];
 }
 
 - (BOOL)compareSnapshotOfViewOrLayer:(id)viewOrLayer
                             selector:(SEL)selector
                           identifier:(NSString *)identifier
+                           tolerance:(CGFloat)tolerance
                                error:(NSError **)errorPtr
 {
   if (self.recordMode) {
     return [self _recordSnapshotOfViewOrLayer:viewOrLayer selector:selector identifier:identifier error:errorPtr];
   } else {
-    return [self _performPixelComparisonWithViewOrLayer:viewOrLayer selector:selector identifier:identifier error:errorPtr];
+    return [self _performPixelComparisonWithViewOrLayer:viewOrLayer selector:selector identifier:identifier tolerance:tolerance error:errorPtr];
   }
 }
 
 #pragma mark -
 #pragma mark Private API
 
-- (BOOL)_performPixelComparisonWithViewOrLayer:(UIView *)viewOrLayer
+- (BOOL)_performPixelComparisonWithViewOrLayer:(id)viewOrLayer
                                       selector:(SEL)selector
                                     identifier:(NSString *)identifier
+                                     tolerance:(CGFloat)tolerance
                                          error:(NSError **)errorPtr
 {
   UIImage *referenceImage = [self referenceImageForSelector:selector identifier:identifier error:errorPtr];
   if (nil != referenceImage) {
     UIImage *snapshot = [self _snapshotViewOrLayer:viewOrLayer];
-    BOOL imagesSame = [self compareReferenceImage:referenceImage toImage:snapshot error:errorPtr];
+    BOOL imagesSame = [self compareReferenceImage:referenceImage toImage:snapshot tolerance:tolerance error:errorPtr];
     if (!imagesSame) {
       [self saveFailedReferenceImage:referenceImage
                            testImage:snapshot
