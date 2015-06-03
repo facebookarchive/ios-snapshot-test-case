@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		871F8717FC9C327124094446 /* libPods-FBSnapshotTestCaseDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C745468193A051F08F0F198 /* libPods-FBSnapshotTestCaseDemoTests.a */; };
+		A52928F81BF86210D3AACDD2 /* Pods_FBSnapshotTestCaseDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F94786ED7FC097D31026B6 /* Pods_FBSnapshotTestCaseDemoTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B30449081AB794320067C75D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B30449071AB794320067C75D /* main.m */; };
 		B30449221AB794320067C75D /* FBSnapshotTestCaseDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B30449211AB794320067C75D /* FBSnapshotTestCaseDemoTests.m */; };
 		B30449351AB795230067C75D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B304492C1AB795230067C75D /* InfoPlist.strings */; };
@@ -30,7 +30,6 @@
 
 /* Begin PBXFileReference section */
 		42711825EC840732F7632DB1 /* Pods-FBSnapshotTestCaseDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBSnapshotTestCaseDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FBSnapshotTestCaseDemoTests/Pods-FBSnapshotTestCaseDemoTests.release.xcconfig"; sourceTree = "<group>"; };
-		5C745468193A051F08F0F198 /* libPods-FBSnapshotTestCaseDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FBSnapshotTestCaseDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89032B249B2E1256F91C7504 /* Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FBSnapshotTestCaseDemoTests/Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B30449021AB794320067C75D /* FBSnapshotTestCaseDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBSnapshotTestCaseDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30449061AB794320067C75D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,7 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				871F8717FC9C327124094446 /* libPods-FBSnapshotTestCaseDemoTests.a in Frameworks */,
+				A52928F81BF86210D3AACDD2 /* Pods_FBSnapshotTestCaseDemoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +151,7 @@
 		B7DD931F31D340869FC40B05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5C745468193A051F08F0F198 /* libPods-FBSnapshotTestCaseDemoTests.a */,
+				F2F94786ED7FC097D31026B6 /* Pods_FBSnapshotTestCaseDemoTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -186,6 +185,7 @@
 				B30449181AB794320067C75D /* Frameworks */,
 				B30449191AB794320067C75D /* Resources */,
 				5D5C191A192999984193BD99 /* Copy Pods Resources */,
+				CA9614629B60310FBFBBF9B7 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -268,6 +268,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FBSnapshotTestCaseDemoTests/Pods-FBSnapshotTestCaseDemoTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA9614629B60310FBFBBF9B7 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FBSnapshotTestCaseDemoTests/Pods-FBSnapshotTestCaseDemoTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D73636094A7C4E425DC3C909 /* Check Pods Manifest.lock */ = {
@@ -443,6 +458,7 @@
 				INFOPLIST_FILE = "FBSnapshotTestCaseDemoTests/FBSnapshotTestCaseDemoTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FBSnapshotTestCaseDemo.app/FBSnapshotTestCaseDemo";
 			};
 			name = Debug;
