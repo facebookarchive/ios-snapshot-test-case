@@ -22,6 +22,7 @@
 		B32447DC1AB78B5E00B1D6FF /* square_with_text.png in Resources */ = {isa = PBXBuildFile; fileRef = B32447D91AB78B5E00B1D6FF /* square_with_text.png */; };
 		B32447DD1AB78B5E00B1D6FF /* square-copy.png in Resources */ = {isa = PBXBuildFile; fileRef = B32447DA1AB78B5E00B1D6FF /* square-copy.png */; };
 		B32447DE1AB78B5E00B1D6FF /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = B32447DB1AB78B5E00B1D6FF /* square.png */; };
+		F0D698F51B204E120005CAC9 /* SwiftSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D698F41B204E120005CAC9 /* SwiftSupport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		B32447D91AB78B5E00B1D6FF /* square_with_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square_with_text.png; sourceTree = "<group>"; };
 		B32447DA1AB78B5E00B1D6FF /* square-copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square-copy.png"; sourceTree = "<group>"; };
 		B32447DB1AB78B5E00B1D6FF /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square.png; sourceTree = "<group>"; };
+		F0D698F41B204E120005CAC9 /* SwiftSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSupport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		B31987F21AB782D000B0A900 /* FBSnapshotTestCase */ = {
 			isa = PBXGroup;
 			children = (
+				F0D698F41B204E120005CAC9 /* SwiftSupport.swift */,
 				B31988201AB7849400B0A900 /* FBSnapshotTestCase.h */,
 				B31988211AB7849400B0A900 /* FBSnapshotTestCase.m */,
 				13CBB39B1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h */,
@@ -255,6 +258,7 @@
 				B31988291AB7849400B0A900 /* FBSnapshotTestCase.m in Sources */,
 				B319882B1AB7849400B0A900 /* FBSnapshotTestController.m in Sources */,
 				B319882F1AB7849400B0A900 /* UIImage+Diff.m in Sources */,
+				F0D698F51B204E120005CAC9 /* SwiftSupport.swift in Sources */,
 				13CBB39E1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m in Sources */,
 				B319882D1AB7849400B0A900 /* UIImage+Compare.m in Sources */,
 			);

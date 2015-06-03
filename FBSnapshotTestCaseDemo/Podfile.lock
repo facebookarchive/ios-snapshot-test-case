@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ..
 
 SPEC CHECKSUMS:
-  FBSnapshotTestCase: 2dbb0709f5d84eab073883c7b4ee61631fe1134b
+  FBSnapshotTestCase: 4d143e61bc2ce575d9a32bcdee7eaef5458af803
 
 COCOAPODS: 0.37.1

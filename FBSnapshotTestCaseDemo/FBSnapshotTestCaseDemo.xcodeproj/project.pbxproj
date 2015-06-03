@@ -15,6 +15,7 @@
 		B30449371AB795230067C75D /* FBExampleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B30449311AB795230067C75D /* FBExampleView.m */; };
 		B30449381AB795230067C75D /* FBSnapshotTestCaseDemo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B30449321AB795230067C75D /* FBSnapshotTestCaseDemo-Info.plist */; };
 		B30449391AB795230067C75D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B30449341AB795230067C75D /* Images.xcassets */; };
+		F02D88451B1F246300BFBC1D /* FBSnapshotTestCaseSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02D88441B1F246300BFBC1D /* FBSnapshotTestCaseSwiftTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,8 @@
 		B30449321AB795230067C75D /* FBSnapshotTestCaseDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FBSnapshotTestCaseDemo-Info.plist"; sourceTree = "<group>"; };
 		B30449331AB795230067C75D /* FBSnapshotTestCaseDemo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBSnapshotTestCaseDemo-Prefix.pch"; sourceTree = "<group>"; };
 		B30449341AB795230067C75D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F02D88441B1F246300BFBC1D /* FBSnapshotTestCaseSwiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBSnapshotTestCaseSwiftTests.swift; sourceTree = "<group>"; };
+		F2F94786ED7FC097D31026B6 /* Pods_FBSnapshotTestCaseDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FBSnapshotTestCaseDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				B30449211AB794320067C75D /* FBSnapshotTestCaseDemoTests.m */,
+				F02D88441B1F246300BFBC1D /* FBSnapshotTestCaseSwiftTests.swift */,
 				B304491F1AB794320067C75D /* Supporting Files */,
 			);
 			path = FBSnapshotTestCaseDemoTests;
@@ -299,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B30449221AB794320067C75D /* FBSnapshotTestCaseDemoTests.m in Sources */,
+				F02D88451B1F246300BFBC1D /* FBSnapshotTestCaseSwiftTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
