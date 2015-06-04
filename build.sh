@@ -5,6 +5,7 @@ set -eu
 function ci_lib() {
     xcodebuild -project FBSnapshotTestCase.xcodeproj \
                -scheme FBSnapshotTestCase \
+               -destination "platform=iOS Simulator,name=iPhone 6" \
                -sdk iphonesimulator \
                build test
 }
