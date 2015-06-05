@@ -20,7 +20,6 @@ function ci_demo() {
     popd
 }
 
-# ci_lib &&
-ci_demo
+ci_lib && ci_demo
 
 
