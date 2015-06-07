@@ -42,11 +42,16 @@ Installation with CocoaPods
 
    Replace "Tests" with the name of your test project.
 
-2. Define `FB_REFERENCE_IMAGE_DIR` in `GCC_PREPROCESSOR_DEFINITIONS`. This should
+2. Define `FB_REFERENCE_IMAGE_DIR` in your scheme. This should
    point to the directory where you want reference images to be stored. At Facebook,
    we normally use this:
 
-     `GCC_PREPROCESSOR_DEFINITIONS = $(inherited) FB_REFERENCE_IMAGE_DIR="\"$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages\""`
+|Name|Value|
+|:---|:----|
+|`FB_REFERENCE_IMAGE_DIR`|`$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages`|
+
+
+![](FBSnapshotTestCaseDemo/Scheme_FB_REFERENCE_IMAGE_DIR.png)
 
 Creating a snapshot test
 ------------------------

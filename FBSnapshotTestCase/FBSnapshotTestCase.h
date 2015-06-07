@@ -16,10 +16,6 @@
 
 #import <XCTest/XCTest.h>
 
-#ifndef FB_REFERENCE_IMAGE_DIR
-#define FB_REFERENCE_IMAGE_DIR "\"$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages\""
-#endif
-
 /**
  Similar to our much-loved XCTAssert() macros. Use this to perform your test. No need to write an explanation, though.
  @param view The view to snapshot
@@ -28,11 +24,13 @@
  */
 #define FBSnapshotVerifyViewWithOptions(view__, identifier__, suffixes__) \
 { \
+NSString *envReferenceImageDirectory = [NSProcessInfo processInfo].environment[@"FB_REFERENCE_IMAGE_DIR"]; \
 NSError *error__ = nil; \
 BOOL comparisonSuccess__; \
 XCTAssertTrue((suffixes__.count > 0), @"Suffixes set cannot be empty %@", suffixes__); \
+XCTAssertNotNil(envReferenceImageDirectory, @"Missing value for referenceImagesDirectory - Set FB_REFERENCE_IMAGE_DIR as Environment variable in your scheme.");\
 for (NSString *suffix__ in suffixes__) { \
-NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s%@", FB_REFERENCE_IMAGE_DIR, suffix__]; \
+NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%@%@", envReferenceImageDirectory, suffix__]; \
 comparisonSuccess__ = [self compareSnapshotOfView:(view__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) error:&error__]; \
 if (comparisonSuccess__ || self.recordMode) break; \
 } \
@@ -53,11 +51,13 @@ FBSnapshotVerifyViewWithOptions(view__, identifier__, FBSnapshotTestCaseDefaultS
  */
 #define FBSnapshotVerifyLayerWithOptions(layer__, identifier__, suffixes__) \
 { \
+NSString *envReferenceImageDirectory = [NSProcessInfo processInfo].environment[@"FB_REFERENCE_IMAGE_DIR"]; \
 NSError *error__ = nil; \
 BOOL comparisonSuccess__; \
 XCTAssertTrue((suffixes__.count > 0), @"Suffixes set cannot be empty %@", suffixes__); \
+XCTAssertNotNil(envReferenceImageDirectory, @"Missing value for referenceImagesDirectory - Set FB_REFERENCE_IMAGE_DIR as Environment variable in your scheme.");\
 for (NSString *suffix__ in suffixes__) { \
-NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s%@", FB_REFERENCE_IMAGE_DIR, suffix__]; \
+NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%@%@", envReferenceImageDirectory, suffix__]; \
 comparisonSuccess__ = [self compareSnapshotOfLayer:(layer__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) error:&error__]; \
 if (comparisonSuccess__ || self.recordMode) break; \
 } \

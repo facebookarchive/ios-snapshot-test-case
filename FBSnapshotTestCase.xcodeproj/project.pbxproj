@@ -12,16 +12,17 @@
 		B31987FC1AB782D100B0A900 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B31987F01AB782D000B0A900 /* FBSnapshotTestCase.framework */; };
 		B31988281AB7849400B0A900 /* FBSnapshotTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = B31988201AB7849400B0A900 /* FBSnapshotTestCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B31988291AB7849400B0A900 /* FBSnapshotTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = B31988211AB7849400B0A900 /* FBSnapshotTestCase.m */; };
-		B319882A1AB7849400B0A900 /* FBSnapshotTestController.h in Headers */ = {isa = PBXBuildFile; fileRef = B31988221AB7849400B0A900 /* FBSnapshotTestController.h */; };
+		B319882A1AB7849400B0A900 /* FBSnapshotTestController.h in Headers */ = {isa = PBXBuildFile; fileRef = B31988221AB7849400B0A900 /* FBSnapshotTestController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B319882B1AB7849400B0A900 /* FBSnapshotTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = B31988231AB7849400B0A900 /* FBSnapshotTestController.m */; };
-		B319882C1AB7849400B0A900 /* UIImage+Compare.h in Headers */ = {isa = PBXBuildFile; fileRef = B31988241AB7849400B0A900 /* UIImage+Compare.h */; };
+		B319882C1AB7849400B0A900 /* UIImage+Compare.h in Headers */ = {isa = PBXBuildFile; fileRef = B31988241AB7849400B0A900 /* UIImage+Compare.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B319882D1AB7849400B0A900 /* UIImage+Compare.m in Sources */ = {isa = PBXBuildFile; fileRef = B31988251AB7849400B0A900 /* UIImage+Compare.m */; };
-		B319882E1AB7849400B0A900 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = B31988261AB7849400B0A900 /* UIImage+Diff.h */; };
+		B319882E1AB7849400B0A900 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = B31988261AB7849400B0A900 /* UIImage+Diff.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B319882F1AB7849400B0A900 /* UIImage+Diff.m in Sources */ = {isa = PBXBuildFile; fileRef = B31988271AB7849400B0A900 /* UIImage+Diff.m */; };
 		B31988311AB784CB00B0A900 /* FBSnapshotControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B31988301AB784CB00B0A900 /* FBSnapshotControllerTests.m */; };
 		B32447DC1AB78B5E00B1D6FF /* square_with_text.png in Resources */ = {isa = PBXBuildFile; fileRef = B32447D91AB78B5E00B1D6FF /* square_with_text.png */; };
 		B32447DD1AB78B5E00B1D6FF /* square-copy.png in Resources */ = {isa = PBXBuildFile; fileRef = B32447DA1AB78B5E00B1D6FF /* square-copy.png */; };
 		B32447DE1AB78B5E00B1D6FF /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = B32447DB1AB78B5E00B1D6FF /* square.png */; };
+		F0D698F51B204E120005CAC9 /* SwiftSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D698F41B204E120005CAC9 /* SwiftSupport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		B32447D91AB78B5E00B1D6FF /* square_with_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square_with_text.png; sourceTree = "<group>"; };
 		B32447DA1AB78B5E00B1D6FF /* square-copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square-copy.png"; sourceTree = "<group>"; };
 		B32447DB1AB78B5E00B1D6FF /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square.png; sourceTree = "<group>"; };
+		F0D698F41B204E120005CAC9 /* SwiftSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSupport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		B31987F21AB782D000B0A900 /* FBSnapshotTestCase */ = {
 			isa = PBXGroup;
 			children = (
+				F0D698F41B204E120005CAC9 /* SwiftSupport.swift */,
 				B31988201AB7849400B0A900 /* FBSnapshotTestCase.h */,
 				B31988211AB7849400B0A900 /* FBSnapshotTestCase.m */,
 				13CBB39B1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h */,
@@ -255,6 +258,7 @@
 				B31988291AB7849400B0A900 /* FBSnapshotTestCase.m in Sources */,
 				B319882B1AB7849400B0A900 /* FBSnapshotTestController.m in Sources */,
 				B319882F1AB7849400B0A900 /* UIImage+Diff.m in Sources */,
+				F0D698F51B204E120005CAC9 /* SwiftSupport.swift in Sources */,
 				13CBB39E1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m in Sources */,
 				B319882D1AB7849400B0A900 /* UIImage+Compare.m in Sources */,
 			);
@@ -314,7 +318,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -353,7 +357,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -370,6 +374,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -394,6 +399,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
