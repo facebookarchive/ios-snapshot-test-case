@@ -10,18 +10,21 @@
 
 public extension FBSnapshotTestCase {
   public func FBSnapshotVerifyView(view: UIView, identifier: String = "", suffixes: NSOrderedSet = FBSnapshotTestCaseDefaultSuffixes(), file: String = __FILE__, line: UInt = __LINE__) {
-    let envReferenceImageDirectory = NSProcessInfo.processInfo().environment["FB_REFERENCE_IMAGE_DIR"] as? String
-    var error: NSError?
+    let envReferenceImageDirectory = NSProcessInfo.processInfo().environment["FB_REFERENCE_IMAGE_DIR"]
 
     if let envReferenceImageDirectory = envReferenceImageDirectory {
       for suffix in suffixes {
         let referenceImagesDirectory = "\(envReferenceImageDirectory)\(suffix)"
-        let comparisonSuccess = compareSnapshotOfView(view, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, error: &error)
-        if comparisonSuccess || recordMode {
+        do {
+            try compareSnapshotOfView(view, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier)
+            break
+        } catch {
+            assert(false, message: "Snapshot comparison failed: \(error)", file: file, line: line)
+        }
+        if recordMode {
           break
         }
 
-        assert(comparisonSuccess, message: "Snapshot comparison failed: \(error)", file: file, line: line)
         assert(recordMode == false, message: "Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!", file: file, line: line)
       }
     } else {
@@ -30,19 +33,22 @@ public extension FBSnapshotTestCase {
   }
 
   public func FBSnapshotVerifyLayer(layer: CALayer, identifier: String = "", suffixes: NSOrderedSet = FBSnapshotTestCaseDefaultSuffixes(), file: String = __FILE__, line: UInt = __LINE__) {
-    let envReferenceImageDirectory = NSProcessInfo.processInfo().environment["FB_REFERENCE_IMAGE_DIR"] as? String
-    var error: NSError?
-    var comparisonSuccess = false
+    let envReferenceImageDirectory = NSProcessInfo.processInfo().environment["FB_REFERENCE_IMAGE_DIR"]
 
     if let envReferenceImageDirectory = envReferenceImageDirectory {
       for suffix in suffixes {
         let referenceImagesDirectory = "\(envReferenceImageDirectory)\(suffix)"
-        comparisonSuccess = compareSnapshotOfLayer(layer, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, error: &error)
-        if comparisonSuccess || recordMode {
+        do {
+            try compareSnapshotOfLayer(layer, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier)
+            break
+        } catch {
+            assert(false, message: "Snapshot comparison failed: \(error)", file: file, line: line)
+        }
+
+        if recordMode {
           break
         }
 
-        assert(comparisonSuccess, message: "Snapshot comparison failed: \(error)", file: file, line: line)
         assert(recordMode == false, message: "Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!", file: file, line: line)
       }
     } else {
