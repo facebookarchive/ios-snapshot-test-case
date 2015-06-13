@@ -31,7 +31,7 @@ BOOL comparisonSuccess__; \
 XCTAssertTrue((suffixes__.count > 0), @"Suffixes set cannot be empty %@", suffixes__); \
 XCTAssertNotNil(envReferenceImageDirectory, @"Missing value for referenceImagesDirectory - Set FB_REFERENCE_IMAGE_DIR as Environment variable in your scheme.");\
 for (NSString *suffix__ in suffixes__) { \
-NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%s%@", envReferenceImageDirectory, suffix__]; \
+NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%@%@", envReferenceImageDirectory, suffix__]; \
 comparisonSuccess__ = [self compareSnapshotOfView:(view__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) tolerance:(tolerance__) error:&error__]; \
 if (comparisonSuccess__ || self.recordMode) break; \
 } \

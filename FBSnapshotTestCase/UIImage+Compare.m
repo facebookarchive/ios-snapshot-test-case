@@ -85,12 +85,6 @@ typedef union {
     return NO;
   }
 
-    /*
-  CGFloat scaleFactor = [[UIScreen mainScreen] scale];
-  CGContextScaleCTM(referenceImageContext, scaleFactor, scaleFactor);
-  CGContextScaleCTM(imageContext, scaleFactor, scaleFactor);
-    */
-
   CGContextDrawImage(referenceImageContext, CGRectMake(0, 0, self.size.width, self.size.height), self.CGImage);
   CGContextDrawImage(imageContext, CGRectMake(0, 0, image.size.width, image.size.height), image.CGImage);
 
@@ -123,8 +117,8 @@ typedef union {
         }
       }
 
-      p1 ++;
-      p2 ++;
+      p1++;
+      p2++;
     }
   }
 
