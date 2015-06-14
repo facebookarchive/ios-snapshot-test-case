@@ -23,6 +23,7 @@
 		B32447DD1AB78B5E00B1D6FF /* square-copy.png in Resources */ = {isa = PBXBuildFile; fileRef = B32447DA1AB78B5E00B1D6FF /* square-copy.png */; };
 		B32447DE1AB78B5E00B1D6FF /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = B32447DB1AB78B5E00B1D6FF /* square.png */; };
 		F0D698F51B204E120005CAC9 /* SwiftSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D698F41B204E120005CAC9 /* SwiftSupport.swift */; };
+		E5C2CD621B1F399A00669887 /* square_with_pixel.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C2CD611B1F399A00669887 /* square_with_pixel.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		B32447DA1AB78B5E00B1D6FF /* square-copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square-copy.png"; sourceTree = "<group>"; };
 		B32447DB1AB78B5E00B1D6FF /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square.png; sourceTree = "<group>"; };
 		F0D698F41B204E120005CAC9 /* SwiftSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSupport.swift; sourceTree = "<group>"; };
+		E5C2CD611B1F399A00669887 /* square_with_pixel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square_with_pixel.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 		B31987FF1AB782D100B0A900 /* FBSnapshotTestCaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				E5C2CD611B1F399A00669887 /* square_with_pixel.png */,
 				B32447D91AB78B5E00B1D6FF /* square_with_text.png */,
 				B32447DA1AB78B5E00B1D6FF /* square-copy.png */,
 				B32447DB1AB78B5E00B1D6FF /* square.png */,
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B32447DC1AB78B5E00B1D6FF /* square_with_text.png in Resources */,
+				E5C2CD621B1F399A00669887 /* square_with_pixel.png in Resources */,
 				B32447DE1AB78B5E00B1D6FF /* square.png in Resources */,
 				B32447DD1AB78B5E00B1D6FF /* square-copy.png in Resources */,
 			);

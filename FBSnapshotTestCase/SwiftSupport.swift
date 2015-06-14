@@ -16,7 +16,7 @@ public extension FBSnapshotTestCase {
     if let envReferenceImageDirectory = envReferenceImageDirectory {
       for suffix in suffixes {
         let referenceImagesDirectory = "\(envReferenceImageDirectory)\(suffix)"
-        let comparisonSuccess = compareSnapshotOfView(view, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, error: &error)
+        let comparisonSuccess = compareSnapshotOfView(view, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, tolerance: 0, error: &error)
         if comparisonSuccess || recordMode {
           break
         }
@@ -37,7 +37,7 @@ public extension FBSnapshotTestCase {
     if let envReferenceImageDirectory = envReferenceImageDirectory {
       for suffix in suffixes {
         let referenceImagesDirectory = "\(envReferenceImageDirectory)\(suffix)"
-        comparisonSuccess = compareSnapshotOfLayer(layer, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, error: &error)
+        comparisonSuccess = compareSnapshotOfLayer(layer, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, tolerance: 0, error: &error)
         if comparisonSuccess || recordMode {
           break
         }

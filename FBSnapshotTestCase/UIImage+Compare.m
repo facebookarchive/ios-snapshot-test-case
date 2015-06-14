@@ -30,9 +30,21 @@
 
 #import "UIImage+Compare.h"
 
+// This makes debugging much more fun
+typedef union {
+    uint32_t raw;
+    unsigned char bytes[4];
+    struct {
+        char red;
+        char green;
+        char blue;
+        char alpha;
+    } __attribute__ ((packed)) pixels;
+} FBComparePixel;
+
 @implementation UIImage (Compare)
 
-- (BOOL)compareWithImage:(UIImage *)image
+- (BOOL)compareWithImage:(UIImage *)image tolerance:(CGFloat)tolerance
 {
   NSAssert(CGSizeEqualToSize(self.size, image.size), @"Images must be same size.");
     
@@ -64,11 +76,7 @@
                                                     CGImageGetColorSpace(image.CGImage),
                                                     (CGBitmapInfo)kCGImageAlphaPremultipliedLast
                                                     );
-    
-  CGFloat scaleFactor = [[UIScreen mainScreen] scale];
-  CGContextScaleCTM(referenceImageContext, scaleFactor, scaleFactor);
-  CGContextScaleCTM(imageContext, scaleFactor, scaleFactor);
-    
+
   if (!referenceImageContext || !imageContext) {
     CGContextRelease(referenceImageContext);
     CGContextRelease(imageContext);
@@ -76,15 +84,47 @@
     free(imagePixels);
     return NO;
   }
-    
+
   CGContextDrawImage(referenceImageContext, CGRectMake(0, 0, self.size.width, self.size.height), self.CGImage);
   CGContextDrawImage(imageContext, CGRectMake(0, 0, image.size.width, image.size.height), image.CGImage);
+
   CGContextRelease(referenceImageContext);
   CGContextRelease(imageContext);
-    
-  BOOL imageEqual = (memcmp(referenceImagePixels, imagePixels, referenceImageSizeBytes) == 0);
+
+  BOOL imageEqual = YES;
+
+  // Do a fast compare if we can
+  if (tolerance == 0) {
+    imageEqual = (memcmp(referenceImagePixels, imagePixels, referenceImageSizeBytes) == 0);
+  } else {
+    // Go through each pixel in turn and see if it is different
+    const NSInteger pixelCount = self.size.width * self.size.height;
+
+    FBComparePixel *p1 = referenceImagePixels;
+    FBComparePixel *p2 = imagePixels;
+
+    NSInteger numDiffPixels = 0;
+    for (int n = 0; n < pixelCount; ++n) {
+      // If this pixel is different, increment the pixel diff count and see
+      // if we have hit our limit.
+      if (p1->raw != p2->raw) {
+        numDiffPixels ++;
+
+        CGFloat percent = (CGFloat)numDiffPixels / pixelCount;
+        if (percent > tolerance) {
+          imageEqual = NO;
+          break;
+        }
+      }
+
+      p1++;
+      p2++;
+    }
+  }
+
   free(referenceImagePixels);
   free(imagePixels);
+
   return imageEqual;
 }
 
