@@ -1,5 +1,5 @@
 PODS:
-  - FBSnapshotTestCase (1.8.1)
+  - FBSnapshotTestCase (2.0.0)
 
 DEPENDENCIES:
   - FBSnapshotTestCase (from `..`)
