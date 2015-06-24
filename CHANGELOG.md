@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.0
+
+  - Approximate comparison (#88) (Thanks to @nap-sam-dean)
+  - Swift support (#87) (Thanks to @pietbrauer)
+
 ## 1.8.1
 
 ### Fixed
