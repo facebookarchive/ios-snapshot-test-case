@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.1
+
+  - Allow usage of Objective-C subspec only, for projects supporting iOS 7 (#93) (Thanks to @x2on)
+
 ## 2.0.0
 
   - Approximate comparison (#88) (Thanks to @nap-sam-dean)
