@@ -40,6 +40,8 @@ Installation with CocoaPods
      end
      ```
 
+   If you support iOS 7 use `FBSnapshotTestCase/Core` instead, which doesn't contain Swift support.
+
    Replace "Tests" with the name of your test project.
 
 2. Define `FB_REFERENCE_IMAGE_DIR` in your scheme. This should
