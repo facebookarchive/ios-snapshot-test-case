@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "FBSnapshotTestCase"
-  s.version      = "2.0.0"
+  s.version      = "2.0.1"
   s.summary      = "Snapshot view unit tests for iOS"
   s.description  = <<-DESC
                     A "snapshot test case" takes a configured UIView or CALayer
