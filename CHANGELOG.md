@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.2
+
+  - Fix for retina comparisons (#96) 
+  
 ## 2.0.1
 
   - Allow usage of Objective-C subspec only, for projects supporting iOS 7 (#93) (Thanks to @x2on)
