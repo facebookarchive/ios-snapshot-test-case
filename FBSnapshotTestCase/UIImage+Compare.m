@@ -47,10 +47,13 @@ typedef union {
 - (BOOL)compareWithImage:(UIImage *)image tolerance:(CGFloat)tolerance
 {
   NSAssert(CGSizeEqualToSize(self.size, image.size), @"Images must be same size.");
+  
+  CGSize referenceImageSize = CGSizeMake(CGImageGetWidth(self.CGImage), CGImageGetHeight(self.CGImage));
+  CGSize imageSize = CGSizeMake(CGImageGetWidth(image.CGImage), CGImageGetHeight(image.CGImage));
     
   // The images have the equal size, so we could use the smallest amount of bytes because of byte padding
   size_t minBytesPerRow = MIN(CGImageGetBytesPerRow(self.CGImage), CGImageGetBytesPerRow(image.CGImage));
-  size_t referenceImageSizeBytes = CGImageGetHeight(self.CGImage) * minBytesPerRow;
+  size_t referenceImageSizeBytes = referenceImageSize.height * minBytesPerRow;
   void *referenceImagePixels = calloc(1, referenceImageSizeBytes);
   void *imagePixels = calloc(1, referenceImageSizeBytes);
 
@@ -59,18 +62,18 @@ typedef union {
     free(imagePixels);
     return NO;
   }
-    
+  
   CGContextRef referenceImageContext = CGBitmapContextCreate(referenceImagePixels,
-                                                             CGImageGetWidth(self.CGImage),
-                                                             CGImageGetHeight(self.CGImage),
+                                                             referenceImageSize.width,
+                                                             referenceImageSize.height,
                                                              CGImageGetBitsPerComponent(self.CGImage),
                                                              minBytesPerRow,
                                                              CGImageGetColorSpace(self.CGImage),
                                                              (CGBitmapInfo)kCGImageAlphaPremultipliedLast
                                                              );
   CGContextRef imageContext = CGBitmapContextCreate(imagePixels,
-                                                    CGImageGetWidth(image.CGImage),
-                                                    CGImageGetHeight(image.CGImage),
+                                                    imageSize.width,
+                                                    imageSize.height,
                                                     CGImageGetBitsPerComponent(image.CGImage),
                                                     minBytesPerRow,
                                                     CGImageGetColorSpace(image.CGImage),
@@ -85,8 +88,8 @@ typedef union {
     return NO;
   }
 
-  CGContextDrawImage(referenceImageContext, CGRectMake(0, 0, self.size.width, self.size.height), self.CGImage);
-  CGContextDrawImage(imageContext, CGRectMake(0, 0, image.size.width, image.size.height), image.CGImage);
+  CGContextDrawImage(referenceImageContext, CGRectMake(0, 0, referenceImageSize.width, referenceImageSize.height), self.CGImage);
+  CGContextDrawImage(imageContext, CGRectMake(0, 0, imageSize.width, imageSize.height), image.CGImage);
 
   CGContextRelease(referenceImageContext);
   CGContextRelease(imageContext);
