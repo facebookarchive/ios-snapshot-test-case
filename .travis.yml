@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode6.4
+osx_image: beta-xcode6.3
 before_script:
   - gem install cocoapods -v 0.37.2 --no-ri --no-rdoc
 script:
