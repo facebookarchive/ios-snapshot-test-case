@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		133564161B59C3F500A4E4BF /* UIImage+Compare.h in Headers */ = {isa = PBXBuildFile; fileRef = 133564101B59C3F500A4E4BF /* UIImage+Compare.h */; };
+		133564171B59C3F500A4E4BF /* UIImage+Compare.m in Sources */ = {isa = PBXBuildFile; fileRef = 133564111B59C3F500A4E4BF /* UIImage+Compare.m */; };
+		133564181B59C3F500A4E4BF /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = 133564121B59C3F500A4E4BF /* UIImage+Diff.h */; };
+		133564191B59C3F500A4E4BF /* UIImage+Diff.m in Sources */ = {isa = PBXBuildFile; fileRef = 133564131B59C3F500A4E4BF /* UIImage+Diff.m */; };
+		1335641A1B59C3F500A4E4BF /* UIImage+Snapshot.h in Headers */ = {isa = PBXBuildFile; fileRef = 133564141B59C3F500A4E4BF /* UIImage+Snapshot.h */; };
+		1335641B1B59C3F500A4E4BF /* UIImage+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 133564151B59C3F500A4E4BF /* UIImage+Snapshot.m */; };
 		13CBB39D1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 13CBB39B1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		13CBB39E1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CBB39C1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m */; };
 		B31987FC1AB782D100B0A900 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B31987F01AB782D000B0A900 /* FBSnapshotTestCase.framework */; };
@@ -14,16 +20,12 @@
 		B31988291AB7849400B0A900 /* FBSnapshotTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = B31988211AB7849400B0A900 /* FBSnapshotTestCase.m */; };
 		B319882A1AB7849400B0A900 /* FBSnapshotTestController.h in Headers */ = {isa = PBXBuildFile; fileRef = B31988221AB7849400B0A900 /* FBSnapshotTestController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B319882B1AB7849400B0A900 /* FBSnapshotTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = B31988231AB7849400B0A900 /* FBSnapshotTestController.m */; };
-		B319882C1AB7849400B0A900 /* UIImage+Compare.h in Headers */ = {isa = PBXBuildFile; fileRef = B31988241AB7849400B0A900 /* UIImage+Compare.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		B319882D1AB7849400B0A900 /* UIImage+Compare.m in Sources */ = {isa = PBXBuildFile; fileRef = B31988251AB7849400B0A900 /* UIImage+Compare.m */; };
-		B319882E1AB7849400B0A900 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = B31988261AB7849400B0A900 /* UIImage+Diff.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		B319882F1AB7849400B0A900 /* UIImage+Diff.m in Sources */ = {isa = PBXBuildFile; fileRef = B31988271AB7849400B0A900 /* UIImage+Diff.m */; };
 		B31988311AB784CB00B0A900 /* FBSnapshotControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B31988301AB784CB00B0A900 /* FBSnapshotControllerTests.m */; };
 		B32447DC1AB78B5E00B1D6FF /* square_with_text.png in Resources */ = {isa = PBXBuildFile; fileRef = B32447D91AB78B5E00B1D6FF /* square_with_text.png */; };
 		B32447DD1AB78B5E00B1D6FF /* square-copy.png in Resources */ = {isa = PBXBuildFile; fileRef = B32447DA1AB78B5E00B1D6FF /* square-copy.png */; };
 		B32447DE1AB78B5E00B1D6FF /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = B32447DB1AB78B5E00B1D6FF /* square.png */; };
-		F0D698F51B204E120005CAC9 /* SwiftSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D698F41B204E120005CAC9 /* SwiftSupport.swift */; };
 		E5C2CD621B1F399A00669887 /* square_with_pixel.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C2CD611B1F399A00669887 /* square_with_pixel.png */; };
+		F0D698F51B204E120005CAC9 /* SwiftSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D698F41B204E120005CAC9 /* SwiftSupport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		133564101B59C3F500A4E4BF /* UIImage+Compare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Compare.h"; sourceTree = "<group>"; };
+		133564111B59C3F500A4E4BF /* UIImage+Compare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Compare.m"; sourceTree = "<group>"; };
+		133564121B59C3F500A4E4BF /* UIImage+Diff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Diff.h"; sourceTree = "<group>"; };
+		133564131B59C3F500A4E4BF /* UIImage+Diff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Diff.m"; sourceTree = "<group>"; };
+		133564141B59C3F500A4E4BF /* UIImage+Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Snapshot.h"; sourceTree = "<group>"; };
+		133564151B59C3F500A4E4BF /* UIImage+Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Snapshot.m"; sourceTree = "<group>"; };
 		13CBB39B1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSnapshotTestCasePlatform.h; sourceTree = "<group>"; };
 		13CBB39C1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCasePlatform.m; sourceTree = "<group>"; };
 		B31987F01AB782D000B0A900 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,16 +55,12 @@
 		B31988211AB7849400B0A900 /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCase.m; sourceTree = "<group>"; };
 		B31988221AB7849400B0A900 /* FBSnapshotTestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSnapshotTestController.h; sourceTree = "<group>"; };
 		B31988231AB7849400B0A900 /* FBSnapshotTestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestController.m; sourceTree = "<group>"; };
-		B31988241AB7849400B0A900 /* UIImage+Compare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Compare.h"; sourceTree = "<group>"; };
-		B31988251AB7849400B0A900 /* UIImage+Compare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Compare.m"; sourceTree = "<group>"; };
-		B31988261AB7849400B0A900 /* UIImage+Diff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Diff.h"; sourceTree = "<group>"; };
-		B31988271AB7849400B0A900 /* UIImage+Diff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Diff.m"; sourceTree = "<group>"; };
 		B31988301AB784CB00B0A900 /* FBSnapshotControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotControllerTests.m; sourceTree = "<group>"; };
 		B32447D91AB78B5E00B1D6FF /* square_with_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square_with_text.png; sourceTree = "<group>"; };
 		B32447DA1AB78B5E00B1D6FF /* square-copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square-copy.png"; sourceTree = "<group>"; };
 		B32447DB1AB78B5E00B1D6FF /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square.png; sourceTree = "<group>"; };
-		F0D698F41B204E120005CAC9 /* SwiftSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSupport.swift; sourceTree = "<group>"; };
 		E5C2CD611B1F399A00669887 /* square_with_pixel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square_with_pixel.png; sourceTree = "<group>"; };
+		F0D698F41B204E120005CAC9 /* SwiftSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSupport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1335640F1B59C3F500A4E4BF /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				133564101B59C3F500A4E4BF /* UIImage+Compare.h */,
+				133564111B59C3F500A4E4BF /* UIImage+Compare.m */,
+				133564121B59C3F500A4E4BF /* UIImage+Diff.h */,
+				133564131B59C3F500A4E4BF /* UIImage+Diff.m */,
+				133564141B59C3F500A4E4BF /* UIImage+Snapshot.h */,
+				133564151B59C3F500A4E4BF /* UIImage+Snapshot.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		B31987E61AB782D000B0A900 = {
 			isa = PBXGroup;
 			children = (
@@ -99,17 +116,14 @@
 		B31987F21AB782D000B0A900 /* FBSnapshotTestCase */ = {
 			isa = PBXGroup;
 			children = (
-				F0D698F41B204E120005CAC9 /* SwiftSupport.swift */,
+				1335640F1B59C3F500A4E4BF /* Categories */,
 				B31988201AB7849400B0A900 /* FBSnapshotTestCase.h */,
 				B31988211AB7849400B0A900 /* FBSnapshotTestCase.m */,
 				13CBB39B1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h */,
 				13CBB39C1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m */,
 				B31988221AB7849400B0A900 /* FBSnapshotTestController.h */,
 				B31988231AB7849400B0A900 /* FBSnapshotTestController.m */,
-				B31988241AB7849400B0A900 /* UIImage+Compare.h */,
-				B31988251AB7849400B0A900 /* UIImage+Compare.m */,
-				B31988261AB7849400B0A900 /* UIImage+Diff.h */,
-				B31988271AB7849400B0A900 /* UIImage+Diff.m */,
+				F0D698F41B204E120005CAC9 /* SwiftSupport.swift */,
 				B31987F31AB782D000B0A900 /* Supporting Files */,
 			);
 			path = FBSnapshotTestCase;
@@ -153,9 +167,10 @@
 			files = (
 				B31988281AB7849400B0A900 /* FBSnapshotTestCase.h in Headers */,
 				13CBB39D1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h in Headers */,
+				133564181B59C3F500A4E4BF /* UIImage+Diff.h in Headers */,
+				133564161B59C3F500A4E4BF /* UIImage+Compare.h in Headers */,
+				1335641A1B59C3F500A4E4BF /* UIImage+Snapshot.h in Headers */,
 				B319882A1AB7849400B0A900 /* FBSnapshotTestController.h in Headers */,
-				B319882E1AB7849400B0A900 /* UIImage+Diff.h in Headers */,
-				B319882C1AB7849400B0A900 /* UIImage+Compare.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,12 +274,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				133564171B59C3F500A4E4BF /* UIImage+Compare.m in Sources */,
 				B31988291AB7849400B0A900 /* FBSnapshotTestCase.m in Sources */,
+				133564191B59C3F500A4E4BF /* UIImage+Diff.m in Sources */,
+				1335641B1B59C3F500A4E4BF /* UIImage+Snapshot.m in Sources */,
 				B319882B1AB7849400B0A900 /* FBSnapshotTestController.m in Sources */,
-				B319882F1AB7849400B0A900 /* UIImage+Diff.m in Sources */,
 				F0D698F51B204E120005CAC9 /* SwiftSupport.swift in Sources */,
 				13CBB39E1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m in Sources */,
-				B319882D1AB7849400B0A900 /* UIImage+Compare.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

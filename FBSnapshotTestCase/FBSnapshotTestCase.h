@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2013, Facebook, Inc.
+ *  Copyright (c) 2015, Facebook, Inc.
  *  All rights reserved.
  *
  *  This source code is licensed under the BSD-style license found in the
@@ -93,6 +93,9 @@ FBSnapshotVerifyLayerWithOptions(layer__, identifier__, FBSnapshotTestCaseDefaul
  When YES, the test macros will save reference images, rather than performing an actual test.
  */
 @property (readwrite, nonatomic, assign) BOOL recordMode;
+
+- (void)setUp NS_REQUIRES_SUPER;
+- (void)tearDown NS_REQUIRES_SUPER;
 
 /**
  Performs the comparison or records a snapshot of the layer if recordMode is YES.
