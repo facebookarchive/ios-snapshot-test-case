@@ -12,6 +12,13 @@
 
 @interface UIImage (Snapshot)
 
-+ (UIImage *)fb_imageForViewOrLayer:(id)viewOrLayer;
+/// Uses renderInContext: to get a snapshot of the layer.
++ (UIImage *)fb_imageForLayer:(CALayer *)layer;
+
+/// Uses renderInContext: to get a snapshot of the view layer.
++ (UIImage *)fb_imageForViewLayer:(UIView *)view;
+
+/// Uses drawViewHierarchyInRect: to get a snapshot of the view and adds the view into a window if needed.
++ (UIImage *)fb_imageForView:(UIView *)view;
 
 @end

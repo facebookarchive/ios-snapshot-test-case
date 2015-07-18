@@ -9,7 +9,6 @@
  */
  
 #import <FBSnapshotTestCase/FBSnapshotTestCase.h>
-#import "FBExampleView.h"
 
 @interface FBSnapshotTestCaseDemoTests : FBSnapshotTestCase
 
@@ -26,10 +25,43 @@
   self.recordMode = NO;
 }
 
-- (void)testExample
+- (void)testViewSnapshot
 {
-  FBExampleView *v = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
-  FBSnapshotVerifyView(v, nil);
+  UIView *redView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+  redView.backgroundColor = [UIColor redColor];
+  redView.frame = CGRectMake(0, 0, 40, 40);
+  FBSnapshotVerifyView(redView, nil);
+  FBSnapshotVerifyLayer(redView.layer, nil);
+}
+
+- (void)testViewSnapshotWithVisualEffects
+{
+  if ([UIVisualEffect class]) {
+    UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    UIView *redView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 40)];
+    redView.backgroundColor = [UIColor redColor];
+    visualEffectView.frame = CGRectMake(0, 0, 40, 40);
+    
+    UIView *parentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    parentView.backgroundColor = [UIColor whiteColor];
+    [parentView addSubview:redView];
+    [parentView addSubview:visualEffectView];
+
+    self.usesDrawViewHierarchyInRect = YES;
+    FBSnapshotVerifyView(parentView, nil);
+  } 
+}
+
+- (void)testViewSnapshotWithUIAppearance
+{
+  [[UISwitch appearance] setOnTintColor:[UIColor blueColor]];
+  [[UISwitch appearance] setThumbTintColor:[UIColor lightGrayColor]];
+  UISwitch *control = [[UISwitch alloc] init];
+  control.on = YES;
+  
+  self.usesDrawViewHierarchyInRect = YES;
+  FBSnapshotVerifyView(control, nil);
 }
 
 @end

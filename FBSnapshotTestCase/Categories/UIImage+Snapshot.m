@@ -12,20 +12,6 @@
 
 @implementation UIImage (Snapshot)
 
-+ (UIImage *)fb_imageForViewOrLayer:(id)viewOrLayer
-{
-  if ([viewOrLayer isKindOfClass:[UIView class]]) {
-    return [self fb_imageForView:viewOrLayer];
-  } else if ([viewOrLayer isKindOfClass:[CALayer class]]) {
-    CALayer *layer = (CALayer *)viewOrLayer;
-    [layer layoutIfNeeded];
-    return [self fb_imageForLayer:layer];
-  } else {
-    [NSException raise:@"Only UIView and CALayer classes can be snapshotted" format:@"%@", viewOrLayer];
-  }
-  return nil;
-}
-
 + (UIImage *)fb_imageForLayer:(CALayer *)layer
 {
   CGRect bounds = layer.bounds;
@@ -35,8 +21,8 @@
   UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
   CGContextRef context = UIGraphicsGetCurrentContext();
   NSAssert1(context, @"Could not generate context for layer %@", layer);
-
   CGContextSaveGState(context);
+  [layer layoutIfNeeded];
   [layer renderInContext:context];
   CGContextRestoreGState(context);
 
@@ -45,10 +31,32 @@
   return snapshot;
 }
 
-+ (UIImage *)fb_imageForView:(UIView *)view
++ (UIImage *)fb_imageForViewLayer:(UIView *)view
 {
   [view layoutIfNeeded];
   return [self fb_imageForLayer:view.layer];
+}
+
++ (UIImage *)fb_imageForView:(UIView *)view
+{
+  CGRect bounds = view.bounds;
+  NSAssert1(CGRectGetWidth(bounds), @"Zero width for view %@", view);
+  NSAssert1(CGRectGetHeight(bounds), @"Zero height for view %@", view);  
+
+  UIWindow *window = view.window;
+  if (window == nil) {
+    window = [[UIWindow alloc] initWithFrame:bounds];
+    [window addSubview:view];
+    [window makeKeyAndVisible];
+  }
+  
+  UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
+  [view layoutIfNeeded];
+  [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+
+  UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  return snapshot;
 }
 
 @end

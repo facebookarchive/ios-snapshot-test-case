@@ -268,7 +268,7 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
 {
   UIImage *referenceImage = [self referenceImageForSelector:selector identifier:identifier error:errorPtr];
   if (nil != referenceImage) {
-    UIImage *snapshot = [UIImage fb_imageForViewOrLayer:viewOrLayer];
+    UIImage *snapshot = [self _imageForViewOrLayer:viewOrLayer];
     BOOL imagesSame = [self compareReferenceImage:referenceImage toImage:snapshot tolerance:tolerance error:errorPtr];
     if (!imagesSame) {
       [self saveFailedReferenceImage:referenceImage
@@ -287,7 +287,7 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                           identifier:(NSString *)identifier
                                error:(NSError **)errorPtr
 {
-  UIImage *snapshot = [UIImage fb_imageForViewOrLayer:viewOrLayer];
+  UIImage *snapshot = [self _imageForViewOrLayer:viewOrLayer];
   return [self _saveReferenceImage:snapshot selector:selector identifier:identifier error:errorPtr];
 }
 
@@ -327,6 +327,22 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
     }
   }
   return didWrite;
+}
+
+- (UIImage *)_imageForViewOrLayer:(id)viewOrLayer
+{
+  if ([viewOrLayer isKindOfClass:[UIView class]]) {
+    if (_usesDrawViewHierarchyInRect) {
+      return [UIImage fb_imageForView:viewOrLayer];
+    } else {
+      return [UIImage fb_imageForViewLayer:viewOrLayer];
+    }
+  } else if ([viewOrLayer isKindOfClass:[CALayer class]]) {
+    return [UIImage fb_imageForLayer:viewOrLayer];
+  } else {
+    [NSException raise:@"Only UIView and CALayer classes can be snapshotted" format:@"%@", viewOrLayer];
+  }
+  return nil;
 }
 
 @end

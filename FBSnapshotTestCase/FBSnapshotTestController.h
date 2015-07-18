@@ -37,8 +37,13 @@ extern NSString *const FBReferenceImageFilePathKey;
 
 /**
  Record snapshots.
- **/
+ */
 @property (readwrite, nonatomic, assign) BOOL recordMode;
+
+/**
+ Uses drawViewHierarchyInRect:afterScreenUpdates: to draw the image instead of renderInContext:
+ */
+@property (readwrite, nonatomic, assign) BOOL usesDrawViewHierarchyInRect;
 
 /**
  The directory in which referfence images are stored.

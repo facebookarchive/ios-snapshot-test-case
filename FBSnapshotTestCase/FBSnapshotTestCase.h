@@ -94,6 +94,17 @@ FBSnapshotVerifyLayerWithOptions(layer__, identifier__, FBSnapshotTestCaseDefaul
  */
 @property (readwrite, nonatomic, assign) BOOL recordMode;
 
+/**
+ When YES, renders a snapshot of the complete view hierarchy as visible onscreen.
+ There are several things that do not work if renderInContext: is used.
+ - UIVisualEffect #70
+ - UIApperance #91
+ - Size Classes #92
+ 
+ @attention If the view does't belong to a UIWindow, it will create one and add the view as a subview.
+ */
+@property (readwrite, nonatomic, assign) BOOL usesDrawViewHierarchyInRect;
+
 - (void)setUp NS_REQUIRES_SUPER;
 - (void)tearDown NS_REQUIRES_SUPER;
 

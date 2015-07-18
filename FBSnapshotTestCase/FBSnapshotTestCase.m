@@ -41,6 +41,17 @@
   _snapshotController.recordMode = recordMode;
 }
 
+- (BOOL)usesDrawViewHierarchyInRect
+{
+  return _snapshotController.usesDrawViewHierarchyInRect;
+}
+
+- (void)setUsesDrawViewHierarchyInRect:(BOOL)usesDrawViewHierarchyInRect
+{
+  NSAssert1(_snapshotController, @"%s cannot be called before [super setUp]", __FUNCTION__);
+  _snapshotController.usesDrawViewHierarchyInRect = usesDrawViewHierarchyInRect;
+}
+
 #pragma mark - Public API
 
 - (BOOL)compareSnapshotOfLayer:(CALayer *)layer
