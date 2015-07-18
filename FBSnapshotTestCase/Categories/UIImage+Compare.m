@@ -28,7 +28,7 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "UIImage+Compare.h"
+#import <FBSnapshotTestCase/UIImage+Compare.h>
 
 // This makes debugging much more fun
 typedef union {
@@ -44,7 +44,7 @@ typedef union {
 
 @implementation UIImage (Compare)
 
-- (BOOL)compareWithImage:(UIImage *)image tolerance:(CGFloat)tolerance
+- (BOOL)fb_compareWithImage:(UIImage *)image tolerance:(CGFloat)tolerance
 {
   NSAssert(CGSizeEqualToSize(self.size, image.size), @"Images must be same size.");
   

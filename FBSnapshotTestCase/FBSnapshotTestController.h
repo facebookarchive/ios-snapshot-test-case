@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2013, Facebook, Inc.
+ *  Copyright (c) 2015, Facebook, Inc.
  *  All rights reserved.
  *
  *  This source code is licensed under the BSD-style license found in the
@@ -41,6 +41,11 @@ extern NSString *const FBReferenceImageFilePathKey;
 @property (readwrite, nonatomic, assign) BOOL recordMode;
 
 /**
+ The directory in which referfence images are stored.
+ */
+@property (readwrite, nonatomic, copy) NSString *referenceImagesDirectory;
+
+/**
  @param testClass The subclass of FBSnapshotTestCase that is using this controller.
  @returns An instance of FBSnapshotTestController.
  */
@@ -52,7 +57,6 @@ extern NSString *const FBReferenceImageFilePathKey;
  @returns An instance of FBSnapshotTestController.
  */
 - (instancetype)initWithTestName:(NSString *)testName;
-
 
 /**
  Performs the comparison of the layer.
@@ -95,12 +99,6 @@ extern NSString *const FBReferenceImageFilePathKey;
                            tolerance:(CGFloat)tolerance
                                error:(NSError **)errorPtr;
 
-
-/**
- The directory in which referfence images are stored.
- */
-@property (readwrite, nonatomic, copy) NSString *referenceImagesDirectory;
-
 /**
  Loads a reference image.
  @param selector The test method being run.
@@ -111,18 +109,6 @@ extern NSString *const FBReferenceImageFilePathKey;
 - (UIImage *)referenceImageForSelector:(SEL)selector
                             identifier:(NSString *)identifier
                                  error:(NSError **)errorPtr;
-
-/**
- Saves a reference image.
- @param selector The test method being run.
- @param identifier The optional identifier, used when multiple images are tested in a single -test method.
- @param errorPtr An error, if this methods returns NO, the error will be something useful.
- @returns An image.
- */
-- (BOOL)saveReferenceImage:(UIImage *)image
-                  selector:(SEL)selector
-                identifier:(NSString *)identifier
-                     error:(NSError **)errorPtr;
 
 /**
  Performs a pixel-by-pixel comparison of the two images with an allowable margin of error.
