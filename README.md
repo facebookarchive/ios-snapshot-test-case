@@ -75,6 +75,7 @@ Features
 - Supply an optional "identifier" if you want to perform multiple snapshots
   in a single test method.
 - Support for `CALayer` via `FBSnapshotVerifyLayer`.
+- `usesDrawViewHierarchyInRect` to handle cases like `UIVisualEffect`, `UIAppearance` and Size Classes.
 
 Notes
 -----
