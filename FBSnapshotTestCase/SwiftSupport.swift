@@ -10,13 +10,20 @@
 
 public extension FBSnapshotTestCase {
   public func FBSnapshotVerifyView(view: UIView, identifier: String = "", suffixes: NSOrderedSet = FBSnapshotTestCaseDefaultSuffixes(), file: String = __FILE__, line: UInt = __LINE__) {
-    let envReferenceImageDirectory = NSProcessInfo.processInfo().environment["FB_REFERENCE_IMAGE_DIR"] as? String
+    let envReferenceImageDirectory = NSProcessInfo.processInfo().environment["FB_REFERENCE_IMAGE_DIR"]
     var error: NSError?
 
     if let envReferenceImageDirectory = envReferenceImageDirectory {
       for suffix in suffixes {
         let referenceImagesDirectory = "\(envReferenceImageDirectory)\(suffix)"
-        let comparisonSuccess = compareSnapshotOfView(view, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, tolerance: 0, error: &error)
+        let comparisonSuccess: Bool
+        do {
+          try compareSnapshotOfView(view, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, tolerance: 0)
+          comparisonSuccess = true
+        } catch let error1 as NSError {
+          error = error1
+          comparisonSuccess = false
+        }
         if comparisonSuccess || recordMode {
           break
         }
@@ -30,14 +37,20 @@ public extension FBSnapshotTestCase {
   }
 
   public func FBSnapshotVerifyLayer(layer: CALayer, identifier: String = "", suffixes: NSOrderedSet = FBSnapshotTestCaseDefaultSuffixes(), file: String = __FILE__, line: UInt = __LINE__) {
-    let envReferenceImageDirectory = NSProcessInfo.processInfo().environment["FB_REFERENCE_IMAGE_DIR"] as? String
+    let envReferenceImageDirectory = NSProcessInfo.processInfo().environment["FB_REFERENCE_IMAGE_DIR"]
     var error: NSError?
     var comparisonSuccess = false
 
     if let envReferenceImageDirectory = envReferenceImageDirectory {
       for suffix in suffixes {
         let referenceImagesDirectory = "\(envReferenceImageDirectory)\(suffix)"
-        comparisonSuccess = compareSnapshotOfLayer(layer, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, tolerance: 0, error: &error)
+        do {
+          try compareSnapshotOfLayer(layer, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, tolerance: 0)
+          comparisonSuccess = true
+        } catch let error1 as NSError {
+          error = error1
+          comparisonSuccess = false
+        }
         if comparisonSuccess || recordMode {
           break
         }
