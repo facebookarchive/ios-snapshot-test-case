@@ -16,6 +16,21 @@
 
 #import <XCTest/XCTest.h>
 
+/*
+ There are three ways of setting reference image directories.
+
+ 1. Set the preprocessor macro FB_REFERENCE_IMAGE_DIR to a double quoted
+    c-string with the path.
+ 2. Set an environment variable named FB_REFERENCE_IMAGE_DIR with the path. This
+    takes precedence over the preprocessor macro to allow for run-time override.
+ 3. Keep everything unset, which will cause the reference images to be looked up
+    inside the bundle holding the current test, in the
+    Resources/ReferenceImages_* directories.
+ */
+#ifndef FB_REFERENCE_IMAGE_DIR
+#define FB_REFERENCE_IMAGE_DIR ""
+#endif
+
 /**
  Similar to our much-loved XCTAssert() macros. Use this to perform your test. No need to write an explanation, though.
  @param view The view to snapshot
@@ -44,12 +59,33 @@
   FBSnapshotVerifyLayerWithOptions(layer__, identifier__, FBSnapshotTestCaseDefaultSuffixes(), 0)
 
 
+#define FBSnapshotVerifyViewOrLayerWithOptions(what__, viewOrLayer__, identifier__, suffixes__, tolerance__) \
+{ \
+  NSString *referenceImageDirectory = [self getReferenceImageDirectoryWithDefault:(@ FB_REFERENCE_IMAGE_DIR)]; \
+  XCTAssertNotNil(referenceImageDirectory, @"Missing value for referenceImagesDirectory - Set FB_REFERENCE_IMAGE_DIR as Environment variable in your scheme.");\
+  XCTAssertTrue((suffixes__.count > 0), @"Suffixes set cannot be empty %@", suffixes__); \
+  NSError *error__ = nil; \
+  BOOL comparisonSuccess__; \
+  for (NSString *suffix__ in suffixes__) { \
+    NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%@%@", referenceImageDirectory, suffix__]; \
+    comparisonSuccess__ = [self compareSnapshotOf ## what__ :(viewOrLayer__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) tolerance:(tolerance__) error:&error__]; \
+    if (comparisonSuccess__ || self.recordMode) break; \
+  } \
+  XCTAssertTrue(comparisonSuccess__, @"Snapshot comparison failed: %@", error__); \
+  XCTAssertFalse(self.recordMode, @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!"); \
+}
+
+
 /**
  The base class of view snapshotting tests. If you have small UI component, it's often easier to configure it in a test
  and compare an image of the view to a reference image that write lots of complex layout-code tests.
  
  In order to flip the tests in your subclass to record the reference images set @c recordMode to @c YES.
  
+ @attention When recording, the reference image directory should be explicitly
+            set, otherwise the images may be written to somewhere inside the
+            simulator directory.
+
  For example:
  @code
  - (void)setUp
@@ -110,23 +146,13 @@
                     tolerance:(CGFloat)tolerance
                         error:(NSError **)errorPtr;
 
+/**
+ Returns the reference image directory.
+
+ Helper function used to implement the assert macros.
+
+ @param dir directory to use if environment variable not specified. Ignored if null or empty.
+ */
+- (NSString *)getReferenceImageDirectoryWithDefault:(NSString *)dir;
+
 @end
-
-#pragma mark Implementation detail
-
-#define FBSnapshotVerifyViewOrLayerWithOptions(what__, viewOrLayer__, identifier__, suffixes__, tolerance__) \
-{ \
-  NSString *envReferenceImageDirectory = [NSProcessInfo processInfo].environment[@"FB_REFERENCE_IMAGE_DIR"]; \
-  NSError *error__ = nil; \
-  BOOL comparisonSuccess__; \
-  XCTAssertTrue((suffixes__.count > 0), @"Suffixes set cannot be empty %@", suffixes__); \
-  XCTAssertNotNil(envReferenceImageDirectory, @"Missing value for referenceImagesDirectory - Set FB_REFERENCE_IMAGE_DIR as Environment variable in your scheme.");\
-  for (NSString *suffix__ in suffixes__) { \
-    NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%@%@", envReferenceImageDirectory, suffix__]; \
-    comparisonSuccess__ = [self compareSnapshotOf ## what__ :(viewOrLayer__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) tolerance:(tolerance__) error:&error__]; \
-    if (comparisonSuccess__ || self.recordMode) break; \
-  } \
-  XCTAssertTrue(comparisonSuccess__, @"Snapshot comparison failed: %@", error__); \
-  XCTAssertFalse(self.recordMode, @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!"); \
-}
-
