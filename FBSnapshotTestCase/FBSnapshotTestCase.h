@@ -24,25 +24,11 @@
  @param tolerance The percentage of pixels that can differ and still count as an 'identical' view
  */
 #define FBSnapshotVerifyViewWithOptions(view__, identifier__, suffixes__, tolerance__) \
-{ \
-NSString *envReferenceImageDirectory = [NSProcessInfo processInfo].environment[@"FB_REFERENCE_IMAGE_DIR"]; \
-NSError *error__ = nil; \
-BOOL comparisonSuccess__; \
-XCTAssertTrue((suffixes__.count > 0), @"Suffixes set cannot be empty %@", suffixes__); \
-XCTAssertNotNil(envReferenceImageDirectory, @"Missing value for referenceImagesDirectory - Set FB_REFERENCE_IMAGE_DIR as Environment variable in your scheme.");\
-for (NSString *suffix__ in suffixes__) { \
-NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%@%@", envReferenceImageDirectory, suffix__]; \
-comparisonSuccess__ = [self compareSnapshotOfView:(view__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) tolerance:(tolerance__) error:&error__]; \
-if (comparisonSuccess__ || self.recordMode) break; \
-} \
-XCTAssertTrue(comparisonSuccess__, @"Snapshot comparison failed: %@", error__); \
-XCTAssertFalse(self.recordMode, @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!"); \
-}
+  FBSnapshotVerifyViewOrLayerWithOptions(View, view__, identifier__, suffixes__, tolerance__)
 
 #define FBSnapshotVerifyView(view__, identifier__) \
-{ \
-FBSnapshotVerifyViewWithOptions(view__, identifier__, FBSnapshotTestCaseDefaultSuffixes(), 0); \
-}
+  FBSnapshotVerifyViewWithOptions(view__, identifier__, FBSnapshotTestCaseDefaultSuffixes(), 0)
+
 
 /**
  Similar to our much-loved XCTAssert() macros. Use this to perform your test. No need to write an explanation, though.
@@ -52,25 +38,11 @@ FBSnapshotVerifyViewWithOptions(view__, identifier__, FBSnapshotTestCaseDefaultS
  @param tolerance The percentage of pixels that can differ and still count as an 'identical' layer
  */
 #define FBSnapshotVerifyLayerWithOptions(layer__, identifier__, suffixes__, tolerance__) \
-{ \
-NSString *envReferenceImageDirectory = [NSProcessInfo processInfo].environment[@"FB_REFERENCE_IMAGE_DIR"]; \
-NSError *error__ = nil; \
-BOOL comparisonSuccess__; \
-XCTAssertTrue((suffixes__.count > 0), @"Suffixes set cannot be empty %@", suffixes__); \
-XCTAssertNotNil(envReferenceImageDirectory, @"Missing value for referenceImagesDirectory - Set FB_REFERENCE_IMAGE_DIR as Environment variable in your scheme.");\
-for (NSString *suffix__ in suffixes__) { \
-NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%@%@", envReferenceImageDirectory, suffix__]; \
-comparisonSuccess__ = [self compareSnapshotOfLayer:(layer__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) tolerance:(tolerance__) error:&error__]; \
-if (comparisonSuccess__ || self.recordMode) break; \
-} \
-XCTAssertTrue(comparisonSuccess__, @"Snapshot comparison failed: %@", error__); \
-XCTAssertFalse(self.recordMode, @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!"); \
-}
+  FBSnapshotVerifyViewOrLayerWithOptions(Layer, layer__, identifier__, suffixes__, tolerance__)
 
 #define FBSnapshotVerifyLayer(layer__, identifier__) \
-{ \
-FBSnapshotVerifyLayerWithOptions(layer__, identifier__, FBSnapshotTestCaseDefaultSuffixes(), 0); \
-}
+  FBSnapshotVerifyLayerWithOptions(layer__, identifier__, FBSnapshotTestCaseDefaultSuffixes(), 0)
+
 
 /**
  The base class of view snapshotting tests. If you have small UI component, it's often easier to configure it in a test
@@ -139,3 +111,22 @@ FBSnapshotVerifyLayerWithOptions(layer__, identifier__, FBSnapshotTestCaseDefaul
                         error:(NSError **)errorPtr;
 
 @end
+
+#pragma mark Implementation detail
+
+#define FBSnapshotVerifyViewOrLayerWithOptions(what__, viewOrLayer__, identifier__, suffixes__, tolerance__) \
+{ \
+  NSString *envReferenceImageDirectory = [NSProcessInfo processInfo].environment[@"FB_REFERENCE_IMAGE_DIR"]; \
+  NSError *error__ = nil; \
+  BOOL comparisonSuccess__; \
+  XCTAssertTrue((suffixes__.count > 0), @"Suffixes set cannot be empty %@", suffixes__); \
+  XCTAssertNotNil(envReferenceImageDirectory, @"Missing value for referenceImagesDirectory - Set FB_REFERENCE_IMAGE_DIR as Environment variable in your scheme.");\
+  for (NSString *suffix__ in suffixes__) { \
+    NSString *referenceImagesDirectory__ = [NSString stringWithFormat:@"%@%@", envReferenceImageDirectory, suffix__]; \
+    comparisonSuccess__ = [self compareSnapshotOf ## what__ :(viewOrLayer__) referenceImagesDirectory:referenceImagesDirectory__ identifier:(identifier__) tolerance:(tolerance__) error:&error__]; \
+    if (comparisonSuccess__ || self.recordMode) break; \
+  } \
+  XCTAssertTrue(comparisonSuccess__, @"Snapshot comparison failed: %@", error__); \
+  XCTAssertFalse(self.recordMode, @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!"); \
+}
+
