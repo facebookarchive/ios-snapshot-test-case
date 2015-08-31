@@ -12,7 +12,6 @@
 		B30449221AB794320067C75D /* FBSnapshotTestCaseDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B30449211AB794320067C75D /* FBSnapshotTestCaseDemoTests.m */; };
 		B30449351AB795230067C75D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B304492C1AB795230067C75D /* InfoPlist.strings */; };
 		B30449361AB795230067C75D /* FBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B304492F1AB795230067C75D /* FBAppDelegate.m */; };
-		B30449381AB795230067C75D /* FBSnapshotTestCaseDemo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B30449321AB795230067C75D /* FBSnapshotTestCaseDemo-Info.plist */; };
 		B30449391AB795230067C75D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B30449341AB795230067C75D /* Images.xcassets */; };
 		F02D88451B1F246300BFBC1D /* FBSnapshotTestCaseSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02D88441B1F246300BFBC1D /* FBSnapshotTestCaseSwiftTests.swift */; };
 /* End PBXBuildFile section */
@@ -198,7 +197,7 @@
 		B30448FA1AB794320067C75D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					B30449011AB794320067C75D = {
@@ -236,7 +235,6 @@
 			files = (
 				B30449391AB795230067C75D /* Images.xcassets in Resources */,
 				B30449351AB795230067C75D /* InfoPlist.strings in Resources */,
-				B30449381AB795230067C75D /* FBSnapshotTestCaseDemo-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
