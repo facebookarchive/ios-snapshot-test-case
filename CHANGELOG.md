@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.4
+
+  - Support loading reference images from the test bundle (#104) (Thanks to @yiding)
+  - Fix for retina tolerance comparisons (#107)
+
 ## 2.0.3
 
   - New property added `usesDrawViewHierarchyInRect` to handle cases like `UIVisualEffect` (#70), `UIAppearance` (#91) and Size Classes (#92) (#100)
