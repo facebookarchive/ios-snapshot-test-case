@@ -10,9 +10,9 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   FBSnapshotTestCase:
-    :path: ..
+    :path: ".."
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: bfa674b5a5a0a79559c1544e3d2846927d6b6d2a
 
-COCOAPODS: 0.38.0
+COCOAPODS: 0.38.2
