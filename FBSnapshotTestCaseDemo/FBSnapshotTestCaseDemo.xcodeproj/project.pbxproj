@@ -197,6 +197,7 @@
 		B30448FA1AB794320067C75D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
