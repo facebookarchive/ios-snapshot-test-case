@@ -26,9 +26,21 @@ public extension FBSnapshotTestCase {
       for suffix in suffixes {
         let referenceImagesDirectory = "\(envReferenceImageDirectory)\(suffix)"
         if viewOrLayer.isKindOfClass(UIView) {
-          comparisonSuccess = compareSnapshotOfView(viewOrLayer as! UIView, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, tolerance: 0, error: &error)
+          do {
+            try compareSnapshotOfView(viewOrLayer as! UIView, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, tolerance: 0)
+            comparisonSuccess = true
+          } catch let error1 as NSError {
+            error = error1
+            comparisonSuccess = false
+          }
         } else if viewOrLayer.isKindOfClass(CALayer) {
-            comparisonSuccess = compareSnapshotOfLayer(viewOrLayer as! CALayer, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, tolerance: 0, error: &error)
+          do {
+            try compareSnapshotOfLayer(viewOrLayer as! CALayer, referenceImagesDirectory: referenceImagesDirectory, identifier: identifier, tolerance: 0)
+            comparisonSuccess = true
+          } catch let error1 as NSError {
+            error = error1
+            comparisonSuccess = false
+          }
         } else {
           assertionFailure("Only UIView and CALayer classes can be snapshotted")
         }
