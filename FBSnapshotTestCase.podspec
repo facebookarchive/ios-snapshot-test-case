@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '7.0'
   s.requires_arc = true
   s.framework    = 'XCTest'
+  s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
   s.public_header_files = ['FBSnapshotTestCase/FBSnapshotTestCase.h', 'FBSnapshotTestCase/FBSnapshotTestCasePlatform.h']
   s.private_header_files = ['FBSnapshotTestCase/FBSnapshotTestController.h', 'FBSnapshotTestCase/UIImage+Compare.h', 'FBSnapshotTestCase/UIImage+Diff.h']
   s.default_subspecs = 'SwiftSupport'
