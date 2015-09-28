@@ -1,6 +1,16 @@
 language: objective-c
 osx_image: xcode7
 before_script:
-  - gem install cocoapods -v 0.37.2 --no-ri --no-rdoc
-script:
-  ./build.sh
+- gem install cocoapods -v 0.37.2 --no-ri --no-rdoc
+script: ./build.sh
+after_script:
+  - carthage build --no-skip-current
+  - carthage archive FBSnapshotTestCase
+deploy:
+  provider: releases
+  file: FBSnapshotTestCase.framework.zip
+  skip_cleanup: true
+  on:
+    tags: true
+  api_key:
+    secure: ICTdItdGFA3Jung1M+O0IPjj4agr2oY5ZTfwfquHlSaX+CDOqRAlPOxeZVhkgBp1gPZIcNS+yV/F7IXQgIAGWHF8AxN6b3DisTZKw6rG7Y+Cq09xOwNV/xDI516bY5Oo3ENO5nStWBfq4I8BQDdulWEEiIXfI8ygR1v9ttMSQq8=
