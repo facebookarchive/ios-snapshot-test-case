@@ -5,7 +5,7 @@ before_script:
 script: ./build.sh
 after_script:
   - brew install carthage
-  - carthage build --no-skip-current
+  - carthage build --no-skip-current --verbose
   - carthage archive FBSnapshotTestCase
 deploy:
   provider: releases
