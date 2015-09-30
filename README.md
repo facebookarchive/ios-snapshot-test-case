@@ -44,9 +44,7 @@ Installation with CocoaPods
 
    Replace "Tests" with the name of your test project.
 
-2. Define `FB_REFERENCE_IMAGE_DIR` in your scheme. This should
-   point to the directory where you want reference images to be stored. At Facebook,
-   we normally use this:
+2. There are [three ways](https://github.com/facebook/ios-snapshot-test-case/blob/master/FBSnapshotTestCase/FBSnapshotTestCase.h#L19-L29) of setting reference image directories, the recommended one is to define `FB_REFERENCE_IMAGE_DIR` in your scheme. This should point to the directory where you want reference images to be stored. At Facebook, we normally use this:
 
 |Name|Value|
 |:---|:----|
