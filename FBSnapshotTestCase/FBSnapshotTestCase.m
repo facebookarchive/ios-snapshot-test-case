@@ -80,6 +80,19 @@
                                        error:errorPtr];
 }
 
+- (BOOL)referenceImageRecordedInDirectory:(NSString *)referenceImagesDirectory
+                               identifier:(NSString *)identifier
+                                    error:(NSError **)errorPtr
+{
+    NSAssert1(_snapshotController, @"%s cannot be called before [super setUp]", __FUNCTION__);
+    _snapshotController.referenceImagesDirectory = referenceImagesDirectory;
+    UIImage *referenceImage = [_snapshotController referenceImageForSelector:self.invocation.selector
+                                                                  identifier:identifier
+                                                                       error:errorPtr];
+
+    return (referenceImage != nil);
+}
+
 - (NSString *)getReferenceImageDirectoryWithDefault:(NSString *)dir
 {
   NSString *envReferenceImageDirectory = [NSProcessInfo processInfo].environment[@"FB_REFERENCE_IMAGE_DIR"];
