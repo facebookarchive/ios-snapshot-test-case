@@ -44,12 +44,14 @@ public extension FBSnapshotTestCase {
         } else {
           assertionFailure("Only UIView and CALayer classes can be snapshotted")
         }
+
+        assert(recordMode == false, message: "Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!", file: file, line: line)
+
         if comparisonSuccess || recordMode {
           break
         }
 
         assert(comparisonSuccess, message: "Snapshot comparison failed: \(error)", file: file, line: line)
-        assert(recordMode == false, message: "Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!", file: file, line: line)
       }
     } else {
       XCTFail("Missing value for referenceImagesDirectory - Set FB_REFERENCE_IMAGE_DIR as Environment variable in your scheme.")
