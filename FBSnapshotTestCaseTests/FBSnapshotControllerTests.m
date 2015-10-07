@@ -10,6 +10,7 @@
 
 #import <XCTest/XCTest.h>
 #import "FBSnapshotTestController.h"
+#import "FBSnapshotTestCasePlatform.h"
 
 @interface FBSnapshotControllerTests : XCTestCase
 
@@ -63,6 +64,24 @@
     FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
     // With some tolerance these should be considered the same
     XCTAssertTrue([controller compareReferenceImage:referenceImage toImage:testImage tolerance:.001 error:nil]);
+}
+
+- (void)testFailedImageWithDeviceAgnosticShouldHaveModelOnName
+{
+  UIImage *referenceImage = [self _bundledImageNamed:@"square" type:@"png"];
+  XCTAssertNotNil(referenceImage);
+  UIImage *testImage = [self _bundledImageNamed:@"square_with_pixel" type:@"png"];
+  XCTAssertNotNil(testImage);
+  
+  FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
+  [controller setDeviceAgnostic:YES];
+  [controller setReferenceImagesDirectory:@"/dev/null/"];
+  NSError *error = nil;
+  SEL selector = @selector(isDeviceAgnostic);
+  [controller referenceImageForSelector:selector identifier:@"" error:&error];
+  XCTAssertNotNil(error);
+  NSString *deviceAgnosticReferencePath = FBDeviceAgnosticNormalizedFileName(NSStringFromSelector(selector));
+  XCTAssertTrue([(NSString *)[error.userInfo objectForKey:FBReferenceImageFilePathKey] containsString:deviceAgnosticReferencePath]);
 }
 
 #pragma mark - Private helper methods

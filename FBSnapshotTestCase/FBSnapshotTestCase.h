@@ -103,6 +103,12 @@
 @property (readwrite, nonatomic, assign) BOOL recordMode;
 
 /**
+ When @c YES appends the name of the device model and OS to the snapshot file name.
+ The default value is @c NO.
+ */
+@property (readwrite, nonatomic, assign, getter=isDeviceAgnostic) BOOL deviceAgnostic;
+
+/**
  When YES, renders a snapshot of the complete view hierarchy as visible onscreen.
  There are several things that do not work if renderInContext: is used.
  - UIVisualEffect #70
