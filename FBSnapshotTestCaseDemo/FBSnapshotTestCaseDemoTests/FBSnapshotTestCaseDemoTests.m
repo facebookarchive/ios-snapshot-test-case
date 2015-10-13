@@ -29,7 +29,6 @@
 {
   UIView *redView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
   redView.backgroundColor = [UIColor redColor];
-  redView.frame = CGRectMake(0, 0, 40, 40);
   FBSnapshotVerifyView(redView, nil);
   FBSnapshotVerifyLayer(redView.layer, nil);
 }
@@ -62,6 +61,22 @@
   
   self.usesDrawViewHierarchyInRect = YES;
   FBSnapshotVerifyView(control, nil);
+}
+
+- (void)testViewSnapshotWithDifferentBackgroundColorPerArchitecture
+{
+    UIColor *color = FBSnapshotTestCaseIs64Bit() ? [UIColor magentaColor] : [UIColor cyanColor];
+
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    view.backgroundColor = color;
+    FBSnapshotVerifyView(view, nil);
+}
+
+- (void)testViewSnapshotRecordedOnlyFor64BitArchitecture
+{
+    UIView *greenView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    greenView.backgroundColor = [UIColor greenColor];
+    FBSnapshotVerifyView(greenView, nil);
 }
 
 @end
