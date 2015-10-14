@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.5
+
+  - Swift 2.0 (#111, #120) (Thanks to @pietbrauer and @grantjk)
+  - Fix pod spec by disabling bitcode (#115) (Thanks to @soleares)
+  - Fix for incorrect errors with multiple suffixes (#119) (Thanks to @Grubas7)
+  - Support for Model and OS in image names (#121 thanks to @esttorhe)
+
 ## 2.0.4
 
   - Support loading reference images from the test bundle (#104) (Thanks to @yiding)
