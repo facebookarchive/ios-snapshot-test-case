@@ -8,8 +8,6 @@
  *
  */
 
-#import <FBSnapshotTestCase/FBSnapshotTestCasePlatform.h>
-
 #import <QuartzCore/QuartzCore.h>
 
 #import <UIKit/UIKit.h>
