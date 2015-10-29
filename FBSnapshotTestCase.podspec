@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "FBSnapshotTestCase"
-  s.version      = "2.0.6"
+  s.version      = "2.0.7"
   s.summary      = "Snapshot view unit tests for iOS"
   s.description  = <<-DESC
                     A "snapshot test case" takes a configured UIView or CALayer
@@ -22,8 +22,8 @@ Pod::Spec.new do |s|
   s.module_map = 'FBSnapshotTestCase.modulemap'
   s.subspec 'Core' do |cs|
     cs.source_files = 'FBSnapshotTestCase/**/*.{h,m}', 'FBSnapshotTestCase/*.{h,m}'
-    cs.public_header_files = 'FBSnapshotTestCase/FBSnapshotTestCase.h','FBSnapshotTestCase/FBSnapshotTestCasePlatform.h'
-    cs.private_header_files = 'FBSnapshotTestCase/FBSnapshotTestController.h','FBSnapshotTestCase/Categories/UIImage+Compare.h','FBSnapshotTestCase/Categories/UIImage+Diff.h','FBSnapshotTestCase/Categories/UIImage+Snapshot.h'
+    cs.public_header_files = 'FBSnapshotTestCase/FBSnapshotTestCase.h','FBSnapshotTestCase/FBSnapshotTestCasePlatform.h','FBSnapshotTestCase/FBSnapshotTestController.h'
+    cs.private_header_files = 'FBSnapshotTestCase/Categories/UIImage+Compare.h','FBSnapshotTestCase/Categories/UIImage+Diff.h','FBSnapshotTestCase/Categories/UIImage+Snapshot.h'
   end
   s.subspec 'SwiftSupport' do |cs|
     cs.dependency 'FBSnapshotTestCase/Core'

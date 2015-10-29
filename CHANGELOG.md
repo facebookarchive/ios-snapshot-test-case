@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.7
+
+  - Change FBSnapshotTestController from private to public (#129)
+
 ## 2.0.6
 
   - Added modulemap and podspec fixes to build with Xcode 7.1 (#127)

@@ -4,12 +4,12 @@ framework module FBSnapshotTestCase {
   export *
   module * { export * }
 
-  header "FBSnapshotTestCasePlatform.h"
   header "FBSnapshotTestCase.h"
+  header "FBSnapshotTestCasePlatform.h"
+  header "FBSnapshotTestController.h"
 
   private header "UIImage+Compare.h"
   private header "UIImage+Diff.h"
   private header "UIImage+Snapshot.h"
-  private header "FBSnapshotTestController.h"
 }
 
