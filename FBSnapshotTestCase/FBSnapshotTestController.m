@@ -15,6 +15,7 @@
 #import <FBSnapshotTestCase/UIImage+Snapshot.h>
 
 #import <UIKit/UIKit.h>
+#import <sys/utsname.h>
 
 NSString *const FBSnapshotTestControllerErrorDomain = @"FBSnapshotTestControllerErrorDomain";
 NSString *const FBReferenceImageFilePathKey = @"FBReferenceImageFilePathKey";
@@ -237,8 +238,35 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   if ([[UIScreen mainScreen] scale] > 1) {
     fileName = [fileName stringByAppendingFormat:@"@%.fx", [[UIScreen mainScreen] scale]];
   }
+  if (self.deviceSpecificCase) {
+    fileName = [fileName stringByAppendingString:[self _deviceName]];
+  }
   fileName = [fileName stringByAppendingPathExtension:@"png"];
   return fileName;
+}
+
+- (NSString*) _hardwareDeviceName
+{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    return [NSString stringWithCString:systemInfo.machine
+                              encoding:NSUTF8StringEncoding];
+}
+
+- (NSString *)_deviceName {
+    NSString* deviceName = [self _hardwareDeviceName];
+    if ([deviceName isEqualToString:@"i386"] ||
+        [deviceName isEqualToString:@"x86_64"]) {
+        // this means the simulator is used
+        
+        // using SIMULATOR_MODEL_IDENTIFIER is not a deterministic way
+        // to get the Simulator name used at runtime, but there doesn't seem to
+        // be a better way
+        deviceName = [NSString stringWithCString:getenv("SIMULATOR_MODEL_IDENTIFIER")
+                                        encoding:NSUTF8StringEncoding];
+    }
+    return deviceName;
 }
 
 - (NSString *)_referenceFilePathForSelector:(SEL)selector

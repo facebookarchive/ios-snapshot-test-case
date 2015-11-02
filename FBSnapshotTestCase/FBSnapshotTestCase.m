@@ -63,6 +63,15 @@
   _snapshotController.usesDrawViewHierarchyInRect = usesDrawViewHierarchyInRect;
 }
 
+- (BOOL)deviceSpecificCase {
+    return _snapshotController.deviceSpecificCase;
+}
+
+- (void)setDeviceSpecificCase:(BOOL)deviceSpecificCase {
+    NSAssert1(_snapshotController, @"%s cannot be called before [super setUp]", __FUNCTION__);
+    _snapshotController.deviceSpecificCase = deviceSpecificCase;
+}
+
 #pragma mark - Public API
 
 - (BOOL)compareSnapshotOfLayer:(CALayer *)layer
