@@ -18,7 +18,7 @@
 		B31987FC1AB782D100B0A900 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B31987F01AB782D000B0A900 /* FBSnapshotTestCase.framework */; };
 		B31988281AB7849400B0A900 /* FBSnapshotTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = B31988201AB7849400B0A900 /* FBSnapshotTestCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B31988291AB7849400B0A900 /* FBSnapshotTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = B31988211AB7849400B0A900 /* FBSnapshotTestCase.m */; };
-		B319882A1AB7849400B0A900 /* FBSnapshotTestController.h in Headers */ = {isa = PBXBuildFile; fileRef = B31988221AB7849400B0A900 /* FBSnapshotTestController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		B319882A1AB7849400B0A900 /* FBSnapshotTestController.h in Headers */ = {isa = PBXBuildFile; fileRef = B31988221AB7849400B0A900 /* FBSnapshotTestController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B319882B1AB7849400B0A900 /* FBSnapshotTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = B31988231AB7849400B0A900 /* FBSnapshotTestController.m */; };
 		B31988311AB784CB00B0A900 /* FBSnapshotControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B31988301AB784CB00B0A900 /* FBSnapshotControllerTests.m */; };
 		B32447DC1AB78B5E00B1D6FF /* square_with_text.png in Resources */ = {isa = PBXBuildFile; fileRef = B32447D91AB78B5E00B1D6FF /* square_with_text.png */; };
@@ -167,10 +167,10 @@
 			files = (
 				B31988281AB7849400B0A900 /* FBSnapshotTestCase.h in Headers */,
 				13CBB39D1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h in Headers */,
+				B319882A1AB7849400B0A900 /* FBSnapshotTestController.h in Headers */,
 				133564181B59C3F500A4E4BF /* UIImage+Diff.h in Headers */,
 				133564161B59C3F500A4E4BF /* UIImage+Compare.h in Headers */,
 				1335641A1B59C3F500A4E4BF /* UIImage+Snapshot.h in Headers */,
-				B319882A1AB7849400B0A900 /* FBSnapshotTestController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
