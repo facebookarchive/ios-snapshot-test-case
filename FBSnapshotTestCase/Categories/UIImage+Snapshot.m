@@ -43,7 +43,8 @@
   NSAssert1(CGRectGetWidth(bounds), @"Zero width for view %@", view);
   NSAssert1(CGRectGetHeight(bounds), @"Zero height for view %@", view);  
 
-  UIWindow *window = view.window;
+  // If the input view is already a UIWindow, then just use that. Otherwise wrap in a window.
+  UIWindow *window = [view isKindOfClass:[UIWindow class]] ? (UIWindow *)view : view.window;
   if (window == nil) {
     window = [[UIWindow alloc] initWithFrame:bounds];
     [window addSubview:view];
