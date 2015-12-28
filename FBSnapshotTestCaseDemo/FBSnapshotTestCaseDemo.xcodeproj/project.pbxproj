@@ -82,7 +82,9 @@
 				A01067CB25E73F7B9122D375 /* Pods */,
 				B7DD931F31D340869FC40B05 /* Frameworks */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		B30449031AB794320067C75D /* Products */ = {
 			isa = PBXGroup;
