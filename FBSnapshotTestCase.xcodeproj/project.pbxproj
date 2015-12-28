@@ -102,7 +102,9 @@
 				B31987FF1AB782D100B0A900 /* FBSnapshotTestCaseTests */,
 				B31987F11AB782D000B0A900 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		B31987F11AB782D000B0A900 /* Products */ = {
 			isa = PBXGroup;
