@@ -13,6 +13,8 @@
 		B30449351AB795230067C75D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B304492C1AB795230067C75D /* InfoPlist.strings */; };
 		B30449361AB795230067C75D /* FBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B304492F1AB795230067C75D /* FBAppDelegate.m */; };
 		B30449391AB795230067C75D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B30449341AB795230067C75D /* Images.xcassets */; };
+		BC97FF051C17E4C900FA40E3 /* FBSnapshotTestCaseDeviceAgnosticTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC97FF041C17E4C900FA40E3 /* FBSnapshotTestCaseDeviceAgnosticTests.m */; };
+		BCF12A251C396B2600789343 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCF12A241C396B2600789343 /* Launch Screen.storyboard */; };
 		F02D88451B1F246300BFBC1D /* FBSnapshotTestCaseSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02D88441B1F246300BFBC1D /* FBSnapshotTestCaseSwiftTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +32,6 @@
 		42711825EC840732F7632DB1 /* Pods-FBSnapshotTestCaseDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBSnapshotTestCaseDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FBSnapshotTestCaseDemoTests/Pods-FBSnapshotTestCaseDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		89032B249B2E1256F91C7504 /* Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FBSnapshotTestCaseDemoTests/Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B30449021AB794320067C75D /* FBSnapshotTestCaseDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBSnapshotTestCaseDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B30449061AB794320067C75D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B30449071AB794320067C75D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B304491B1AB794320067C75D /* FBSnapshotTestCaseDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FBSnapshotTestCaseDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30449201AB794320067C75D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -41,6 +42,8 @@
 		B30449321AB795230067C75D /* FBSnapshotTestCaseDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FBSnapshotTestCaseDemo-Info.plist"; sourceTree = "<group>"; };
 		B30449331AB795230067C75D /* FBSnapshotTestCaseDemo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBSnapshotTestCaseDemo-Prefix.pch"; sourceTree = "<group>"; };
 		B30449341AB795230067C75D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BC97FF041C17E4C900FA40E3 /* FBSnapshotTestCaseDeviceAgnosticTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCaseDeviceAgnosticTests.m; sourceTree = "<group>"; };
+		BCF12A241C396B2600789343 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F02D88441B1F246300BFBC1D /* FBSnapshotTestCaseSwiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBSnapshotTestCaseSwiftTests.swift; sourceTree = "<group>"; };
 		F2F94786ED7FC097D31026B6 /* Pods_FBSnapshotTestCaseDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FBSnapshotTestCaseDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -105,6 +108,7 @@
 				B30449331AB795230067C75D /* FBSnapshotTestCaseDemo-Prefix.pch */,
 				B30449341AB795230067C75D /* Images.xcassets */,
 				B30449051AB794320067C75D /* Supporting Files */,
+				BCF12A241C396B2600789343 /* Launch Screen.storyboard */,
 			);
 			path = FBSnapshotTestCaseDemo;
 			sourceTree = "<group>";
@@ -112,7 +116,6 @@
 		B30449051AB794320067C75D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B30449061AB794320067C75D /* Info.plist */,
 				B30449071AB794320067C75D /* main.m */,
 			);
 			name = "Supporting Files";
@@ -122,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				B30449211AB794320067C75D /* FBSnapshotTestCaseDemoTests.m */,
+				BC97FF041C17E4C900FA40E3 /* FBSnapshotTestCaseDeviceAgnosticTests.m */,
 				F02D88441B1F246300BFBC1D /* FBSnapshotTestCaseSwiftTests.swift */,
 				B304491F1AB794320067C75D /* Supporting Files */,
 			);
@@ -236,6 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCF12A251C396B2600789343 /* Launch Screen.storyboard in Resources */,
 				B30449391AB795230067C75D /* Images.xcassets in Resources */,
 				B30449351AB795230067C75D /* InfoPlist.strings in Resources */,
 			);
@@ -313,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B30449221AB794320067C75D /* FBSnapshotTestCaseDemoTests.m in Sources */,
+				BC97FF051C17E4C900FA40E3 /* FBSnapshotTestCaseDeviceAgnosticTests.m in Sources */,
 				F02D88451B1F246300BFBC1D /* FBSnapshotTestCaseSwiftTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,6 +427,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = "FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemo-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -431,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = "FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemo-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
