@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B31987EF1AB782D000B0A900"
-               BuildableName = "FBSnapshotTestCase.framework"
-               BlueprintName = "FBSnapshotTestCase"
+               BuildableName = "FBSnapshotTestCase iOS.framework"
+               BlueprintName = "FBSnapshotTestCase iOS"
                ReferencedContainer = "container:FBSnapshotTestCase.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B31987FA1AB782D100B0A900"
-               BuildableName = "FBSnapshotTestCaseTests.xctest"
-               BlueprintName = "FBSnapshotTestCaseTests"
+               BuildableName = "FBSnapshotTestCase iOS Tests.xctest"
+               BlueprintName = "FBSnapshotTestCase iOS Tests"
                ReferencedContainer = "container:FBSnapshotTestCase.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,8 +47,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B31987FA1AB782D100B0A900"
-               BuildableName = "FBSnapshotTestCaseTests.xctest"
-               BlueprintName = "FBSnapshotTestCaseTests"
+               BuildableName = "FBSnapshotTestCase iOS Tests.xctest"
+               BlueprintName = "FBSnapshotTestCase iOS Tests"
                ReferencedContainer = "container:FBSnapshotTestCase.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -57,8 +57,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B31987EF1AB782D000B0A900"
-            BuildableName = "FBSnapshotTestCase.framework"
-            BlueprintName = "FBSnapshotTestCase"
+            BuildableName = "FBSnapshotTestCase iOS.framework"
+            BlueprintName = "FBSnapshotTestCase iOS"
             ReferencedContainer = "container:FBSnapshotTestCase.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -79,8 +79,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B31987EF1AB782D000B0A900"
-            BuildableName = "FBSnapshotTestCase.framework"
-            BlueprintName = "FBSnapshotTestCase"
+            BuildableName = "FBSnapshotTestCase iOS.framework"
+            BlueprintName = "FBSnapshotTestCase iOS"
             ReferencedContainer = "container:FBSnapshotTestCase.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -97,8 +97,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B31987EF1AB782D000B0A900"
-            BuildableName = "FBSnapshotTestCase.framework"
-            BlueprintName = "FBSnapshotTestCase"
+            BuildableName = "FBSnapshotTestCase iOS.framework"
+            BlueprintName = "FBSnapshotTestCase iOS"
             ReferencedContainer = "container:FBSnapshotTestCase.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
