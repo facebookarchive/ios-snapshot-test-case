@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "827137791C63AB6F00354E42"
-               BuildableName = "FBSnapshotTestCase tvOS.framework"
+               BuildableName = "FBSnapshotTestCase.framework"
                BlueprintName = "FBSnapshotTestCase tvOS"
                ReferencedContainer = "container:FBSnapshotTestCase.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "827137791C63AB6F00354E42"
-            BuildableName = "FBSnapshotTestCase tvOS.framework"
+            BuildableName = "FBSnapshotTestCase.framework"
             BlueprintName = "FBSnapshotTestCase tvOS"
             ReferencedContainer = "container:FBSnapshotTestCase.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "827137791C63AB6F00354E42"
-            BuildableName = "FBSnapshotTestCase tvOS.framework"
+            BuildableName = "FBSnapshotTestCase.framework"
             BlueprintName = "FBSnapshotTestCase tvOS"
             ReferencedContainer = "container:FBSnapshotTestCase.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "827137791C63AB6F00354E42"
-            BuildableName = "FBSnapshotTestCase tvOS.framework"
+            BuildableName = "FBSnapshotTestCase.framework"
             BlueprintName = "FBSnapshotTestCase tvOS"
             ReferencedContainer = "container:FBSnapshotTestCase.xcodeproj">
          </BuildableReference>
