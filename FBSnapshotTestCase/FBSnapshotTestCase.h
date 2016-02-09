@@ -124,6 +124,11 @@
 @interface FBSnapshotTestCase : XCTestCase
 
 /**
+ Test mode. Can be record, compare or both combined.
+ */
+@property (readwrite, nonatomic, assign) FBSnapshotTestMode mode;
+
+/**
  When YES, the test macros will save reference images, rather than performing an actual test.
  */
 @property (readwrite, nonatomic, assign) BOOL recordMode;

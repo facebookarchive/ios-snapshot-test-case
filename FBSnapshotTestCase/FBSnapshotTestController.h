@@ -18,6 +18,13 @@ typedef NS_ENUM(NSInteger, FBSnapshotTestControllerErrorCode) {
   FBSnapshotTestControllerErrorCodeImagesDifferentSizes,
   FBSnapshotTestControllerErrorCodeImagesDifferent,
 };
+
+typedef NS_OPTIONS(NSUInteger, FBSnapshotTestMode){
+  FBSnapshotModeNone = 0,
+  FBSnapshotModeCompare = 1 << 0,
+  FBSnapshotModeRecord = 1 << 1
+};
+
 /**
  Errors returned by the methods of FBSnapshotTestController use this domain.
  */
@@ -36,9 +43,9 @@ extern NSString *const FBReferenceImageFilePathKey;
 @interface FBSnapshotTestController : NSObject
 
 /**
- Record snapshots.
+ Record, Compare or both
  */
-@property (readwrite, nonatomic, assign) BOOL recordMode;
+@property (readwrite, nonatomic, assign) FBSnapshotTestMode mode;
 
 /**
  When @c YES appends the name of the device model and OS to the snapshot file name.
