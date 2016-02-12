@@ -32,7 +32,7 @@ We developed `FBSnapshotTestCase` to make snapshot tests easy.
 Installation with CocoaPods
 ---------------------------
 
-1. Add the following lines to your Podfile:
+1. Add the following lines to your Podfile.  Replace "Tests" with the name of your test project.
 
      ```
      target "Tests" do
@@ -40,9 +40,12 @@ Installation with CocoaPods
      end
      ```
 
-   If you support iOS 7 use `FBSnapshotTestCase/Core` instead, which doesn't contain Swift support.
-
-   Replace "Tests" with the name of your test project.
+   - If you support iOS 7 use `FBSnapshotTestCase/Core` instead, which doesn't contain Swift support.
+   - If you're project is in Swift, add the following to your test targets bridging header:
+   
+   ```
+   #import <FBSnapshotTestCase/FBSnapshotTestCase.h>
+   ```
 
 2. There are [three ways](https://github.com/facebook/ios-snapshot-test-case/blob/master/FBSnapshotTestCase/FBSnapshotTestCase.h#L19-L29) of setting reference image directories, the recommended one is to define `FB_REFERENCE_IMAGE_DIR` in your scheme. This should point to the directory where you want reference images to be stored. At Facebook, we normally use this:
 
