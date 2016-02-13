@@ -20,7 +20,6 @@ typedef NS_ENUM(NSInteger, FBSnapshotTestControllerErrorCode) {
 };
 
 typedef NS_OPTIONS(NSUInteger, FBSnapshotTestMode){
-  FBSnapshotModeNone = 0,
   FBSnapshotModeCompare = 1 << 0,
   FBSnapshotModeRecord = 1 << 1
 };
