@@ -40,11 +40,13 @@
   _snapshotController.mode = recordMode ? FBSnapshotModeRecord : FBSnapshotModeCompare;
 }
 
-- (FBSnapshotTestMode)mode{
+- (FBSnapshotTestMode)mode
+{
   return _snapshotController.mode;
 }
 
-- (void)setMode:(FBSnapshotTestMode)mode{
+- (void)setMode:(FBSnapshotTestMode)mode
+{
   NSAssert1(_snapshotController, @"%s cannot be called before [super setUp]", __FUNCTION__);
   _snapshotController.mode = mode;
 }
