@@ -28,7 +28,9 @@
     XCTAssertNotNil(testImage);
 
     FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
-    XCTAssertTrue([controller compareReferenceImage:referenceImage toImage:testImage tolerance:0 error:nil]);
+    NSError *error = nil;
+    XCTAssertTrue([controller compareReferenceImage:referenceImage toImage:testImage tolerance:0 error:&error]);
+    XCTAssertNil(error);
 }
 
 - (void)testCompareReferenceImageToImageShouldNotBeEqual
@@ -39,7 +41,10 @@
     XCTAssertNotNil(testImage);
 
     FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
-    XCTAssertFalse([controller compareReferenceImage:referenceImage toImage:testImage tolerance:0 error:nil]);
+    NSError *error = nil;
+    XCTAssertFalse([controller compareReferenceImage:referenceImage toImage:testImage tolerance:0 error:&error]);
+    XCTAssertNotNil(error);
+    XCTAssertEqual(error.code, FBSnapshotTestControllerErrorCodeImagesDifferent);
 }
 
 - (void)testCompareReferenceImageWithVeryLowToleranceShouldNotMatch
@@ -51,7 +56,10 @@
 
     FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
     // With virtually no margin for error, this should fail to be equal
-    XCTAssertFalse([controller compareReferenceImage:referenceImage toImage:testImage tolerance:0.0001 error:nil]);
+    NSError *error = nil;
+    XCTAssertFalse([controller compareReferenceImage:referenceImage toImage:testImage tolerance:0.0001 error:&error]);
+    XCTAssertNotNil(error);
+    XCTAssertEqual(error.code, FBSnapshotTestControllerErrorCodeImagesDifferent);
 }
 
 - (void)testCompareReferenceImageWithVeryLowToleranceShouldMatch
@@ -63,7 +71,24 @@
 
     FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
     // With some tolerance these should be considered the same
-    XCTAssertTrue([controller compareReferenceImage:referenceImage toImage:testImage tolerance:.001 error:nil]);
+    NSError *error = nil;
+    XCTAssertTrue([controller compareReferenceImage:referenceImage toImage:testImage tolerance:.001 error:&error]);
+    XCTAssertNil(error);
+}
+
+- (void)testCompareReferenceImageWithDifferentSizes
+{
+  UIImage *referenceImage = [self _bundledImageNamed:@"square" type:@"png"];
+  XCTAssertNotNil(referenceImage);
+  UIImage *testImage = [self _bundledImageNamed:@"rect" type:@"png"];
+  XCTAssertNotNil(testImage);
+  
+  FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
+  // With some tolerance these should be considered the same
+  NSError *error = nil;
+  XCTAssertFalse([controller compareReferenceImage:referenceImage toImage:testImage tolerance:0 error:&error]);
+  XCTAssertNotNil(error);
+  XCTAssertEqual(error.code, FBSnapshotTestControllerErrorCodeImagesDifferentSizes);
 }
 
 - (void)testFailedImageWithDeviceAgnosticShouldHaveModelOnName
