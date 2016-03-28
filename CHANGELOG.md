@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.1.0
+
+  - Changed FBSnapshotTestController from private to public in the xcodeproj (#135)
+  - Added device agnostic tests and assertions (#137)
+  - Fixed fb_imageForView edge cases (#138, #153)
+  - Changed project setting to match the code style (#139)
+  - Fixed propagating the correct file name and line number on Swift (#140)
+  - Added framework support for tvOS (#143)
+  - Added optional tolerance parameter on Swift (#145)
+  - Added images to comparison errors (#146)
+  - Fixed build for Xcode 7.3 (#152)
+  
 ## 2.0.7
 
   - Change FBSnapshotTestController from private to public (#129)
