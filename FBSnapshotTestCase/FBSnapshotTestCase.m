@@ -52,6 +52,17 @@
   _snapshotController.deviceAgnostic = deviceAgnostic;
 }
 
+- (BOOL)includeOSVersionInFilename
+{
+  return _snapshotController.includeOSVersionInFilename;
+}
+
+- (void)setIncludeOSVersionInFilename:(BOOL)include
+{
+  NSAssert1(_snapshotController, @"%s cannot be called before [super setUp]", __FUNCTION__);
+  _snapshotController.includeOSVersionInFilename = include;
+}
+
 - (BOOL)usesDrawViewHierarchyInRect
 {
   return _snapshotController.usesDrawViewHierarchyInRect;

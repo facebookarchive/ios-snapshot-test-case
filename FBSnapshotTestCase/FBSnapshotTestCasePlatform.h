@@ -37,7 +37,7 @@ NSOrderedSet *FBSnapshotTestCaseDefaultSuffixes(void);
  
  @returns An @c NSString object containing the passed @c fileName with the device model, OS and screen size appended at the end.
  */
-NSString *FBDeviceAgnosticNormalizedFileName(NSString *fileName);
+NSString *FBDeviceAgnosticNormalizedFileName(NSString *fileName, BOOL includeOSVersion);
 
 #ifdef __cplusplus
 }
