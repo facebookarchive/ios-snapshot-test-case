@@ -15,6 +15,8 @@
 		1335641B1B59C3F500A4E4BF /* UIImage+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 133564151B59C3F500A4E4BF /* UIImage+Snapshot.m */; };
 		13CBB39D1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 13CBB39B1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		13CBB39E1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CBB39C1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m */; };
+		78DD30AB1CD6AAB50003BCB8 /* FBSnapshotTestCaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DD30AA1CD6AAB50003BCB8 /* FBSnapshotTestCaseTest.m */; };
+		78DD30AC1CD6AABD0003BCB8 /* FBSnapshotTestCaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DD30AA1CD6AAB50003BCB8 /* FBSnapshotTestCaseTest.m */; };
 		827137841C63AB7000354E42 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8271377A1C63AB6F00354E42 /* FBSnapshotTestCase.framework */; };
 		827137911C63ABE900354E42 /* UIImage+Compare.h in Headers */ = {isa = PBXBuildFile; fileRef = 133564101B59C3F500A4E4BF /* UIImage+Compare.h */; };
 		827137921C63ABF000354E42 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = 133564121B59C3F500A4E4BF /* UIImage+Diff.h */; };
@@ -79,6 +81,7 @@
 		133564151B59C3F500A4E4BF /* UIImage+Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Snapshot.m"; sourceTree = "<group>"; };
 		13CBB39B1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSnapshotTestCasePlatform.h; sourceTree = "<group>"; };
 		13CBB39C1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCasePlatform.m; sourceTree = "<group>"; };
+		78DD30AA1CD6AAB50003BCB8 /* FBSnapshotTestCaseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCaseTest.m; sourceTree = "<group>"; };
 		8271377A1C63AB6F00354E42 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		827137831C63AB7000354E42 /* FBSnapshotTestCase tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FBSnapshotTestCase tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B31987F01AB782D000B0A900 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +208,7 @@
 				B32447DA1AB78B5E00B1D6FF /* square-copy.png */,
 				B32447DB1AB78B5E00B1D6FF /* square.png */,
 				B31988301AB784CB00B0A900 /* FBSnapshotControllerTests.m */,
+				78DD30AA1CD6AAB50003BCB8 /* FBSnapshotTestCaseTest.m */,
 				B31988001AB782D100B0A900 /* Supporting Files */,
 			);
 			name = Tests;
@@ -432,6 +436,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				827137A41C63AC0F00354E42 /* FBSnapshotControllerTests.m in Sources */,
+				78DD30AC1CD6AABD0003BCB8 /* FBSnapshotTestCaseTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +460,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B31988311AB784CB00B0A900 /* FBSnapshotControllerTests.m in Sources */,
+				78DD30AB1CD6AAB50003BCB8 /* FBSnapshotTestCaseTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +752,7 @@
 				8271378C1C63AB7000354E42 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		827137901C63AB7000354E42 /* Build configuration list for PBXNativeTarget "FBSnapshotTestCase tvOS Tests" */ = {
 			isa = XCConfigurationList;
@@ -754,6 +761,7 @@
 				8271378E1C63AB7000354E42 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B31987EA1AB782D000B0A900 /* Build configuration list for PBXProject "FBSnapshotTestCase" */ = {
 			isa = XCConfigurationList;

@@ -40,7 +40,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "NO">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -62,6 +62,13 @@
             ReferencedContainer = "container:FBSnapshotTestCase.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "FB_REFERENCE_IMAGE_DIR"
+            value = "$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
