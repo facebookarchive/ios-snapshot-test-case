@@ -10,6 +10,7 @@
 
 #import <FBSnapshotTestCase/FBSnapshotTestCasePlatform.h>
 #import <FBSnapshotTestCase/FBSnapshotTestController.h>
+#import <FBSnapshotTestCase/FBSnapshotTestCaseAgnosticnessOption.h>
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -67,7 +68,6 @@
   XCTAssertTrue(noErrors, @"%@", errorDescription); \
 }
 
-
 /**
  The base class of view snapshotting tests. If you have small UI component, it's often easier to configure it in a test
  and compare an image of the view to a reference image that write lots of complex layout-code tests.
@@ -95,10 +95,11 @@
 @property (readwrite, nonatomic, assign) BOOL recordMode;
 
 /**
- When @c YES appends the name of the device model and OS to the snapshot file name.
- The default value is @c NO.
+ The default value is @c FBSnapshotTestCaseAgnosticnessOptionNone.
+ 
+ @see FBSnapshotTestCaseAgnosticnessOption
  */
-@property (readwrite, nonatomic, assign, getter=isDeviceAgnostic) BOOL deviceAgnostic;
+@property (readwrite, nonatomic, assign) FBSnapshotTestCaseAgnosticnessOption agnosticnessOptions;
 
 /**
  When YES, renders a snapshot of the complete view hierarchy as visible onscreen.

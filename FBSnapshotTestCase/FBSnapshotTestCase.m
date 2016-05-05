@@ -41,15 +41,15 @@
   _snapshotController.recordMode = recordMode;
 }
 
-- (BOOL)isDeviceAgnostic
+- (FBSnapshotTestCaseAgnosticnessOption)agnosticnessOptions
 {
-  return _snapshotController.deviceAgnostic;
+  return _snapshotController.agnosticnessOptions;
 }
 
-- (void)setDeviceAgnostic:(BOOL)deviceAgnostic
+- (void)setAgnosticnessOptions:(FBSnapshotTestCaseAgnosticnessOption)agnosticnessOptions
 {
   NSAssert1(_snapshotController, @"%s cannot be called before [super setUp]", __FUNCTION__);
-  _snapshotController.deviceAgnostic = deviceAgnostic;
+  _snapshotController.agnosticnessOptions = agnosticnessOptions;
 }
 
 - (BOOL)usesDrawViewHierarchyInRect

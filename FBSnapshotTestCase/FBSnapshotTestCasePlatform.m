@@ -32,20 +32,35 @@ NSOrderedSet *FBSnapshotTestCaseDefaultSuffixes(void)
   return [suffixesSet copy];
 }
 
-NSString *FBDeviceAgnosticNormalizedFileName(NSString *fileName)
+NSString *FBAgnosticNormalizedFileName(NSString *fileName, FBSnapshotTestCaseAgnosticnessOption options)
 {
-  UIDevice *device = [UIDevice currentDevice];
-  UIWindow *keyWindow = [[UIApplication sharedApplication] fb_strictKeyWindow];
-  CGSize screenSize = keyWindow.bounds.size;
-  NSString *os = device.systemVersion;
+  if (options == FBSnapshotTestCaseAgnosticnessOptionNone) {
+    return fileName;
+  }
   
-  fileName = [NSString stringWithFormat:@"%@_%@%@_%.0fx%.0f", fileName, device.model, os, screenSize.width, screenSize.height];
-  
+  NSMutableString *mutableFileName = [fileName mutableCopy];
+  if (options & FBSnapshotTestCaseAgnosticnessOptionDeviceModel) {
+    UIDevice *device = [UIDevice currentDevice];
+    [mutableFileName appendFormat:@"_%@", device.model];
+  }
+  if (options & FBSnapshotTestCaseAgnosticnessOptionOSVersion) {
+    UIDevice *device = [UIDevice currentDevice];
+    [mutableFileName appendFormat:@"_%@", device.systemVersion];
+  }
+  if (options & FBSnapshotTestCaseAgnosticnessOptionScreenSize) {
+    UIWindow *keyWindow = [[UIApplication sharedApplication] fb_strictKeyWindow];
+    CGSize screenSize = keyWindow.bounds.size;
+    [mutableFileName appendFormat:@"_%.0fx%.0f", screenSize.width, screenSize.height];
+  }
+  if (options & FBSnapshotTestCaseAgnosticnessOptionLocalization) {
+    //TODO
+  }
+
   NSMutableCharacterSet *invalidCharacters = [NSMutableCharacterSet new];
   [invalidCharacters formUnionWithCharacterSet:[NSCharacterSet whitespaceCharacterSet]];
   [invalidCharacters formUnionWithCharacterSet:[NSCharacterSet punctuationCharacterSet]];
-  NSArray *validComponents = [fileName componentsSeparatedByCharactersInSet:invalidCharacters];
-  fileName = [validComponents componentsJoinedByString:@"_"];
+  NSArray *validComponents = [mutableFileName componentsSeparatedByCharactersInSet:invalidCharacters];
+  NSString *resultFileName = [validComponents componentsJoinedByString:@"_"];
   
-  return fileName;
+  return resultFileName;
 }
