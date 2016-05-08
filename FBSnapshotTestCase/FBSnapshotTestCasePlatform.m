@@ -53,7 +53,7 @@ NSString *FBAgnosticNormalizedFileName(NSString *fileName, FBSnapshotTestCaseAgn
     [mutableFileName appendFormat:@"_%.0fx%.0f", screenSize.width, screenSize.height];
   }
   if (options & FBSnapshotTestCaseAgnosticnessOptionLocalization) {
-    //TODO
+    [mutableFileName appendFormat:@"_%@", [[[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"] firstObject]];
   }
 
   NSMutableCharacterSet *invalidCharacters = [NSMutableCharacterSet new];
