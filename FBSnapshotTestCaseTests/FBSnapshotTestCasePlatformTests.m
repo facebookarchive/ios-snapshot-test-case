@@ -78,7 +78,7 @@
   
   NSString *normalizedFileName = FBAgnosticNormalizedFileName(@"testFileName", (FBSnapshotTestCaseAgnosticnessOption)(FBSnapshotTestCaseAgnosticnessOptionOSVersion | FBSnapshotTestCaseAgnosticnessOptionScreenSize | FBSnapshotTestCaseAgnosticnessOptionDeviceModel | FBSnapshotTestCaseAgnosticnessOptionLocalization));
   
-  XCTAssertTrue([normalizedFileName hasSuffix:@"_iPhone_4_0_0x0_ru_RU"]);
+  XCTAssertTrue([normalizedFileName hasSuffix:@"_iPhone4_0_0x0_ru_RU"]);
   
   [deviceMock stopMocking];
   [userDefaultsMock stopMocking];

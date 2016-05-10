@@ -45,7 +45,7 @@ NSString *FBAgnosticNormalizedFileName(NSString *fileName, FBSnapshotTestCaseAgn
   }
   if (options & FBSnapshotTestCaseAgnosticnessOptionOSVersion) {
     UIDevice *device = [UIDevice currentDevice];
-    [mutableFileName appendFormat:@"_%@", device.systemVersion];
+    [mutableFileName appendFormat:@"%@%@", (options & FBSnapshotTestCaseAgnosticnessOptionDeviceModel) ? @"" : @"_", device.systemVersion];
   }
   if (options & FBSnapshotTestCaseAgnosticnessOptionScreenSize) {
     UIWindow *keyWindow = [[UIApplication sharedApplication] fb_strictKeyWindow];

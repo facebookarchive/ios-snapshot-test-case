@@ -179,3 +179,13 @@
 - (NSString *)getReferenceImageDirectoryWithDefault:(NSString *)dir;
 
 @end
+
+@interface FBSnapshotTestCase (Deprecated)
+
+/**
+ When @c YES appends the name of the device model, OS and screen size to the snapshot file name.
+ The default value is @c NO.
+ */
+@property (readwrite, nonatomic, assign, getter=isDeviceAgnostic) BOOL deviceAgnostic __attribute((deprecated("use agnosticnessOptions instead")));
+
+@end

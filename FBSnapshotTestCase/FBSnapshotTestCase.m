@@ -190,3 +190,17 @@
 }
 
 @end
+
+@implementation FBSnapshotTestCase (Deprecated)
+
+- (BOOL)isDeviceAgnostic {
+  return (_snapshotController.agnosticnessOptions & FBSnapshotTestCaseAgnosticnessOptionDeviceModel) &&
+         (_snapshotController.agnosticnessOptions & FBSnapshotTestCaseAgnosticnessOptionScreenSize) &&
+         (_snapshotController.agnosticnessOptions & FBSnapshotTestCaseAgnosticnessOptionOSVersion);
+}
+
+- (void)setDeviceAgnostic:(BOOL)deviceAgnostic {
+  _snapshotController.agnosticnessOptions = FBSnapshotTestCaseAgnosticnessOptionDeviceModel | FBSnapshotTestCaseAgnosticnessOptionScreenSize | FBSnapshotTestCaseAgnosticnessOptionOSVersion;
+}
+
+@end
