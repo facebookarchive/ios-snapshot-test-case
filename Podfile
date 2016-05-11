@@ -1,4 +1,4 @@
-source 'git@github.com:CocoaPods/Specs.git'
+source 'https://github.com/CocoaPods/Specs.git'
 
 target 'FBSnapshotTestCase iOS Tests' do
 pod 'OCMock', '~> 3.1'
