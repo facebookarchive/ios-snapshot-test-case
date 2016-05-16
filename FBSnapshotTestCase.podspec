@@ -14,9 +14,10 @@ Pod::Spec.new do |s|
   s.author       = 'Facebook'
   s.source       = { :git => "https://github.com/facebook/ios-snapshot-test-case.git",
                      :tag => s.version.to_s }
-  s.platform     = :ios, '7.0'
+  s.ios.deployment_target  = '7.0'
+  s.tvos.deployment_target = '9.0'
   s.requires_arc = true
-  s.frameworks    = 'XCTest','UIKit','Foundation','QuartzCore'
+  s.frameworks   = 'XCTest','UIKit','Foundation','QuartzCore'
   s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
   s.default_subspecs = 'SwiftSupport'
   s.subspec 'Core' do |cs|
