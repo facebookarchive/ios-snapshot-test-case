@@ -62,13 +62,23 @@
 
 #define FBSnapshotVerifyViewOrLayerWithOptions(what__, viewOrLayer__, identifier__, suffixes__, tolerance__) \
 { \
+  \
+  BOOL testSuccess__ = NO; \
+  NSMutableArray *errors__ = [NSMutableArray array]; \
+  \
+  _FBSnapshotVerifyViewOrLayerWithOptions(what__, viewOrLayer__, identifier__, suffixes__, tolerance__) \
+  \
+  XCTAssertTrue(testSuccess__, @"Snapshot comparison failed: %@", errors__.firstObject); \
+  XCTAssertFalse(self.recordMode, @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!"); \
+}
+
+#define _FBSnapshotVerifyViewOrLayerWithOptions(what__, viewOrLayer__, identifier__, suffixes__, tolerance__) \
+{ \
   NSString *referenceImageDirectory = [self getReferenceImageDirectoryWithDefault:(@ FB_REFERENCE_IMAGE_DIR)]; \
   XCTAssertNotNil(referenceImageDirectory, @"Missing value for referenceImagesDirectory - Set FB_REFERENCE_IMAGE_DIR as Environment variable in your scheme.");\
   XCTAssertTrue((suffixes__.count > 0), @"Suffixes set cannot be empty %@", suffixes__); \
   \
-  BOOL testSuccess__ = NO; \
   NSError *error__ = nil; \
-  NSMutableArray *errors__ = [NSMutableArray array]; \
   \
   if (self.recordMode) { \
     \
@@ -97,8 +107,6 @@
       } \
     } \
   } \
-  XCTAssertTrue(testSuccess__, @"Snapshot comparison failed: %@", errors__.firstObject); \
-  XCTAssertFalse(self.recordMode, @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!"); \
 }
 
 
