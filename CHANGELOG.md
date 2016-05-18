@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.1.1
+
+  - Added tvOS support for cocoapods (#163)
+  - Remove custom module map for cocoapods (#141)
+
 ## 2.1.0
 
   - Changed FBSnapshotTestController from private to public in the xcodeproj (#135)
