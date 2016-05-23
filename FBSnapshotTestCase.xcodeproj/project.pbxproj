@@ -103,6 +103,13 @@
 			remoteGlobalIDString = 817EB1621BD765130047E85A;
 			remoteInfo = "OCMock tvOS";
 		};
+		6D683C2D1CF3A65600656B71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D683C161CF3A24400656B71 /* OCMock.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F0B950F01B0080BE00942C38;
+			remoteInfo = "OCMock iOS";
+		};
 		827137851C63AB7000354E42 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B31987E71AB782D000B0A900 /* Project object */;
@@ -407,6 +414,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6D683C2E1CF3A65600656B71 /* PBXTargetDependency */,
 				B31987FE1AB782D100B0A900 /* PBXTargetDependency */,
 			);
 			name = "FBSnapshotTestCase iOS Tests";
@@ -605,6 +613,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6D683C2E1CF3A65600656B71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "OCMock iOS";
+			targetProxy = 6D683C2D1CF3A65600656B71 /* PBXContainerItemProxy */;
+		};
 		827137861C63AB7000354E42 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 827137791C63AB6F00354E42 /* FBSnapshotTestCase tvOS */;
@@ -864,6 +877,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "Submodules/**";
 			};
 			name = Debug;
 		};
@@ -879,6 +893,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "Submodules/**";
 			};
 			name = Release;
 		};

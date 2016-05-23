@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <FBSnapshotTestCase/FBSnapshotTestCaseAgnosticnessOption.h>
+#import "FBSnapshotTestCaseAgnosticnessOption.h"
 
 #ifdef __cplusplus
 extern "C" {

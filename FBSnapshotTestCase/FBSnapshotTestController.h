@@ -11,7 +11,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import <FBSnapshotTestCase/FBSnapshotTestCaseAgnosticnessOption.h>
+#import "FBSnapshotTestCaseAgnosticnessOption.h"
 
 typedef NS_ENUM(NSInteger, FBSnapshotTestControllerErrorCode) {
   FBSnapshotTestControllerErrorCodeUnknown,
