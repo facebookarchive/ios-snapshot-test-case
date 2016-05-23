@@ -1,0 +1,3 @@
+[submodule "vendor/OCMock"]
+	path = vendor/OCMock
+	url = git://github.com/erikdoe/ocmock
