@@ -46,11 +46,11 @@ typedef union {
 
 - (BOOL)fb_compareWithImage:(UIImage *)image tolerance:(CGFloat)tolerance
 {
-  NSAssert(CGSizeEqualToSize(self.size, image.size), @"Images must be same size.");
-  
   CGSize referenceImageSize = CGSizeMake(CGImageGetWidth(self.CGImage), CGImageGetHeight(self.CGImage));
   CGSize imageSize = CGSizeMake(CGImageGetWidth(image.CGImage), CGImageGetHeight(image.CGImage));
-    
+
+  NSAssert(CGSizeEqualToSize(referenceImageSize, imageSize), @"Images must be same size.");
+
   // The images have the equal size, so we could use the smallest amount of bytes because of byte padding
   size_t minBytesPerRow = MIN(CGImageGetBytesPerRow(self.CGImage), CGImageGetBytesPerRow(image.CGImage));
   size_t referenceImageSizeBytes = referenceImageSize.height * minBytesPerRow;

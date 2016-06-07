@@ -72,6 +72,11 @@ extern NSString *const FBDiffedImageKey;
 @property (readwrite, nonatomic, copy) NSString *referenceImagesDirectory;
 
 /**
+ When set to values different than 0, it uses a specific scale for generating and comparing images rather than using the main screen's default scale.
+ */
+@property (readwrite, nonatomic, assign) NSUInteger manualScale;
+
+/**
  @param testClass The subclass of FBSnapshotTestCase that is using this controller.
  @returns An instance of FBSnapshotTestController.
  */

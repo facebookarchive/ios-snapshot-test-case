@@ -105,7 +105,8 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
 {
   NSString *filePath = [self _referenceFilePathForSelector:selector identifier:identifier];
   UIImage *image = [UIImage imageWithContentsOfFile:filePath];
-  if (nil == image && NULL != errorPtr) {
+  CGFloat scale = (self.manualScale > 0 ?: [[UIScreen mainScreen] scale]);
+  if ((nil == image && NULL != errorPtr) || (image && image.scale != scale)) {
     BOOL exists = [_fileManager fileExistsAtPath:filePath];
     if (!exists) {
       *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
@@ -129,7 +130,13 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                     tolerance:(CGFloat)tolerance
                         error:(NSError **)errorPtr
 {
-  BOOL sameImageDimensions = CGSizeEqualToSize(referenceImage.size, image.size);
+  CGSize referenceImagePixelSize = referenceImage.size;
+  referenceImagePixelSize = CGSizeMake(referenceImagePixelSize.width * referenceImage.scale,
+                                       referenceImagePixelSize.height * referenceImage.scale);
+  CGSize imagePixelSize = image.size;
+  imagePixelSize = CGSizeMake(imagePixelSize.width * image.scale,
+                              imagePixelSize.height * image.scale);
+  BOOL sameImageDimensions = CGSizeEqualToSize(referenceImagePixelSize, imagePixelSize);
   if (sameImageDimensions && [referenceImage fb_compareWithImage:image tolerance:tolerance]) {
     return YES;
   }
@@ -137,7 +144,7 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   if (NULL != errorPtr) {
     NSString *errorDescription = sameImageDimensions ? @"Images different" : @"Images different sizes";
     NSString *errorReason = sameImageDimensions ? [NSString stringWithFormat:@"image pixels differed by more than %.2f%% from the reference image", tolerance * 100]
-                                                : [NSString stringWithFormat:@"referenceImage:%@, image:%@", NSStringFromCGSize(referenceImage.size), NSStringFromCGSize(image.size)];
+                                                : [NSString stringWithFormat:@"referenceImage:%@, image:%@", NSStringFromCGSize(referenceImagePixelSize), NSStringFromCGSize(imagePixelSize)];
     FBSnapshotTestControllerErrorCode errorCode = sameImageDimensions ? FBSnapshotTestControllerErrorCodeImagesDifferent : FBSnapshotTestControllerErrorCodeImagesDifferentSizes;
     
     *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
@@ -236,9 +243,10 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   if (self.isDeviceAgnostic) {
     fileName = FBDeviceAgnosticNormalizedFileName(fileName);
   }
-  
-  if ([[UIScreen mainScreen] scale] > 1) {
-    fileName = [fileName stringByAppendingFormat:@"@%.fx", [[UIScreen mainScreen] scale]];
+
+  CGFloat scale = (self.manualScale > 0 ?: [[UIScreen mainScreen] scale]);
+  if (1 < scale) {
+    fileName = [fileName stringByAppendingFormat:@"@%.fx", scale];
   }
   fileName = [fileName stringByAppendingPathExtension:@"png"];
   return fileName;
@@ -343,12 +351,12 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
 {
   if ([viewOrLayer isKindOfClass:[UIView class]]) {
     if (_usesDrawViewHierarchyInRect) {
-      return [UIImage fb_imageForView:viewOrLayer];
+      return [UIImage fb_imageForView:viewOrLayer scale:self.manualScale];
     } else {
-      return [UIImage fb_imageForViewLayer:viewOrLayer];
+      return [UIImage fb_imageForViewLayer:viewOrLayer scale:self.manualScale];
     }
   } else if ([viewOrLayer isKindOfClass:[CALayer class]]) {
-    return [UIImage fb_imageForLayer:viewOrLayer];
+    return [UIImage fb_imageForLayer:viewOrLayer scale:self.manualScale];
   } else {
     [NSException raise:@"Only UIView and CALayer classes can be snapshotted" format:@"%@", viewOrLayer];
   }

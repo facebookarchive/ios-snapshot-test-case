@@ -13,13 +13,13 @@
 
 @implementation UIImage (Snapshot)
 
-+ (UIImage *)fb_imageForLayer:(CALayer *)layer
++ (UIImage *)fb_imageForLayer:(CALayer *)layer scale:(CGFloat)scale
 {
   CGRect bounds = layer.bounds;
   NSAssert1(CGRectGetWidth(bounds), @"Zero width for layer %@", layer);
   NSAssert1(CGRectGetHeight(bounds), @"Zero height for layer %@", layer);
 
-  UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
+  UIGraphicsBeginImageContextWithOptions(bounds.size, NO, scale);
   CGContextRef context = UIGraphicsGetCurrentContext();
   NSAssert1(context, @"Could not generate context for layer %@", layer);
   CGContextSaveGState(context);
@@ -32,13 +32,13 @@
   return snapshot;
 }
 
-+ (UIImage *)fb_imageForViewLayer:(UIView *)view
++ (UIImage *)fb_imageForViewLayer:(UIView *)view scale:(CGFloat)scale
 {
   [view layoutIfNeeded];
-  return [self fb_imageForLayer:view.layer];
+  return [self fb_imageForLayer:view.layer scale:scale];
 }
 
-+ (UIImage *)fb_imageForView:(UIView *)view
++ (UIImage *)fb_imageForView:(UIView *)view scale:(CGFloat)scale
 {
   CGRect bounds = view.bounds;
   NSAssert1(CGRectGetWidth(bounds), @"Zero width for view %@", view);
@@ -56,7 +56,7 @@
     removeFromSuperview = YES;
   }
 
-  UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
+  UIGraphicsBeginImageContextWithOptions(bounds.size, NO, scale);
   [view layoutIfNeeded];
   [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
 
