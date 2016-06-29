@@ -482,6 +482,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -513,6 +514,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -746,6 +748,7 @@
 				8271378C1C63AB7000354E42 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		827137901C63AB7000354E42 /* Build configuration list for PBXNativeTarget "FBSnapshotTestCase tvOS Tests" */ = {
 			isa = XCConfigurationList;
@@ -754,6 +757,7 @@
 				8271378E1C63AB7000354E42 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B31987EA1AB782D000B0A900 /* Build configuration list for PBXProject "FBSnapshotTestCase" */ = {
 			isa = XCConfigurationList;
