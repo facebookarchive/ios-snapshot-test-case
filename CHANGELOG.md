@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.1.2
+
+  - Disabled Bitcode for tvOS target (#169)
+  - Added user target in podspec (#165)
+
 ## 2.1.1
 
   - Added tvOS support for cocoapods (#163)
