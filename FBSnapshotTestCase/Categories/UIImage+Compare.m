@@ -35,12 +35,63 @@ typedef union {
     uint32_t raw;
     unsigned char bytes[4];
     struct {
-        char red;
-        char green;
-        char blue;
-        char alpha;
+        unsigned char red;
+        unsigned char green;
+        unsigned char blue;
+        unsigned char alpha;
     } __attribute__ ((packed)) pixels;
 } FBComparePixel;
+
+CGFloat toXYZ(unsigned char rgbRaw) {
+  CGFloat rgb = (CGFloat)rgbRaw / 255.0;
+  if ( rgb > 0.04045 ) {
+    return 100.0 * pow((rgb + 0.055) / 1.055, 2.4);
+  }
+  return rgb * 7.739938080495356;
+}
+
+CGFloat toLab(CGFloat xyzRaw, CGFloat ref) {
+  CGFloat xyz = xyzRaw / ref;
+  if ( xyz > 0.008856 ) {
+    return pow(xyz, 0.33333333);
+  }
+  return (7.787 * xyz) + 0.13793103448275862;
+}
+
+CGFloat deltaE(FBComparePixel p1, FBComparePixel p2) {
+  CGFloat red1 = toXYZ(p1.pixels.red);
+  CGFloat green1 = toXYZ(p1.pixels.green);
+  CGFloat blue1 = toXYZ(p1.pixels.blue);
+
+  CGFloat X1 = toLab(red1 * 0.4124 + green1 * 0.3576 + blue1 * 0.1805, 95.047);
+  CGFloat Y1 = toLab(red1 * 0.2126 + green1 * 0.7152 + blue1 * 0.0722, 100.000);
+  CGFloat Z1 = toLab(red1 * 0.0193 + green1 * 0.1192 + blue1 * 0.9505, 108.883);
+
+  CGFloat L1 = (116.0 * Y1) - 16;
+  CGFloat a1 = 500.0 * (X1 - Y1);
+  CGFloat b1 = 200.0 * (Y1 - Z1);
+
+  CGFloat red2 = toXYZ(p2.pixels.red);
+  CGFloat green2 = toXYZ(p2.pixels.green);
+  CGFloat blue2 = toXYZ(p2.pixels.blue);
+
+  CGFloat X2 = toLab(red2 * 0.4124 + green2 * 0.3576 + blue2 * 0.1805, 95.047);
+  CGFloat Y2 = toLab(red2 * 0.2126 + green2 * 0.7152 + blue2 * 0.0722, 100.000);
+  CGFloat Z2 = toLab(red2 * 0.0193 + green2 * 0.1192 + blue2 * 0.9505, 108.883);
+
+  CGFloat L2 = (116.0 * Y2) - 16;
+  CGFloat a2 = 500.0 * (X2 - Y2);
+  CGFloat b2 = 200.0 * (Y2 - Z2);
+
+  return sqrt(pow(L1 - L2, 2) + pow(a1 - a2, 2) + pow(b1 - b2, 2));
+}
+
+BOOL significantDeltaE(FBComparePixel p1, FBComparePixel p2) {
+  if ( p1.pixels.alpha != p2.pixels.alpha ) {
+    return YES;
+  }
+  return deltaE(p1, p2) >= 1.5;
+}
 
 @implementation UIImage (Compare)
 
@@ -110,7 +161,7 @@ typedef union {
     for (int n = 0; n < pixelCount; ++n) {
       // If this pixel is different, increment the pixel diff count and see
       // if we have hit our limit.
-      if (p1->raw != p2->raw) {
+      if (p1->raw != p2->raw && significantDeltaE(*p1, *p2)) {
         numDiffPixels ++;
 
         CGFloat percent = (CGFloat)numDiffPixels / pixelCount;
