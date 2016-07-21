@@ -62,7 +62,7 @@
     XCTAssertEqual(error.code, FBSnapshotTestControllerErrorCodeImagesDifferent);
 }
 
-- (void)testCompareReferenceImageWithVeryLowToleranceShouldMatch
+- (void)testCompareReferenceImageWithLowToleranceShouldMatch
 {
     UIImage *referenceImage = [self _bundledImageNamed:@"square" type:@"png"];
     XCTAssertNotNil(referenceImage);
