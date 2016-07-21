@@ -15,6 +15,8 @@
 		1335641B1B59C3F500A4E4BF /* UIImage+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 133564151B59C3F500A4E4BF /* UIImage+Snapshot.m */; };
 		13CBB39D1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 13CBB39B1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		13CBB39E1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CBB39C1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m */; };
+		1D612BFB1D414F3300B4079C /* square_with_no_noticeable_diffs.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D612BF91D414EFF00B4079C /* square_with_no_noticeable_diffs.png */; };
+		1D612BFC1D414F3300B4079C /* square_with_no_noticeable_diffs.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D612BF91D414EFF00B4079C /* square_with_no_noticeable_diffs.png */; };
 		827137841C63AB7000354E42 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8271377A1C63AB6F00354E42 /* FBSnapshotTestCase.framework */; };
 		827137911C63ABE900354E42 /* UIImage+Compare.h in Headers */ = {isa = PBXBuildFile; fileRef = 133564101B59C3F500A4E4BF /* UIImage+Compare.h */; };
 		827137921C63ABF000354E42 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = 133564121B59C3F500A4E4BF /* UIImage+Diff.h */; };
@@ -79,6 +81,7 @@
 		133564151B59C3F500A4E4BF /* UIImage+Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Snapshot.m"; sourceTree = "<group>"; };
 		13CBB39B1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSnapshotTestCasePlatform.h; sourceTree = "<group>"; };
 		13CBB39C1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCasePlatform.m; sourceTree = "<group>"; };
+		1D612BF91D414EFF00B4079C /* square_with_no_noticeable_diffs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square_with_no_noticeable_diffs.png; sourceTree = "<group>"; };
 		8271377A1C63AB6F00354E42 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		827137831C63AB7000354E42 /* FBSnapshotTestCase tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FBSnapshotTestCase tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B31987F01AB782D000B0A900 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +204,7 @@
 			children = (
 				B76C68271C6BD68100586E5B /* rect.png */,
 				E5C2CD611B1F399A00669887 /* square_with_pixel.png */,
+				1D612BF91D414EFF00B4079C /* square_with_no_noticeable_diffs.png */,
 				B32447D91AB78B5E00B1D6FF /* square_with_text.png */,
 				B32447DA1AB78B5E00B1D6FF /* square-copy.png */,
 				B32447DB1AB78B5E00B1D6FF /* square.png */,
@@ -383,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B76C682A1C6BD6D500586E5B /* rect.png in Resources */,
+				1D612BFC1D414F3300B4079C /* square_with_no_noticeable_diffs.png in Resources */,
 				827137A01C63AC0700354E42 /* square_with_pixel.png in Resources */,
 				827137A21C63AC0D00354E42 /* square-copy.png in Resources */,
 				827137A31C63AC0D00354E42 /* square.png in Resources */,
@@ -402,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B76C68291C6BD6D200586E5B /* rect.png in Resources */,
+				1D612BFB1D414F3300B4079C /* square_with_no_noticeable_diffs.png in Resources */,
 				B32447DC1AB78B5E00B1D6FF /* square_with_text.png in Resources */,
 				E5C2CD621B1F399A00669887 /* square_with_pixel.png in Resources */,
 				B32447DE1AB78B5E00B1D6FF /* square.png in Resources */,
