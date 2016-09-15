@@ -177,12 +177,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B30449281AB794320067C75D /* Build configuration list for PBXNativeTarget "FBSnapshotTestCaseDemoTests" */;
 			buildPhases = (
-				2446417C513BDAF88B9890FC /* 📦 Check Pods Manifest.lock */,
+				2446417C513BDAF88B9890FC /* [CP] Check Pods Manifest.lock */,
 				B30449171AB794320067C75D /* Sources */,
 				B30449181AB794320067C75D /* Frameworks */,
 				B30449191AB794320067C75D /* Resources */,
-				EB64CD802D89DDA691FA7827 /* 📦 Embed Pods Frameworks */,
-				30B7BE4963F35A6D89E72AFF /* 📦 Copy Pods Resources */,
+				EB64CD802D89DDA691FA7827 /* [CP] Embed Pods Frameworks */,
+				30B7BE4963F35A6D89E72AFF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -206,9 +206,11 @@
 				TargetAttributes = {
 					B30449011AB794320067C75D = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0800;
 					};
 					B304491A1AB794320067C75D = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = B30449011AB794320067C75D;
 					};
 				};
@@ -253,14 +255,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2446417C513BDAF88B9890FC /* 📦 Check Pods Manifest.lock */ = {
+		2446417C513BDAF88B9890FC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,14 +270,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		30B7BE4963F35A6D89E72AFF /* 📦 Copy Pods Resources */ = {
+		30B7BE4963F35A6D89E72AFF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,14 +285,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FBSnapshotTestCaseDemoTests/Pods-FBSnapshotTestCaseDemoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EB64CD802D89DDA691FA7827 /* 📦 Embed Pods Frameworks */ = {
+		EB64CD802D89DDA691FA7827 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,6 +429,7 @@
 				INFOPLIST_FILE = "FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemo-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -438,6 +441,7 @@
 				INFOPLIST_FILE = "FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemo-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -458,6 +462,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FBSnapshotTestCaseDemo.app/FBSnapshotTestCaseDemo";
 			};
 			name = Debug;
@@ -474,6 +479,7 @@
 				INFOPLIST_FILE = "FBSnapshotTestCaseDemoTests/FBSnapshotTestCaseDemoTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FBSnapshotTestCaseDemo.app/FBSnapshotTestCaseDemo";
 			};
 			name = Release;
