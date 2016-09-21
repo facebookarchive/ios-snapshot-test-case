@@ -66,9 +66,9 @@
 #pragma mark - Public API
 
 - (NSString *)snapshotVerifyViewOrLayer:(id)viewOrLayer
-                       identifier:(NSString *)identifier
-                         suffixes:(NSOrderedSet *)suffixes
-                        tolerance:(CGFloat)tolerance
+                             identifier:(NSString *)identifier
+                               suffixes:(NSOrderedSet *)suffixes
+                              tolerance:(CGFloat)tolerance
 {
   NSString *referenceImageDirectory = [self getReferenceImageDirectoryWithDefault:(@ FB_REFERENCE_IMAGE_DIR)];
   if (referenceImageDirectory == nil) {
