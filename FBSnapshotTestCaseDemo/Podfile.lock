@@ -1,8 +1,8 @@
 PODS:
-  - FBSnapshotTestCase (2.1.2):
-    - FBSnapshotTestCase/SwiftSupport (= 2.1.2)
-  - FBSnapshotTestCase/Core (2.1.2)
-  - FBSnapshotTestCase/SwiftSupport (2.1.2):
+  - FBSnapshotTestCase (2.1.3):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.3)
+  - FBSnapshotTestCase/Core (2.1.3)
+  - FBSnapshotTestCase/SwiftSupport (2.1.3):
     - FBSnapshotTestCase/Core
 
 DEPENDENCIES:
@@ -10,10 +10,10 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   FBSnapshotTestCase:
-    :path: ".."
+    :path: ..
 
 SPEC CHECKSUMS:
-  FBSnapshotTestCase: 918c55861356ee83aee7843d759f55a18ff6982b
+  FBSnapshotTestCase: fc5bff1097ef52eb7be3e838c0d7041415719e9d
 
 PODFILE CHECKSUM: f0c8c3073f8e31e4718d87d66744e7fa5953f5c4
 
