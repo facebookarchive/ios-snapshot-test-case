@@ -206,9 +206,11 @@
 				TargetAttributes = {
 					B30449011AB794320067C75D = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0800;
 					};
 					B304491A1AB794320067C75D = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = B30449011AB794320067C75D;
 					};
 				};
@@ -427,6 +429,7 @@
 				INFOPLIST_FILE = "FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemo-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -438,6 +441,7 @@
 				INFOPLIST_FILE = "FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemo-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -458,6 +462,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FBSnapshotTestCaseDemo.app/FBSnapshotTestCaseDemo";
 			};
 			name = Debug;
@@ -474,6 +479,7 @@
 				INFOPLIST_FILE = "FBSnapshotTestCaseDemoTests/FBSnapshotTestCaseDemoTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FBSnapshotTestCaseDemo.app/FBSnapshotTestCaseDemo";
 			};
 			name = Release;
