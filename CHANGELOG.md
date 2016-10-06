@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.1.4
+
+  - Swift 3 suppport (#194)
+  - Replace big macro with Objective-C method for easier debugging (#180)
+
 ## 2.1.3
 
   - Allow to compile with Xcode 7 and Xcode 8 Swift 2.3 (#179)
