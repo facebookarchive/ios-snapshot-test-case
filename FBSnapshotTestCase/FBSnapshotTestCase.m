@@ -65,6 +65,62 @@
 
 #pragma mark - Public API
 
+- (NSString *)snapshotVerifyViewOrLayer:(id)viewOrLayer
+                             identifier:(NSString *)identifier
+                               suffixes:(NSOrderedSet *)suffixes
+                              tolerance:(CGFloat)tolerance
+{
+  if (nil == viewOrLayer) {
+    return @"Object to be snapshotted must not be nil";
+  }
+  NSString *referenceImageDirectory = [self getReferenceImageDirectoryWithDefault:(@ FB_REFERENCE_IMAGE_DIR)];
+  if (referenceImageDirectory == nil) {
+    return @"Missing value for referenceImagesDirectory - Set FB_REFERENCE_IMAGE_DIR as Environment variable in your scheme.";
+  }
+  if (suffixes.count == 0) {
+    return [NSString stringWithFormat:@"Suffixes set cannot be empty %@", suffixes];
+  }
+  
+  BOOL testSuccess = NO;
+  NSError *error = nil;
+  NSMutableArray *errors = [NSMutableArray array];
+  
+  if (self.recordMode) {
+    NSString *referenceImagesDirectory = [NSString stringWithFormat:@"%@%@", referenceImageDirectory, suffixes.firstObject];
+    BOOL referenceImageSaved = [self _compareSnapshotOfViewOrLayer:viewOrLayer referenceImagesDirectory:referenceImagesDirectory identifier:(identifier) tolerance:tolerance error:&error];
+    if (!referenceImageSaved) {
+      [errors addObject:error];
+    }
+  } else {
+    for (NSString *suffix in suffixes) {
+      NSString *referenceImagesDirectory = [NSString stringWithFormat:@"%@%@", referenceImageDirectory, suffix];
+      BOOL referenceImageAvailable = [self referenceImageRecordedInDirectory:referenceImagesDirectory identifier:(identifier) error:&error];
+     
+      if (referenceImageAvailable) {
+        BOOL comparisonSuccess = [self _compareSnapshotOfViewOrLayer:viewOrLayer referenceImagesDirectory:referenceImagesDirectory identifier:identifier tolerance:tolerance error:&error];
+        [errors removeAllObjects];
+        if (comparisonSuccess) {
+          testSuccess = YES;
+          break;
+        } else {
+          [errors addObject:error];
+        }
+      } else {
+        [errors addObject:error];
+      }
+    }
+  }
+  
+  if (!testSuccess) {
+    return [NSString stringWithFormat:@"Snapshot comparison failed: %@", errors.firstObject];
+  }
+  if (self.recordMode) {
+    return @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!";
+  }
+
+  return nil;
+}
+
 - (BOOL)compareSnapshotOfLayer:(CALayer *)layer
       referenceImagesDirectory:(NSString *)referenceImagesDirectory
                     identifier:(NSString *)identifier
