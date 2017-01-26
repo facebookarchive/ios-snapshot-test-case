@@ -32,6 +32,6 @@
 
 @interface UIImage (Compare)
 
-- (BOOL)fb_compareWithImage:(UIImage *)image tolerance:(CGFloat)tolerance;
+- (BOOL)fb_compareWithImage:(UIImage *)image tolerance:(CGFloat)tolerance colorTolerance:(CGFloat)colorTolerance;
 
 @end

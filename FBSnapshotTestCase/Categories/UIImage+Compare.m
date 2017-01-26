@@ -44,7 +44,7 @@ typedef union {
 
 @implementation UIImage (Compare)
 
-- (BOOL)fb_compareWithImage:(UIImage *)image tolerance:(CGFloat)tolerance
+- (BOOL)fb_compareWithImage:(UIImage *)image tolerance:(CGFloat)tolerance colorTolerance:(CGFloat)colorTolerance
 {
   NSAssert(CGSizeEqualToSize(self.size, image.size), @"Images must be same size.");
   
@@ -97,7 +97,7 @@ typedef union {
   BOOL imageEqual = YES;
 
   // Do a fast compare if we can
-  if (tolerance == 0) {
+  if (tolerance == 0 && colorTolerance == 0) {
     imageEqual = (memcmp(referenceImagePixels, imagePixels, referenceImageSizeBytes) == 0);
   } else {
     // Go through each pixel in turn and see if it is different
@@ -111,12 +111,30 @@ typedef union {
       // If this pixel is different, increment the pixel diff count and see
       // if we have hit our limit.
       if (p1->raw != p2->raw) {
-        numDiffPixels ++;
+        BOOL pixelsEqual = YES;
+        if (colorTolerance == 0) {
+          pixelsEqual = NO;
+        } else {
+          long dr = (long)p1->pixels.red - (long)p2->pixels.red;
+          long dg = (long)p1->pixels.green - (long)p2->pixels.green;
+          long db = (long)p1->pixels.blue - (long)p2->pixels.blue;
+          
+          double distanceSquared = (float) (dr * dr + dg * dg + db * db);
+          distanceSquared /= (255.0 * 255.0); // Scale each channel from 0 - 255 to 0 - 1.0
 
-        CGFloat percent = (CGFloat)numDiffPixels / pixelCount;
-        if (percent > tolerance) {
-          imageEqual = NO;
-          break;
+          if (distanceSquared > colorTolerance * colorTolerance) {
+            pixelsEqual = NO;
+          }
+        }
+        
+        if (!pixelsEqual) {
+          numDiffPixels++;
+          
+          CGFloat percent = (CGFloat)numDiffPixels / pixelCount;
+          if (percent > tolerance) {
+            imageEqual = NO;
+            break;
+          }
         }
       }
 

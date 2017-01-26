@@ -92,10 +92,20 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                            tolerance:(CGFloat)tolerance
                                error:(NSError **)errorPtr
 {
+  return [self compareSnapshotOfViewOrLayer:viewOrLayer selector:selector identifier:identifier tolerance:tolerance colorTolerance:0.0 error:errorPtr];
+}
+
+- (BOOL)compareSnapshotOfViewOrLayer:(id)viewOrLayer
+                            selector:(SEL)selector
+                          identifier:(NSString *)identifier
+                           tolerance:(CGFloat)tolerance
+                           colorTolerance:(CGFloat)colorTolerance
+                               error:(NSError **)errorPtr
+{
   if (self.recordMode) {
     return [self _recordSnapshotOfViewOrLayer:viewOrLayer selector:selector identifier:identifier error:errorPtr];
   } else {
-    return [self _performPixelComparisonWithViewOrLayer:viewOrLayer selector:selector identifier:identifier tolerance:tolerance error:errorPtr];
+    return [self _performPixelComparisonWithViewOrLayer:viewOrLayer selector:selector identifier:identifier tolerance:tolerance colorTolerance:colorTolerance error:errorPtr];
   }
 }
 
@@ -127,10 +137,18 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
 - (BOOL)compareReferenceImage:(UIImage *)referenceImage
                       toImage:(UIImage *)image
                     tolerance:(CGFloat)tolerance
+                        error:(NSError **)errorPtr {
+  return [self compareReferenceImage:image toImage:image tolerance:0 colorTolerance:0 error:errorPtr];
+}
+
+- (BOOL)compareReferenceImage:(UIImage *)referenceImage
+                      toImage:(UIImage *)image
+                    tolerance:(CGFloat)tolerance
+               colorTolerance:(CGFloat)colorTolerance
                         error:(NSError **)errorPtr
 {
   BOOL sameImageDimensions = CGSizeEqualToSize(referenceImage.size, image.size);
-  if (sameImageDimensions && [referenceImage fb_compareWithImage:image tolerance:tolerance]) {
+  if (sameImageDimensions && [referenceImage fb_compareWithImage:image tolerance:tolerance colorTolerance:colorTolerance]) {
     return YES;
   }
   
@@ -275,12 +293,13 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                                       selector:(SEL)selector
                                     identifier:(NSString *)identifier
                                      tolerance:(CGFloat)tolerance
+                                     colorTolerance:(CGFloat)colorTolerance
                                          error:(NSError **)errorPtr
 {
   UIImage *referenceImage = [self referenceImageForSelector:selector identifier:identifier error:errorPtr];
   if (nil != referenceImage) {
     UIImage *snapshot = [self _imageForViewOrLayer:viewOrLayer];
-    BOOL imagesSame = [self compareReferenceImage:referenceImage toImage:snapshot tolerance:tolerance error:errorPtr];
+    BOOL imagesSame = [self compareReferenceImage:referenceImage toImage:snapshot tolerance:tolerance colorTolerance:colorTolerance error:errorPtr];
     if (!imagesSame) {
       NSError *saveError = nil;
       if ([self saveFailedReferenceImage:referenceImage testImage:snapshot selector:selector identifier:identifier error:&saveError] == NO) {
