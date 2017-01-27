@@ -87,7 +87,7 @@
   
   if (self.recordMode) {
     NSString *referenceImagesDirectory = [NSString stringWithFormat:@"%@%@", referenceImageDirectory, suffixes.firstObject];
-    BOOL referenceImageSaved = [self _compareSnapshotOfViewOrLayer:viewOrLayer referenceImagesDirectory:referenceImagesDirectory identifier:(identifier) tolerance:tolerance error:&error];
+    BOOL referenceImageSaved = [self _compareSnapshotOfViewOrLayer:viewOrLayer referenceImagesDirectory:referenceImagesDirectory identifier:(identifier) tolerance:tolerance colorTolerance: 0.0 error:&error];
     if (!referenceImageSaved) {
       [errors addObject:error];
     }
@@ -97,7 +97,7 @@
       BOOL referenceImageAvailable = [self referenceImageRecordedInDirectory:referenceImagesDirectory identifier:(identifier) error:&error];
      
       if (referenceImageAvailable) {
-        BOOL comparisonSuccess = [self _compareSnapshotOfViewOrLayer:viewOrLayer referenceImagesDirectory:referenceImagesDirectory identifier:identifier tolerance:tolerance error:&error];
+        BOOL comparisonSuccess = [self _compareSnapshotOfViewOrLayer:viewOrLayer referenceImagesDirectory:referenceImagesDirectory identifier:identifier tolerance:tolerance colorTolerance: 0.0 error:&error];
         [errors removeAllObjects];
         if (comparisonSuccess) {
           testSuccess = YES;
