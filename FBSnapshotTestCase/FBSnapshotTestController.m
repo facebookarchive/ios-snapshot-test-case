@@ -138,7 +138,7 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                       toImage:(UIImage *)image
                     tolerance:(CGFloat)tolerance
                         error:(NSError **)errorPtr {
-  return [self compareReferenceImage:image toImage:image tolerance:0 colorTolerance:0 error:errorPtr];
+  return [self compareReferenceImage:referenceImage toImage:image tolerance:tolerance colorTolerance:0 error:errorPtr];
 }
 
 - (BOOL)compareReferenceImage:(UIImage *)referenceImage
