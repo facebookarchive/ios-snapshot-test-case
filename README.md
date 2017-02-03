@@ -36,6 +36,7 @@ Installation with CocoaPods
 
      ```
      target "Tests" do
+       use_frameworks!
        pod 'FBSnapshotTestCase'
      end
      ```
