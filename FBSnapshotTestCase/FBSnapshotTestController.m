@@ -259,12 +259,16 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                               identifier:(NSString *)identifier
                             fileNameType:(FBTestSnapshotFileNameType)fileNameType
 {
+  NSAssert(getenv("IMAGE_DIFF_DIR") && _imageDiffDirectory.length, @"Image diff directory set in both environment variable and property");
+  
   NSString *fileName = [self _fileNameForSelector:selector
                                        identifier:identifier
                                      fileNameType:fileNameType];
   NSString *folderPath = NSTemporaryDirectory();
   if (getenv("IMAGE_DIFF_DIR")) {
     folderPath = @(getenv("IMAGE_DIFF_DIR"));
+  } else if ([_imageDiffDirectory length] > 0) {
+    folderPath = _imageDiffDirectory;
   }
   NSString *filePath = [folderPath stringByAppendingPathComponent:_testName];
   filePath = [filePath stringByAppendingPathComponent:fileName];

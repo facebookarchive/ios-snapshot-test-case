@@ -67,9 +67,14 @@ extern NSString *const FBDiffedImageKey;
 @property (readwrite, nonatomic, assign) BOOL usesDrawViewHierarchyInRect;
 
 /**
- The directory in which referfence images are stored.
+ The directory in which reference images are stored.
  */
 @property (readwrite, nonatomic, copy) NSString *referenceImagesDirectory;
+
+/**
+ The directory in which failed snapshot images are stored.
+ */
+@property (readwrite, nonatomic, copy) NSString *imageDiffDirectory;
 
 /**
  @param testClass The subclass of FBSnapshotTestCase that is using this controller.

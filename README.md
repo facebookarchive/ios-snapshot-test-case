@@ -52,7 +52,7 @@ Installation with CocoaPods
 |`FB_REFERENCE_IMAGE_DIR`|`$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages`|
 |`IMAGE_DIFF_DIR`|`$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/FailureDiffs`|
 
-Define the `IMAGE_DIFF_DIR` to the directory where you want to store diffs of failed snapshots.
+Define the `IMAGE_DIFF_DIR` to the directory where you want to store diffs of failed snapshots. There is [an alternate way](https://github.com/facebook/ios-snapshot-test-case/blob/master/FBSnapshotTestCase/FBSnapshotTestController.h#L74-L77) to set the failed snapshots directory using a property on the test controller.
 
 ![](FBSnapshotTestCaseDemo/Scheme_FB_REFERENCE_IMAGE_DIR.png)
 
