@@ -62,7 +62,7 @@
     XCTAssertEqual(error.code, FBSnapshotTestControllerErrorCodeImagesDifferent);
 }
 
-- (void)testCompareReferenceImageWithVeryLowToleranceShouldMatch
+- (void)testCompareReferenceImageWithLowToleranceShouldMatch
 {
     UIImage *referenceImage = [self _bundledImageNamed:@"square" type:@"png"];
     XCTAssertNotNil(referenceImage);
@@ -74,6 +74,20 @@
     NSError *error = nil;
     XCTAssertTrue([controller compareReferenceImage:referenceImage toImage:testImage tolerance:.001 error:&error]);
     XCTAssertNil(error);
+}
+
+- (void)testCompareReferenceImageWithVeryLittleDifferenceShouldNotMatch
+{
+  UIImage *referenceImage = [self _bundledImageNamed:@"square" type:@"png"];
+  XCTAssertNotNil(referenceImage);
+  UIImage *testImage = [self _bundledImageNamed:@"square_with_no_noticeable_diffs" type:@"png"];
+  XCTAssertNotNil(testImage);
+
+  FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
+  // With some tolerance these should be considered the same
+  NSError *error = nil;
+  XCTAssertTrue([controller compareReferenceImage:referenceImage toImage:testImage tolerance:.0001 error:&error]);
+  XCTAssertNil(error);
 }
 
 - (void)testCompareReferenceImageWithDifferentSizes
