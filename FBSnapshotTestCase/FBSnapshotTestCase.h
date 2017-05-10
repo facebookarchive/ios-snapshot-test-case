@@ -111,6 +111,13 @@
  */
 @property (readwrite, nonatomic, assign) BOOL usesDrawViewHierarchyInRect;
 
+/**
+ When YES, will generate (test against, respectively) device specific reference images.
+ For example, if tests are run on the iPhone 5s simulator, views will be compared to reference images specific to
+ the iPhone 5s, and not ones generated for iPhone 6 Plus.
+ */
+@property (readwrite, nonatomic, assign) BOOL deviceSpecificCase;
+
 - (void)setUp NS_REQUIRES_SUPER;
 - (void)tearDown NS_REQUIRES_SUPER;
 

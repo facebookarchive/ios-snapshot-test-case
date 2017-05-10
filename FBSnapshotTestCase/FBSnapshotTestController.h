@@ -67,6 +67,11 @@ extern NSString *const FBDiffedImageKey;
 @property (readwrite, nonatomic, assign) BOOL usesDrawViewHierarchyInRect;
 
 /**
+ Generates / compares against difference reference images depending on the device type (e.g. iPhone 6)
+ */
+@property (readwrite, nonatomic, assign) BOOL deviceSpecificCase;
+
+/**
  The directory in which referfence images are stored.
  */
 @property (readwrite, nonatomic, copy) NSString *referenceImagesDirectory;
