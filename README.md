@@ -56,6 +56,9 @@ Define the `IMAGE_DIFF_DIR` to the directory where you want to store diffs of fa
 
 ![](FBSnapshotTestCaseDemo/Scheme_FB_REFERENCE_IMAGE_DIR.png)
 
+In the `Test` configuration `Use the Run action's arguments and environment variable` is checked.
+![](FBSnapshotTestCaseDemo/Scheme_Test_Configuration.png)
+
 Creating a snapshot test
 ------------------------
 
