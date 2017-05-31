@@ -40,10 +40,6 @@
 
 + (UIImage *)fb_imageForView:(UIView *)view
 {
-  CGRect bounds = view.bounds;
-  NSAssert1(CGRectGetWidth(bounds), @"Zero width for view %@", view);
-  NSAssert1(CGRectGetHeight(bounds), @"Zero height for view %@", view);
-
   // If the input view is already a UIWindow, then just use that. Otherwise wrap in a window.
   UIWindow *window = [view isKindOfClass:[UIWindow class]] ? (UIWindow *)view : view.window;
   BOOL removeFromSuperview = NO;
@@ -55,9 +51,14 @@
     [window addSubview:view];
     removeFromSuperview = YES;
   }
-
-  UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
+  
   [view layoutIfNeeded];
+
+  CGRect bounds = view.bounds;
+  NSAssert1(CGRectGetWidth(bounds), @"Zero width for view %@", view);
+  NSAssert1(CGRectGetHeight(bounds), @"Zero height for view %@", view);
+    
+  UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
   [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
 
   UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
