@@ -113,7 +113,7 @@
     }
   }
     
-  [self addAttachementsWithErrors:errors identifier:identifier];
+  [self addAttachmentsWithErrors:errors identifier:identifier];
     
   if (self.recordMode) {
     if (errors.count > 0) {
@@ -128,29 +128,29 @@
   return nil;
 }
 
-- (void) addAttachementsWithErrors:(NSArray<NSError*>*)errors identifier:(NSString*)identifier {
-#ifdef __IPHONE_11_0
+- (void) addAttachmentsWithErrors:(NSArray<NSError *> *)errors identifier:(NSString *)identifier {
+#if defined(__IPHONE_11_0) || defined(__TVOS_11_0)
     if (self.recordMode) {
         UIImage* image = [_snapshotController referenceImageForSelector:self.invocation.selector identifier:identifier error:nil];
         if (image) {
-            XCTAttachment* attachement = [XCTAttachment attachmentWithImage:image];
+            XCTAttachment *attachement = [XCTAttachment attachmentWithImage:image];
             attachement.name = @"Reference Image";
             [self addAttachment:attachement];
         }
     } else if (errors.firstObject != nil) {
-        NSError* error = errors.firstObject;
+        NSError *error = errors.firstObject;
         if (error.userInfo[FBReferenceImageKey] != nil) {
-            XCTAttachment* attachement = [XCTAttachment attachmentWithImage:error.userInfo[FBReferenceImageKey]];
+            XCTAttachment *attachement = [XCTAttachment attachmentWithImage:error.userInfo[FBReferenceImageKey]];
             attachement.name = @"Reference Image";
             [self addAttachment:attachement];
         }
         if (error.userInfo[FBCapturedImageKey] != nil) {
-            XCTAttachment* attachement = [XCTAttachment attachmentWithImage:error.userInfo[FBCapturedImageKey]];
+            XCTAttachment *attachement = [XCTAttachment attachmentWithImage:error.userInfo[FBCapturedImageKey]];
             attachement.name = @"Captured Image";
             [self addAttachment:attachement];
         }
         if (error.userInfo[FBDiffedImageKey] != nil) {
-            XCTAttachment* attachement = [XCTAttachment attachmentWithImage:error.userInfo[FBDiffedImageKey]];
+            XCTAttachment *attachement = [XCTAttachment attachmentWithImage:error.userInfo[FBDiffedImageKey]];
             attachement.name = @"Diffed Image";
             [self addAttachment:attachement];
         }
