@@ -10,6 +10,7 @@
 
 #import <FBSnapshotTestCase/FBSnapshotTestCase.h>
 #import <FBSnapshotTestCase/FBSnapshotTestController.h>
+#import <Availability.h>
 
 @implementation FBSnapshotTestCase
 {
@@ -111,15 +112,50 @@
       }
     }
   }
-  
-  if (!testSuccess) {
-    return [NSString stringWithFormat:@"Snapshot comparison failed: %@", errors.firstObject];
-  }
+    
+  [self addAttachmentsWithErrors:errors identifier:identifier];
+    
   if (self.recordMode) {
-    return @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!";
+    if (errors.count > 0) {
+      return [NSString stringWithFormat:@"Snapshot comparison failed: %@", errors.firstObject];
+    } else {
+      return @"Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!";
+    }
+  } else if (!testSuccess) {
+    return [NSString stringWithFormat:@"Snapshot comparison failed: %@", errors.firstObject];
   }
 
   return nil;
+}
+
+- (void) addAttachmentsWithErrors:(NSArray<NSError *> *)errors identifier:(NSString *)identifier {
+#if defined(__IPHONE_11_0) || defined(__TVOS_11_0)
+    if (self.recordMode) {
+        UIImage* image = [_snapshotController referenceImageForSelector:self.invocation.selector identifier:identifier error:nil];
+        if (image) {
+            XCTAttachment *attachement = [XCTAttachment attachmentWithImage:image];
+            attachement.name = @"Reference Image";
+            [self addAttachment:attachement];
+        }
+    } else if (errors.firstObject != nil) {
+        NSError *error = errors.firstObject;
+        if (error.userInfo[FBReferenceImageKey] != nil) {
+            XCTAttachment *attachement = [XCTAttachment attachmentWithImage:error.userInfo[FBReferenceImageKey]];
+            attachement.name = @"Reference Image";
+            [self addAttachment:attachement];
+        }
+        if (error.userInfo[FBCapturedImageKey] != nil) {
+            XCTAttachment *attachement = [XCTAttachment attachmentWithImage:error.userInfo[FBCapturedImageKey]];
+            attachement.name = @"Captured Image";
+            [self addAttachment:attachement];
+        }
+        if (error.userInfo[FBDiffedImageKey] != nil) {
+            XCTAttachment *attachement = [XCTAttachment attachmentWithImage:error.userInfo[FBDiffedImageKey]];
+            attachement.name = @"Diffed Image";
+            [self addAttachment:attachement];
+        }
+    }
+#endif
 }
 
 - (BOOL)compareSnapshotOfLayer:(CALayer *)layer
