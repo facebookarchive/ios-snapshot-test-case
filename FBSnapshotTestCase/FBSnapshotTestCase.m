@@ -21,7 +21,8 @@
 - (void)setUp
 {
   [super setUp];
-  _snapshotController = [[FBSnapshotTestController alloc] initWithTestName:NSStringFromClass([self class])];
+  NSString *testName = [[NSStringFromClass([self class]) componentsSeparatedByString:@"."] lastObject];
+  _snapshotController = [[FBSnapshotTestController alloc] initWithTestName:testName];
 }
 
 - (void)tearDown
