@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
                     two images don't match.
                    DESC
   s.homepage     = "https://github.com/facebook/ios-snapshot-test-case"
-  s.license      = 'BSD'
+  s.license      = 'MIT'
   s.author       = 'Facebook'
   s.source       = { :git => "https://github.com/facebook/ios-snapshot-test-case.git",
                      :tag => s.version.to_s }
