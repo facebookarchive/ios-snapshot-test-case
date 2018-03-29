@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "542E5EAD47EA299C9005C3138923F693160B998F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "542E5EAD47EA299C9005C3138923F693160B998F" : 9223372036854775807,
+    "C29DD0E89C17000393FD71820E9E7C86451DD28A" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "61F27B42-711F-4F72-989C-E02DC0D613E8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "542E5EAD47EA299C9005C3138923F693160B998F" : "FBSnapshotTestCase\/",
+    "C29DD0E89C17000393FD71820E9E7C86451DD28A" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "FBSnapshotTestCase",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "FBSnapshotTestCase.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/thorthugnasty\/ios-snapshot-test-case.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "542E5EAD47EA299C9005C3138923F693160B998F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/git.corp.squareup.com\/ios\/appointments.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C29DD0E89C17000393FD71820E9E7C86451DD28A"
+    }
+  ]
+}

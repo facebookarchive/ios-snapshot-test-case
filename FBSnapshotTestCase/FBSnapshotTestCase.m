@@ -86,7 +86,7 @@
   
   if (self.recordMode) {
     NSString *referenceImagesDirectory = [NSString stringWithFormat:@"%@%@", referenceImageDirectory, suffixes.firstObject];
-    BOOL referenceImageSaved = [self _compareSnapshotOfViewOrLayer:viewOrLayer referenceImagesDirectory:referenceImagesDirectory identifier:(identifier) tolerance:tolerance error:&error];
+    BOOL referenceImageSaved = [self _compareSnapshotOfViewOrLayer:viewOrLayer referenceImagesDirectory:referenceImagesDirectory identifier:(identifier) tolerance:tolerance colorTolerance: 0.0 error:&error];
     if (!referenceImageSaved) {
       [errors addObject:error];
     }
@@ -96,7 +96,7 @@
       BOOL referenceImageAvailable = [self referenceImageRecordedInDirectory:referenceImagesDirectory identifier:(identifier) error:&error];
      
       if (referenceImageAvailable) {
-        BOOL comparisonSuccess = [self _compareSnapshotOfViewOrLayer:viewOrLayer referenceImagesDirectory:referenceImagesDirectory identifier:identifier tolerance:tolerance error:&error];
+        BOOL comparisonSuccess = [self _compareSnapshotOfViewOrLayer:viewOrLayer referenceImagesDirectory:referenceImagesDirectory identifier:identifier tolerance:tolerance colorTolerance: 0.0 error:&error];
         [errors removeAllObjects];
         if (comparisonSuccess) {
           testSuccess = YES;
@@ -130,6 +130,24 @@
                     referenceImagesDirectory:referenceImagesDirectory
                                   identifier:identifier
                                    tolerance:tolerance
+                              colorTolerance:0
+                                       error:errorPtr];
+}
+
+
+
+- (BOOL)compareSnapshotOfLayer:(CALayer *)layer
+      referenceImagesDirectory:(NSString *)referenceImagesDirectory
+                    identifier:(NSString *)identifier
+                     tolerance:(CGFloat)tolerance
+                colorTolerance:(CGFloat)colorTolerance
+                         error:(NSError **)errorPtr
+{
+  return [self _compareSnapshotOfViewOrLayer:layer
+                    referenceImagesDirectory:referenceImagesDirectory
+                                  identifier:identifier
+                                   tolerance:tolerance
+                              colorTolerance:colorTolerance
                                        error:errorPtr];
 }
 
@@ -143,6 +161,23 @@
                     referenceImagesDirectory:referenceImagesDirectory
                                   identifier:identifier
                                    tolerance:tolerance
+                              colorTolerance:0
+                                       error:errorPtr];
+}
+
+
+- (BOOL)compareSnapshotOfView:(UIView *)view
+     referenceImagesDirectory:(NSString *)referenceImagesDirectory
+                   identifier:(NSString *)identifier
+                    tolerance:(CGFloat)tolerance
+               colorTolerance:(CGFloat)colorTolerance
+                        error:(NSError **)errorPtr
+{
+  return [self _compareSnapshotOfViewOrLayer:view
+                    referenceImagesDirectory:referenceImagesDirectory
+                                  identifier:identifier
+                                   tolerance:tolerance
+                              colorTolerance:colorTolerance
                                        error:errorPtr];
 }
 
@@ -178,6 +213,7 @@
              referenceImagesDirectory:(NSString *)referenceImagesDirectory
                            identifier:(NSString *)identifier
                             tolerance:(CGFloat)tolerance
+                            colorTolerance:(CGFloat)colorTolerance
                                 error:(NSError **)errorPtr
 {
   _snapshotController.referenceImagesDirectory = referenceImagesDirectory;
@@ -185,6 +221,7 @@
                                                   selector:self.invocation.selector
                                                 identifier:identifier
                                                  tolerance:tolerance
+                                                 colorTolerance:colorTolerance
                                                      error:errorPtr];
 }
 

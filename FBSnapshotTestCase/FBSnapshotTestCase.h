@@ -143,6 +143,23 @@
                          error:(NSError **)errorPtr;
 
 /**
+ Performs the comparison or records a snapshot of the layer if recordMode is YES.
+ @param layer The Layer to snapshot
+ @param referenceImagesDirectory The directory in which reference images are stored.
+ @param identifier An optional identifier, used if there are multiple snapshot tests in a given -test method.
+ @param tolerance The percentage difference to still count as identical - 0 mean pixel perfect, 1 means I don't care
+ @param colorTolerance The euclidean distance allowable between two colors (with each channel 0-1.0) to consider pixels to be "identical". colorTolerance is applied before calculating percentage of pixels that are different.
+ @param errorPtr An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
+ @returns YES if the comparison (or saving of the reference image) succeeded.
+ */
+- (BOOL)compareSnapshotOfLayer:(CALayer *)layer
+      referenceImagesDirectory:(NSString *)referenceImagesDirectory
+                    identifier:(NSString *)identifier
+                     tolerance:(CGFloat)tolerance
+                colorTolerance:(CGFloat)colorTolerance
+                         error:(NSError **)errorPtr;
+
+/**
  Performs the comparison or records a snapshot of the view if recordMode is YES.
  @param view The view to snapshot
  @param referenceImagesDirectory The directory in which reference images are stored.
@@ -155,6 +172,24 @@
      referenceImagesDirectory:(NSString *)referenceImagesDirectory
                    identifier:(NSString *)identifier
                     tolerance:(CGFloat)tolerance
+                        error:(NSError **)errorPtr;
+
+
+/**
+ Performs the comparison or records a snapshot of the view if recordMode is YES.
+ @param view The view to snapshot
+ @param referenceImagesDirectory The directory in which reference images are stored.
+ @param identifier An optional identifier, used if there are multiple snapshot tests in a given -test method.
+ @param tolerance The percentage difference to still count as identical - 0 mean pixel perfect, 1 means I don't care
+ @param colorTolerance The euclidean distance allowable between two colors (with each channel 0-1.0) to consider pixels to be "identical". colorTolerance is applied before calculating percentage of pixels that are different.
+ @param errorPtr An error to log in an XCTAssert() macro if the method fails (missing reference image, images differ, etc).
+ @returns YES if the comparison (or saving of the reference image) succeeded.
+ */
+- (BOOL)compareSnapshotOfView:(UIView *)view
+     referenceImagesDirectory:(NSString *)referenceImagesDirectory
+                   identifier:(NSString *)identifier
+                    tolerance:(CGFloat)tolerance
+               colorTolerance:(CGFloat)colorTolerance
                         error:(NSError **)errorPtr;
 
 /**
