@@ -42,6 +42,11 @@ extern NSString *const FBCapturedImageKey;
 extern NSString *const FBDiffedImageKey;
 
 /**
+ Errors returned by the methods of FBSnapshotTestController will contain this key if a tolerance was specified.
+ */
+extern NSString *const FBPercentDifferenceKey;
+
+/**
  Provides the heavy-lifting for FBSnapshotTestCase. It loads and saves images, along with performing the actual pixel-
  by-pixel comparison of images.
  Instances are initialized with the test class, and directories to read and write to.

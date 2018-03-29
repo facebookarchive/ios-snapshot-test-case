@@ -58,6 +58,7 @@
     XCTAssertFalse([controller compareReferenceImage:referenceImage toImage:testImage tolerance:0.0001 error:&error]);
     XCTAssertNotNil(error);
     XCTAssertEqual(error.code, FBSnapshotTestControllerErrorCodeImagesDifferent);
+    XCTAssertEqual([error.userInfo[FBPercentDifferenceKey] doubleValue], .04);
 }
 
 - (void)testCompareReferenceImageWithVeryLowToleranceShouldMatch

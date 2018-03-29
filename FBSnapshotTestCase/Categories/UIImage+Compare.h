@@ -32,6 +32,13 @@
 
 @interface UIImage (Compare)
 
+/// Takes a tolerance percentage (0.0-1.0) and compares this image with another image. Returns YES if the images differ less than the tollerance.
 - (BOOL)fb_compareWithImage:(UIImage *)image tolerance:(CGFloat)tolerance;
+
+/// Performs a bitmap comparison of this image to another image. Returns YES if the images are exactly the same.
+- (BOOL)fb_isEqualToImage:(UIImage *)image;
+
+/// Returns the percent of total pixels that differ between this image and another image as a float ranging from 0.0 to 1.0.
+- (CGFloat)fb_differenceFromImage:(UIImage *)image;
 
 @end

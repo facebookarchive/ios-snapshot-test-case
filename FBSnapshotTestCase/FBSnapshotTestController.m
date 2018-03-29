@@ -19,6 +19,7 @@ NSString *const FBReferenceImageFilePathKey = @"FBReferenceImageFilePathKey";
 NSString *const FBReferenceImageKey = @"FBReferenceImageKey";
 NSString *const FBCapturedImageKey = @"FBCapturedImageKey";
 NSString *const FBDiffedImageKey = @"FBDiffedImageKey";
+NSString *const FBPercentDifferenceKey = @"FBPercentDifferenceKey";
 
 typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   FBTestSnapshotFileNameTypeReference,
@@ -128,25 +129,44 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                         error:(NSError **)errorPtr
 {
   BOOL sameImageDimensions = CGSizeEqualToSize(referenceImage.size, image.size);
-  if (sameImageDimensions && [referenceImage fb_compareWithImage:image tolerance:tolerance]) {
+  if (sameImageDimensions && [referenceImage fb_isEqualToImage:image]) {
     return YES;
+  }
+  
+  CGFloat percentDifference = 0.0;
+  if (tolerance > 0.0) {
+    percentDifference = [referenceImage fb_differenceFromImage:image];
+    if (percentDifference < tolerance) {
+      return YES;
+    }
   }
   
   if (NULL != errorPtr) {
     NSString *errorDescription = sameImageDimensions ? @"Images different" : @"Images different sizes";
-    NSString *errorReason = sameImageDimensions ? [NSString stringWithFormat:@"image pixels differed by more than %.2f%% from the reference image", tolerance * 100]
+    NSString *errorReason = sameImageDimensions ? @"Images differed"
                                                 : [NSString stringWithFormat:@"referenceImage:%@, image:%@", NSStringFromCGSize(referenceImage.size), NSStringFromCGSize(image.size)];
     FBSnapshotTestControllerErrorCode errorCode = sameImageDimensions ? FBSnapshotTestControllerErrorCodeImagesDifferent : FBSnapshotTestControllerErrorCodeImagesDifferentSizes;
     
-    *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
-                                    code:errorCode
-                                userInfo:@{
-                                           NSLocalizedDescriptionKey: errorDescription,
-                                           NSLocalizedFailureReasonErrorKey: errorReason,
-                                           FBReferenceImageKey: referenceImage,
-                                           FBCapturedImageKey: image,
-                                           FBDiffedImageKey: [referenceImage fb_diffWithImage:image],
-                                           }];
+    if (sameImageDimensions && tolerance > 0.0) {
+      *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
+                                      code:errorCode
+                                  userInfo:@{
+                                             NSLocalizedDescriptionKey: errorDescription,
+                                             NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Images differed by %.2f%% from the reference (with a tolerance of %.2f%%)", percentDifference * 100, tolerance * 100],
+                                             FBReferenceImageKey: referenceImage,
+                                             FBCapturedImageKey: image,
+                                             FBPercentDifferenceKey: @(percentDifference * 100),
+                                             }];
+    } else {
+      *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
+                                      code:errorCode
+                                  userInfo:@{
+                                             NSLocalizedDescriptionKey: errorDescription,
+                                             NSLocalizedFailureReasonErrorKey: errorReason,
+                                             FBReferenceImageKey: referenceImage,
+                                             FBCapturedImageKey: image,
+                                             }];
+    }
   }
   return NO;
 }
