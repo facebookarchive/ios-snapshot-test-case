@@ -15,6 +15,13 @@
 		1335641B1B59C3F500A4E4BF /* UIImage+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 133564151B59C3F500A4E4BF /* UIImage+Snapshot.m */; };
 		13CBB39D1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 13CBB39B1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		13CBB39E1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CBB39C1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m */; };
+		6D683C2B1CF3A2F900656B71 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D683C241CF3A24500656B71 /* libOCMock.a */; };
+		6D935ED11CDB609100E24C54 /* FBSnapshotTestCaseAgnosticnessOption.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D935ECF1CDB609100E24C54 /* FBSnapshotTestCaseAgnosticnessOption.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D935ED21CDB609100E24C54 /* FBSnapshotTestCaseAgnosticnessOption.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D935ECF1CDB609100E24C54 /* FBSnapshotTestCaseAgnosticnessOption.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D935ED61CDBDA6500E24C54 /* FBSnapshotTestCasePlatformTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D935ED51CDBDA6500E24C54 /* FBSnapshotTestCasePlatformTests.m */; };
+		6D935ED71CDBDA6500E24C54 /* FBSnapshotTestCasePlatformTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D935ED51CDBDA6500E24C54 /* FBSnapshotTestCasePlatformTests.m */; };
+		6D9E0A6B1CE20E8400A2E365 /* FBSnapshotTestCaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D9E0A6A1CE20E8400A2E365 /* FBSnapshotTestCaseTests.m */; };
+		6D9E0A6C1CE20E8400A2E365 /* FBSnapshotTestCaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D9E0A6A1CE20E8400A2E365 /* FBSnapshotTestCaseTests.m */; };
 		827137841C63AB7000354E42 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8271377A1C63AB6F00354E42 /* FBSnapshotTestCase.framework */; };
 		827137911C63ABE900354E42 /* UIImage+Compare.h in Headers */ = {isa = PBXBuildFile; fileRef = 133564101B59C3F500A4E4BF /* UIImage+Compare.h */; };
 		827137921C63ABF000354E42 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = 133564121B59C3F500A4E4BF /* UIImage+Diff.h */; };
@@ -54,6 +61,55 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6D683C1F1CF3A24500656B71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D683C161CF3A24400656B71 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 030EF0A814632FD000B04273;
+			remoteInfo = OCMock;
+		};
+		6D683C211CF3A24500656B71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D683C161CF3A24400656B71 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 03565A3118F0566E003AE91E;
+			remoteInfo = OCMockTests;
+		};
+		6D683C231CF3A24500656B71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D683C161CF3A24400656B71 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 030EF0DC14632FF700B04273;
+			remoteInfo = OCMockLib;
+		};
+		6D683C251CF3A24500656B71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D683C161CF3A24400656B71 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D31108AD1828DB8700737925;
+			remoteInfo = OCMockLibTests;
+		};
+		6D683C271CF3A24500656B71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D683C161CF3A24400656B71 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F0B950F11B0080BE00942C38;
+			remoteInfo = "OCMock iOS";
+		};
+		6D683C291CF3A24500656B71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D683C161CF3A24400656B71 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 817EB1621BD765130047E85A;
+			remoteInfo = "OCMock tvOS";
+		};
+		6D683C2D1CF3A65600656B71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D683C161CF3A24400656B71 /* OCMock.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F0B950F01B0080BE00942C38;
+			remoteInfo = "OCMock iOS";
+		};
 		827137851C63AB7000354E42 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B31987E71AB782D000B0A900 /* Project object */;
@@ -79,6 +135,10 @@
 		133564151B59C3F500A4E4BF /* UIImage+Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Snapshot.m"; sourceTree = "<group>"; };
 		13CBB39B1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSnapshotTestCasePlatform.h; sourceTree = "<group>"; };
 		13CBB39C1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCasePlatform.m; sourceTree = "<group>"; };
+		6D683C161CF3A24400656B71 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = vendor/OCMock/Source/OCMock.xcodeproj; sourceTree = "<group>"; };
+		6D935ECF1CDB609100E24C54 /* FBSnapshotTestCaseAgnosticnessOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSnapshotTestCaseAgnosticnessOption.h; sourceTree = "<group>"; };
+		6D935ED51CDBDA6500E24C54 /* FBSnapshotTestCasePlatformTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCasePlatformTests.m; sourceTree = "<group>"; };
+		6D9E0A6A1CE20E8400A2E365 /* FBSnapshotTestCaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCaseTests.m; sourceTree = "<group>"; };
 		8271377A1C63AB6F00354E42 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		827137831C63AB7000354E42 /* FBSnapshotTestCase tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FBSnapshotTestCase tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B31987F01AB782D000B0A900 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D683C2B1CF3A2F900656B71 /* libOCMock.a in Frameworks */,
 				B31987FC1AB782D100B0A900 /* FBSnapshotTestCase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,12 +210,42 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		6D683C141CF3A1D600656B71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B31987F11AB782D000B0A900 /* Products */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D683C151CF3A1E100656B71 /* Submodules */ = {
+			isa = PBXGroup;
+			children = (
+				6D683C161CF3A24400656B71 /* OCMock.xcodeproj */,
+			);
+			name = Submodules;
+			sourceTree = "<group>";
+		};
+		6D683C171CF3A24400656B71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D683C201CF3A24500656B71 /* OCMock.framework */,
+				6D683C221CF3A24500656B71 /* OCMockTests.xctest */,
+				6D683C241CF3A24500656B71 /* libOCMock.a */,
+				6D683C261CF3A24500656B71 /* OCMockLibTests.xctest */,
+				6D683C281CF3A24500656B71 /* OCMock.framework */,
+				6D683C2A1CF3A24500656B71 /* OCMock.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		B31987E61AB782D000B0A900 = {
 			isa = PBXGroup;
 			children = (
+				6D683C151CF3A1E100656B71 /* Submodules */,
 				B31987F21AB782D000B0A900 /* Sources */,
 				B31987FF1AB782D100B0A900 /* Tests */,
-				B31987F11AB782D000B0A900 /* Products */,
+				6D683C141CF3A1D600656B71 /* Products */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -181,6 +272,7 @@
 				13CBB39C1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.m */,
 				B31988221AB7849400B0A900 /* FBSnapshotTestController.h */,
 				B31988231AB7849400B0A900 /* FBSnapshotTestController.m */,
+				6D935ECF1CDB609100E24C54 /* FBSnapshotTestCaseAgnosticnessOption.h */,
 				F0D698F41B204E120005CAC9 /* SwiftSupport.swift */,
 				B31987F31AB782D000B0A900 /* Supporting Files */,
 			);
@@ -205,6 +297,8 @@
 				B32447DA1AB78B5E00B1D6FF /* square-copy.png */,
 				B32447DB1AB78B5E00B1D6FF /* square.png */,
 				B31988301AB784CB00B0A900 /* FBSnapshotControllerTests.m */,
+				6D935ED51CDBDA6500E24C54 /* FBSnapshotTestCasePlatformTests.m */,
+				6D9E0A6A1CE20E8400A2E365 /* FBSnapshotTestCaseTests.m */,
 				B31988001AB782D100B0A900 /* Supporting Files */,
 			);
 			name = Tests;
@@ -228,6 +322,7 @@
 			files = (
 				827137941C63ABF000354E42 /* UIApplication+StrictKeyWindow.h in Headers */,
 				8271379A1C63ABF900354E42 /* FBSnapshotTestCasePlatform.h in Headers */,
+				6D935ED21CDB609100E24C54 /* FBSnapshotTestCaseAgnosticnessOption.h in Headers */,
 				827137911C63ABE900354E42 /* UIImage+Compare.h in Headers */,
 				827137991C63ABF900354E42 /* FBSnapshotTestCase.h in Headers */,
 				8271379B1C63ABF900354E42 /* FBSnapshotTestController.h in Headers */,
@@ -242,6 +337,7 @@
 			files = (
 				BC45D5211C2AEFCE007C72F3 /* UIApplication+StrictKeyWindow.h in Headers */,
 				B31988281AB7849400B0A900 /* FBSnapshotTestCase.h in Headers */,
+				6D935ED11CDB609100E24C54 /* FBSnapshotTestCaseAgnosticnessOption.h in Headers */,
 				13CBB39D1AEE013900B6ADBA /* FBSnapshotTestCasePlatform.h in Headers */,
 				B319882A1AB7849400B0A900 /* FBSnapshotTestController.h in Headers */,
 				133564181B59C3F500A4E4BF /* UIImage+Diff.h in Headers */,
@@ -318,6 +414,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6D683C2E1CF3A65600656B71 /* PBXTargetDependency */,
 				B31987FE1AB782D100B0A900 /* PBXTargetDependency */,
 			);
 			name = "FBSnapshotTestCase iOS Tests";
@@ -344,11 +441,9 @@
 					};
 					B31987EF1AB782D000B0A900 = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0800;
 					};
 					B31987FA1AB782D100B0A900 = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -362,6 +457,12 @@
 			mainGroup = B31987E61AB782D000B0A900;
 			productRefGroup = B31987F11AB782D000B0A900 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6D683C171CF3A24400656B71 /* Products */;
+					ProjectRef = 6D683C161CF3A24400656B71 /* OCMock.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B31987EF1AB782D000B0A900 /* FBSnapshotTestCase iOS */,
@@ -371,6 +472,51 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6D683C201CF3A24500656B71 /* OCMock.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OCMock.framework;
+			remoteRef = 6D683C1F1CF3A24500656B71 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6D683C221CF3A24500656B71 /* OCMockTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OCMockTests.xctest;
+			remoteRef = 6D683C211CF3A24500656B71 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6D683C241CF3A24500656B71 /* libOCMock.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libOCMock.a;
+			remoteRef = 6D683C231CF3A24500656B71 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6D683C261CF3A24500656B71 /* OCMockLibTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OCMockLibTests.xctest;
+			remoteRef = 6D683C251CF3A24500656B71 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6D683C281CF3A24500656B71 /* OCMock.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OCMock.framework;
+			remoteRef = 6D683C271CF3A24500656B71 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6D683C2A1CF3A24500656B71 /* OCMock.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OCMock.framework;
+			remoteRef = 6D683C291CF3A24500656B71 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		827137781C63AB6F00354E42 /* Resources */ = {
@@ -433,6 +579,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D935ED71CDBDA6500E24C54 /* FBSnapshotTestCasePlatformTests.m in Sources */,
+				6D9E0A6C1CE20E8400A2E365 /* FBSnapshotTestCaseTests.m in Sources */,
 				827137A41C63AC0F00354E42 /* FBSnapshotControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +604,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D935ED61CDBDA6500E24C54 /* FBSnapshotTestCasePlatformTests.m in Sources */,
+				6D9E0A6B1CE20E8400A2E365 /* FBSnapshotTestCaseTests.m in Sources */,
 				B31988311AB784CB00B0A900 /* FBSnapshotControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,6 +613,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6D683C2E1CF3A65600656B71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "OCMock iOS";
+			targetProxy = 6D683C2D1CF3A65600656B71 /* PBXContainerItemProxy */;
+		};
 		827137861C63AB7000354E42 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 827137791C63AB6F00354E42 /* FBSnapshotTestCase tvOS */;
@@ -484,7 +639,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -517,7 +671,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -611,7 +764,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -650,7 +802,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -727,9 +878,10 @@
 				);
 				INFOPLIST_FILE = "FBSnapshotTestCaseTests/FBSnapshotTestCaseTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				USER_HEADER_SEARCH_PATHS = "Submodules/**";
 			};
 			name = Debug;
 		};
@@ -742,9 +894,10 @@
 				);
 				INFOPLIST_FILE = "FBSnapshotTestCaseTests/FBSnapshotTestCaseTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				USER_HEADER_SEARCH_PATHS = "Submodules/**";
 			};
 			name = Release;
 		};

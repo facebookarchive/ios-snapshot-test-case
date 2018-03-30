@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "FBSnapshotTestCaseAgnosticnessOption.h"
+
 typedef NS_ENUM(NSInteger, FBSnapshotTestControllerErrorCode) {
   FBSnapshotTestControllerErrorCodeUnknown,
   FBSnapshotTestControllerErrorCodeNeedsRecord,
@@ -57,7 +59,7 @@ extern NSString *const FBDiffedImageKey;
  When @c YES appends the name of the device model and OS to the snapshot file name.
  The default value is @c NO.
  */
-@property (readwrite, nonatomic, assign, getter=isDeviceAgnostic) BOOL deviceAgnostic;
+@property (readwrite, nonatomic, assign) FBSnapshotTestCaseAgnosticnessOption agnosticnessOptions;
 
 /**
  Uses drawViewHierarchyInRect:afterScreenUpdates: to draw the image instead of renderInContext:

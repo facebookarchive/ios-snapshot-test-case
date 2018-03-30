@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "FBSnapshotTestCaseAgnosticnessOption.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -31,11 +33,11 @@ NSOrderedSet *FBSnapshotTestCaseDefaultSuffixes(void);
   
 /**
  Returns a fully «normalized» file name.
- Strips punctuation and spaces and replaces them with @c _. Also appends the device model, running OS and screen size to the file name.
+ Strips punctuation and spaces and replaces them with @c _. Also appends the provided options by the @c options parameter.
  
- @returns An @c NSString object containing the passed @c fileName with the device model, OS and screen size appended at the end.
+ @returns An @c NSString object containing the passed @c fileName with the provided options by the @c options parameter appended at the end.
  */
-NSString *FBDeviceAgnosticNormalizedFileName(NSString *fileName);
+NSString *FBAgnosticNormalizedFileName(NSString *fileName, FBSnapshotTestCaseAgnosticnessOption options);
 
 #ifdef __cplusplus
 }

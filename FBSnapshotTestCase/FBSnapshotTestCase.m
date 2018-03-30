@@ -39,15 +39,15 @@
   _snapshotController.recordMode = recordMode;
 }
 
-- (BOOL)isDeviceAgnostic
+- (FBSnapshotTestCaseAgnosticnessOption)agnosticnessOptions
 {
-  return _snapshotController.deviceAgnostic;
+  return _snapshotController.agnosticnessOptions;
 }
 
-- (void)setDeviceAgnostic:(BOOL)deviceAgnostic
+- (void)setAgnosticnessOptions:(FBSnapshotTestCaseAgnosticnessOption)agnosticnessOptions
 {
   NSAssert1(_snapshotController, @"%s cannot be called before [super setUp]", __FUNCTION__);
-  _snapshotController.deviceAgnostic = deviceAgnostic;
+  _snapshotController.agnosticnessOptions = agnosticnessOptions;
 }
 
 - (BOOL)usesDrawViewHierarchyInRect
@@ -186,6 +186,20 @@
                                                 identifier:identifier
                                                  tolerance:tolerance
                                                      error:errorPtr];
+}
+
+@end
+
+@implementation FBSnapshotTestCase (Deprecated)
+
+- (BOOL)isDeviceAgnostic {
+  return (_snapshotController.agnosticnessOptions & FBSnapshotTestCaseAgnosticnessOptionDeviceModel) &&
+         (_snapshotController.agnosticnessOptions & FBSnapshotTestCaseAgnosticnessOptionScreenSize) &&
+         (_snapshotController.agnosticnessOptions & FBSnapshotTestCaseAgnosticnessOptionOSVersion);
+}
+
+- (void)setDeviceAgnostic:(BOOL)deviceAgnostic {
+  _snapshotController.agnosticnessOptions = FBSnapshotTestCaseAgnosticnessOptionDeviceModel | FBSnapshotTestCaseAgnosticnessOptionScreenSize | FBSnapshotTestCaseAgnosticnessOptionOSVersion;
 }
 
 @end

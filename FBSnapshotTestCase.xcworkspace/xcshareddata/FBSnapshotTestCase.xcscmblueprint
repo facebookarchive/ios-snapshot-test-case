@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "542E5EAD47EA299C9005C3138923F693160B998F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "542E5EAD47EA299C9005C3138923F693160B998F" : 0,
+    "E4BCE3AE6B24E41B9BCE312FF3B0B6CD0B8B8025" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "59A3BEEC-60D0-4B63-96E2-09BEE25716D0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "542E5EAD47EA299C9005C3138923F693160B998F" : "ios-snapshot-test-case\/",
+    "E4BCE3AE6B24E41B9BCE312FF3B0B6CD0B8B8025" : "ios-snapshot-test-case\/vendor\/OCMock\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "FBSnapshotTestCase",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "FBSnapshotTestCase.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Antondomashnev\/ios-snapshot-test-case.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "542E5EAD47EA299C9005C3138923F693160B998F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/erikdoe\/ocmock",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E4BCE3AE6B24E41B9BCE312FF3B0B6CD0B8B8025"
+    }
+  ]
+}
