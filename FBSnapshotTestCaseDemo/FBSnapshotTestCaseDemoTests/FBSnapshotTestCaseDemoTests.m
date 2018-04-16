@@ -61,6 +61,28 @@
   FBSnapshotVerifyView(control, nil);
 }
 
+- (void)testViewSnapshotWithUIAppearanceResizing
+{
+  // If this works properly you should be able to read the whole "Click me!" title in the snapshot
+  [[UIButton appearance] setContentEdgeInsets:UIEdgeInsetsMake(15, 15, 15, 15)];
+  
+  UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+  [button setTitle:@"Click me!" forState:UIControlStateNormal];
+  
+  button.translatesAutoresizingMaskIntoConstraints = NO;
+  [button addConstraint:[NSLayoutConstraint constraintWithItem:button
+                                                     attribute:NSLayoutAttributeWidth
+                                                     relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                        toItem:nil
+                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                    multiplier:0
+                                                      constant:65]];
+  [button sizeToFit];
+  
+  self.usesDrawViewHierarchyInRect = YES;
+  FBSnapshotVerifyView(button, nil);
+}
+
 - (void)testViewSnapshotWithDifferentBackgroundColorPerArchitecture
 {
     UIColor *color = FBSnapshotTestCaseIs64Bit() ? [UIColor magentaColor] : [UIColor cyanColor];
