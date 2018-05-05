@@ -30,20 +30,25 @@ NSOrderedSet *FBSnapshotTestCaseDefaultSuffixes(void)
   return [suffixesSet copy];
 }
 
-NSString *FBDeviceAgnosticNormalizedFileName(NSString *fileName)
+NSString *FBDeviceAgnosticNormalizedFileName(NSString *fileName, BOOL includeOSVersion)
 {
+  NSMutableString *deviceAgnosticFilename = [fileName mutableCopy];
+
   UIDevice *device = [UIDevice currentDevice];
+  [deviceAgnosticFilename appendFormat:@"_%@", device.model];
+
+  if (includeOSVersion) {
+    [deviceAgnosticFilename appendFormat:@"%@", device.systemVersion];
+  }
+
   UIWindow *keyWindow = [[UIApplication sharedApplication] fb_strictKeyWindow];
   CGSize screenSize = keyWindow.bounds.size;
-  NSString *os = device.systemVersion;
-  
-  fileName = [NSString stringWithFormat:@"%@_%@%@_%.0fx%.0f", fileName, device.model, os, screenSize.width, screenSize.height];
-  
+  [deviceAgnosticFilename appendFormat:@"_%.0fx%.0f", screenSize.width, screenSize.height];
+
   NSMutableCharacterSet *invalidCharacters = [NSMutableCharacterSet new];
   [invalidCharacters formUnionWithCharacterSet:[NSCharacterSet whitespaceCharacterSet]];
   [invalidCharacters formUnionWithCharacterSet:[NSCharacterSet punctuationCharacterSet]];
-  NSArray *validComponents = [fileName componentsSeparatedByCharactersInSet:invalidCharacters];
-  fileName = [validComponents componentsJoinedByString:@"_"];
-  
-  return fileName;
+  NSArray *validComponents = [deviceAgnosticFilename componentsSeparatedByCharactersInSet:invalidCharacters];
+
+  return [validComponents componentsJoinedByString:@"_"];
 }

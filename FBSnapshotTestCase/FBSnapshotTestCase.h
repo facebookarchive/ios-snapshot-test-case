@@ -95,8 +95,20 @@
 /**
  When @c YES appends the name of the device model and OS to the snapshot file name.
  The default value is @c NO.
+
+ @see includeOSVersionInFilename
  */
 @property (readwrite, nonatomic, assign, getter=isDeviceAgnostic) BOOL deviceAgnostic;
+
+/**
+ Used in conjunction with @c deviceAgnostic, when @c YES the OS version will be included in the snapshot file name.
+ The default value is @c YES.
+
+ @attention @c deviceAgnostic needs to be set to @c YES for this to take effect
+
+ @see deviceAgnostic
+ */
+@property (readwrite, nonatomic, assign) BOOL includeOSVersionInFilename;
 
 /**
  When YES, renders a snapshot of the complete view hierarchy as visible onscreen.

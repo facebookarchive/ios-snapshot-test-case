@@ -103,8 +103,23 @@
   SEL selector = @selector(isDeviceAgnostic);
   [controller referenceImageForSelector:selector identifier:@"" error:&error];
   XCTAssertNotNil(error);
-  NSString *deviceAgnosticReferencePath = FBDeviceAgnosticNormalizedFileName(NSStringFromSelector(selector));
+  NSString *deviceAgnosticReferencePath = FBDeviceAgnosticNormalizedFileName(NSStringFromSelector(selector), true);
   XCTAssertTrue([(NSString *)[error.userInfo objectForKey:FBReferenceImageFilePathKey] containsString:deviceAgnosticReferencePath]);
+}
+
+- (void)testFilenameDoesNotContainOSVersionWhenIncludeOSInFilenameIsFalse
+{
+  FBSnapshotTestController *controller = [[FBSnapshotTestController alloc] initWithTestClass:nil];
+  [controller setDeviceAgnostic:YES];
+  [controller setIncludeOSVersionInFilename:NO];
+
+  [controller setReferenceImagesDirectory:@"/dev/null/"];
+  NSError *error = nil;
+  SEL selector = @selector(includeOSVersionInFilename);
+  [controller referenceImageForSelector:selector identifier:@"" error:&error];
+  XCTAssertNotNil(error);
+  NSString *includeOSVersionInFilenameReferencePath = FBDeviceAgnosticNormalizedFileName(NSStringFromSelector(selector), false);
+  XCTAssertTrue([(NSString *)[error.userInfo objectForKey:FBReferenceImageFilePathKey] containsString:includeOSVersionInFilenameReferencePath]);
 }
 
 #pragma mark - Private helper methods
