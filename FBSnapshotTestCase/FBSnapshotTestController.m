@@ -45,6 +45,7 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   if (self = [super init]) {
     _testName = [testName copy];
     _deviceAgnostic = NO;
+    _mode = FBSnapshotModeCompare;
     
     _fileManager = [[NSFileManager alloc] init];
   }
@@ -90,11 +91,14 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
                            tolerance:(CGFloat)tolerance
                                error:(NSError **)errorPtr
 {
-  if (self.recordMode) {
-    return [self _recordSnapshotOfViewOrLayer:viewOrLayer selector:selector identifier:identifier error:errorPtr];
-  } else {
-    return [self _performPixelComparisonWithViewOrLayer:viewOrLayer selector:selector identifier:identifier tolerance:tolerance error:errorPtr];
+  BOOL result = NO;
+  if (self.mode & FBSnapshotModeCompare) {
+    result = [self _performPixelComparisonWithViewOrLayer:viewOrLayer selector:selector identifier:identifier tolerance:tolerance error:errorPtr];
   }
+  if (self.mode & FBSnapshotModeRecord) {
+    result = [self _recordSnapshotOfViewOrLayer:viewOrLayer selector:selector identifier:identifier error:errorPtr];
+  }
+  return result;
 }
 
 - (UIImage *)referenceImageForSelector:(SEL)selector

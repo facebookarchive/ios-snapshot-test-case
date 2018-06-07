@@ -30,13 +30,23 @@
 
 - (BOOL)recordMode
 {
-  return _snapshotController.recordMode;
+  return _snapshotController.mode & FBSnapshotModeRecord;
 }
 
 - (void)setRecordMode:(BOOL)recordMode
 {
+  _snapshotController.mode = recordMode ? FBSnapshotModeRecord : FBSnapshotModeCompare;
+}
+
+- (FBSnapshotTestMode)mode
+{
+  return _snapshotController.mode;
+}
+
+- (void)setMode:(FBSnapshotTestMode)mode
+{
   NSAssert1(_snapshotController, @"%s cannot be called before [super setUp]", __FUNCTION__);
-  _snapshotController.recordMode = recordMode;
+  _snapshotController.mode = mode;
 }
 
 - (BOOL)isDeviceAgnostic
